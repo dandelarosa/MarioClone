@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+
+<body>
+<center>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+</center>
+
+<script>
+const GAME_WIDTH = 800;
+const GAME_HEIGHT = 600;
+var gameClass = 'Game';
+var firstLevelClass = 'Level1';
+</script>
+
+<!-- Engine-type stuff -->
+<script src="js/game.js"></script>
+<script src="js/graphics.js"></script>
+<script src="js/input.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Game-specific stuff -->
+<script src="mario_clone/key_events.js"></script>
+<script src="mario_clone/level1.js"></script>
+<script src="mario_clone/bricks.js"></script>
+
+</body>
+</html>
