@@ -15,7 +15,7 @@ function Jumper() {
 };
 
 Jumper.prototype.move = function(keyEvents, bricks) {
-  if (holdJump && this.onGround) {
+  if (keyEvents.holdJump && this.onGround) {
     this.speedY = -JUMP_POWER;
   }
 
@@ -31,10 +31,10 @@ Jumper.prototype.move = function(keyEvents, bricks) {
      }
    }
 
-   if (holdLeft) {
+   if (keyEvents.holdLeft) {
      this.speedX = -RUN_SPEED;
    }
-   if (holdRight) {
+   if (keyEvents.holdRight) {
      this.speedX = RUN_SPEED;
    }
 
