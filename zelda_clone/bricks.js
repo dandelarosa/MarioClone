@@ -1,0 +1,76 @@
+const BRICK_W = 60;
+const BRICK_H = 60;
+const BRICK_GAP = 1;
+const BRICK_COLS = 20;
+const BRICK_ROWS = 15;
+var brickGrid = [
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+  1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+  1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+  1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
+  1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1,
+  1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+  1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1,
+  1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+  1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+  1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1,
+  1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+  1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
+  1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+];
+
+function brickTileToIndex (tileCol, tileRow) {
+  return (tileCol + BRICK_COLS * tileRow);
+}
+
+function isBrickAtTileCoord(brickTileCol, brickTileRow) {
+  var brickIndex = brickTileToIndex(brickTileCol, brickTileRow);
+  return (brickGrid[brickIndex] == 1);
+}
+
+function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
+  var tileCol = hitPixelX / BRICK_W;
+  var tileRow = hitPixelY / BRICK_H;
+
+  // using Math.floor to round down to the nearest whole number
+  tileCol = Math.floor(tileCol);
+  tileRow = Math.floor(tileRow);
+
+  // first check whether the slider is within any part of the brick wall
+  if(tileCol < 0 || tileCol >= BRICK_COLS ||
+     tileRow < 0 || tileRow >= BRICK_ROWS) {
+     return false;
+  }
+
+  var brickIndex = brickTileToIndex(tileCol, tileRow);
+  return (brickGrid[brickIndex] == 1);
+}
+
+function drawOnlyBricksOnScreen(graphics) {
+  // what are the top-left most col and row visible on canvas?
+  var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
+  var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
+
+  // how many columns and rows of tiles fit on one screenful of area?
+  var colsThatFitOnScreen = Math.floor(GAME_WIDTH / BRICK_W);
+  var rowsThatFitOnScreen = Math.floor(GAME_HEIGHT / BRICK_H);
+
+  // finding the rightmost and bottommost tiles to draw.
+  // the +1 and + 2 on each pushes the new tile popping in off visible area
+  // +2 for columns since BRICK_W doesn't divide evenly into canvas.width
+  var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 2;
+  var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 1;
+
+  for (var eachCol = cameraLeftMostCol; eachCol < cameraRightMostCol; eachCol++) {
+    for (var eachRow = cameraTopMostRow; eachRow < cameraBottomMostRow; eachRow++) {
+      if (isBrickAtTileCoord(eachCol, eachRow)) {
+        var brickLeftEdgeX = eachCol * BRICK_W;
+        var brickTopEdgeY = eachRow * BRICK_H;
+        graphics.colorRect(brickLeftEdgeX, brickTopEdgeY,
+          BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'blue');
+      }
+    }
+  }
+};
