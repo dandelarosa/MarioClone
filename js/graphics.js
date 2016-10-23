@@ -10,6 +10,13 @@ Graphics.prototype.fillWholeScreen = function(color) {
   this.colorRect(0, 0, this.canvasWidth, this.canvasHeight, color);
 };
 
+Graphics.prototype.drawInCamera = function(camPanX, camPanY, draw) {
+  this.context2d.save();
+  this.context2d.translate(-camPanX, -camPanY);
+  draw();
+  this.context2d.restore();
+};
+
 Graphics.prototype.drawBitmapCenteredWithRotation = function (bitmap, atX, atY, rot) {
   this.context2d.save();
   this.context2d.translate(atX, atY);

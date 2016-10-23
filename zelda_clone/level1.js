@@ -83,20 +83,10 @@ Level1.prototype.cameraFollow = function() {
 Level1.prototype.draw = function(graphics) {
   graphics.fillWholeScreen('black');
 
-  graphics.context2d.save(); // needed to undo this .translate() used for scroll
+  graphics.drawInCamera(camPanX, camPanY, function() {
+    this.bricks.draw(graphics);
+    graphics.colorCircle(sliderX, sliderY, 10, 'white');
+  });
 
-  // this next line is like subtracting camPanX and camPanY from every
-  // canvasContext draw operation up until we call canvasContext.restore
-  // this way we can just draw them at their "actual" position coordinates
-  graphics.context2d.translate(-camPanX,-camPanY);
-
-  this.bricks.draw(graphics);
-
-  graphics.colorCircle(sliderX, sliderY, 10, 'white');
-
-  graphics.context2d.restore(); // undoes the .translate() used for cam scroll
-
-  // doing this after .restore() so it won't scroll with the camera pan
-  graphics.context2d.fillStyle = 'white';
-  graphics.context2d.fillText("Arrow keys to slide, scrolling demo",8,14);
+  graphics.colorText("Arrow keys to slide, scrolling demo", 8, 14, 'white');
 };
