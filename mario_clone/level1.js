@@ -14,5 +14,5 @@ Level1.prototype.draw = function(graphics) {
 
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
 
-  graphics.colorCircle(jumperX, jumperY, JUMPER_RADIUS, 'white')
+  this.jumper.draw(graphics);
 };

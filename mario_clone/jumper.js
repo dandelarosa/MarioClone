@@ -60,3 +60,7 @@ Jumper.prototype.move = function(bricks) {
    jumperX += jumperSpeedX; // move the jumper based on its current horizontal speed
    jumperY += jumperSpeedY; // same as above, but for vertical
 };
+
+Jumper.prototype.draw = function(graphics) {
+  graphics.colorCircle(jumperX, jumperY, JUMPER_RADIUS, 'white')
+};
