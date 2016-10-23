@@ -6,15 +6,17 @@ const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 150;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 
 function Level1() {
-  sliderReset();
+  // center slider on screen
+  sliderX = GAME_WIDTH / 2;
+  sliderY = GAME_HEIGHT / 2;
 };
 
 Level1.prototype.update = function(keyEvents) {
-  sliderMove(keyEvents);
-  cameraFollow();
+  this.sliderMove(keyEvents);
+  this.cameraFollow();
 };
 
-function sliderMove(keyEvents) {
+Level1.prototype.sliderMove = function(keyEvents) {
   var nextX = sliderX;
   var nextY = sliderY;
 
@@ -35,20 +37,9 @@ function sliderMove(keyEvents) {
     sliderX = nextX;
     sliderY = nextY;
   }
-}
+};
 
-function sliderReset() {
-  // center slider on screen
-  sliderX = GAME_WIDTH / 2;
-  sliderY = GAME_HEIGHT / 2;
-}
-
-function instantCamFollow() {
-  camPanX = sliderX - GAME_WIDTH / 2;
-  camPanY = sliderY - GAME_HEIGHT / 2;
-}
-
-function cameraFollow() {
+Level1.prototype.cameraFollow = function() {
   var cameraFocusCenterX = camPanX + GAME_WIDTH / 2;
   var cameraFocusCenterY = camPanY + GAME_HEIGHT / 2;
 
@@ -70,8 +61,6 @@ function cameraFollow() {
     }
   }
 
-  // instantCamFollow();
-
   // this next code blocks the game from showing out of bounds
   // (this isn't required, if you don't mind seeing beyond edges)
   if(camPanX < 0) {
@@ -91,10 +80,6 @@ function cameraFollow() {
 }
 
 Level1.prototype.draw = function(graphics) {
-  drawEverything(graphics);
-};
-
-function drawEverything(graphics) {
   graphics.fillWholeScreen('black');
 
   graphics.context2d.save(); // needed to undo this .translate() used for scroll
@@ -114,4 +99,4 @@ function drawEverything(graphics) {
   // doing this after .restore() so it won't scroll with the camera pan
   graphics.context2d.fillStyle = 'white';
   graphics.context2d.fillText("Arrow keys to slide, scrolling demo",8,14);
-}
+};
