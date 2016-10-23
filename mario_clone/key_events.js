@@ -1,7 +1,3 @@
-const KEY_LEFT_ARROW = 37;
-const KEY_UP_ARROW = 38;
-const KEY_RIGHT_ARROW = 39;
-const KEY_SPACE = 32;
 var holdLeft = false;
 var holdRight = false;
 var holdJump = false;
