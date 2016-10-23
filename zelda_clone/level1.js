@@ -13,11 +13,11 @@ function Level1() {
 };
 
 Level1.prototype.update = function(keyEvents) {
-  this.sliderMove(keyEvents);
+  this.sliderMove(keyEvents, this.bricks);
   this.cameraFollow();
 };
 
-Level1.prototype.sliderMove = function(keyEvents) {
+Level1.prototype.sliderMove = function(keyEvents, bricks) {
   var nextX = sliderX;
   var nextY = sliderY;
 
@@ -34,7 +34,7 @@ Level1.prototype.sliderMove = function(keyEvents) {
     nextY += RUN_SPEED;
   }
 
-  if (this.bricks.isBrickAtPixelCoord(nextX,nextY) == false) {
+  if (bricks.isBrickAtPixelCoord(nextX,nextY) == false) {
     sliderX = nextX;
     sliderY = nextY;
   }
