@@ -78,14 +78,13 @@ function jumperMove() {
   jumperY += jumperSpeedY; // same as above, but for vertical
 }
 
-function jumperReset() {
-  // center jumper on screen
+function Level1() {
+  this.jumperReset();
+};
+
+Level1.prototype.jumperReset = function() {
   jumperX = GAME_WIDTH / 2;
   jumperY = GAME_HEIGHT / 2;
-}
-
-function Level1() {
-  jumperReset();
 };
 
 Level1.prototype.update = function() {
