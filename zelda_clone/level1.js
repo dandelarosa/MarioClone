@@ -5,6 +5,8 @@ function Level1() {
   this.bricks = new Bricks();
   this.slider = new Slider();
   this.camera = new Camera();
+  this.camera.width = GAME_WIDTH;
+  this.camera.height = GAME_HEIGHT;
   this.camera.speed = RUN_SPEED;
 };
 
@@ -14,8 +16,8 @@ Level1.prototype.update = function(keyEvents) {
 };
 
 Level1.prototype.cameraFollow = function(object) {
-  var cameraFocusCenterX = this.camera.panX + GAME_WIDTH / 2;
-  var cameraFocusCenterY = this.camera.panY + GAME_HEIGHT / 2;
+  var cameraFocusCenterX = this.camera.panX + this.camera.width / 2;
+  var cameraFocusCenterY = this.camera.panY + this.camera.height / 2;
 
   var playerDistFromCameraFocusX = Math.abs(object.x - cameraFocusCenterX);
   var playerDistFromCameraFocusY = Math.abs(object.y - cameraFocusCenterY);
@@ -43,8 +45,8 @@ Level1.prototype.cameraFollow = function(object) {
   if(this.camera.panY < 0) {
     this.camera.panY = 0;
   }
-  var maxPanRight = BRICK_COLS * BRICK_W - GAME_WIDTH;
-  var maxPanTop = BRICK_ROWS * BRICK_H - GAME_HEIGHT;
+  var maxPanRight = BRICK_COLS * BRICK_W - this.camera.width;
+  var maxPanTop = BRICK_ROWS * BRICK_H - this.camera.height;
   if(this.camera.panX > maxPanRight) {
     this.camera.panX = maxPanRight;
   }
