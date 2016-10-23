@@ -6,6 +6,7 @@ const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 function Level1() {
   this.bricks = new Bricks();
   this.slider = new Slider();
+  this.camera = new Camera();
 };
 
 Level1.prototype.update = function(keyEvents) {
@@ -14,42 +15,42 @@ Level1.prototype.update = function(keyEvents) {
 };
 
 Level1.prototype.cameraFollow = function(object) {
-  var cameraFocusCenterX = camPanX + GAME_WIDTH / 2;
-  var cameraFocusCenterY = camPanY + GAME_HEIGHT / 2;
+  var cameraFocusCenterX = this.camera.panX + GAME_WIDTH / 2;
+  var cameraFocusCenterY = this.camera.panY + GAME_HEIGHT / 2;
 
   var playerDistFromCameraFocusX = Math.abs(object.x - cameraFocusCenterX);
   var playerDistFromCameraFocusY = Math.abs(object.y - cameraFocusCenterY);
 
   if(playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
     if(cameraFocusCenterX < object.x)  {
-      camPanX += RUN_SPEED;
+      this.camera.panX += RUN_SPEED;
     } else {
-      camPanX -= RUN_SPEED;
+      this.camera.panX -= RUN_SPEED;
     }
   }
   if(playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
     if(cameraFocusCenterY < object.y)  {
-      camPanY += RUN_SPEED;
+      this.camera.panY += RUN_SPEED;
     } else {
-      camPanY -= RUN_SPEED;
+      this.camera.panY -= RUN_SPEED;
     }
   }
 
   // this next code blocks the game from showing out of bounds
   // (this isn't required, if you don't mind seeing beyond edges)
-  if(camPanX < 0) {
-    camPanX = 0;
+  if(this.camera.panX < 0) {
+    this.camera.panX = 0;
   }
-  if(camPanY < 0) {
-    camPanY = 0;
+  if(this.camera.panY < 0) {
+    this.camera.panY = 0;
   }
   var maxPanRight = BRICK_COLS * BRICK_W - GAME_WIDTH;
   var maxPanTop = BRICK_ROWS * BRICK_H - GAME_HEIGHT;
-  if(camPanX > maxPanRight) {
-    camPanX = maxPanRight;
+  if(this.camera.panX > maxPanRight) {
+    this.camera.panX = maxPanRight;
   }
-  if(camPanY > maxPanTop) {
-    camPanY = maxPanTop;
+  if(this.camera.panY > maxPanTop) {
+    this.camera.panY = maxPanTop;
   }
 }
 
@@ -58,8 +59,9 @@ Level1.prototype.draw = function(graphics) {
 
   var bricks = this.bricks;
   var slider = this.slider;
-  graphics.drawInCamera(camPanX, camPanY, function() {
-    bricks.draw(graphics);
+  var camera = this.camera;
+  graphics.drawInCamera(this.camera.panX, this.camera.panY, function() {
+    bricks.draw(graphics, camera);
     slider.draw(graphics);
   });
 

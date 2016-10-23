@@ -52,10 +52,10 @@ Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
   return (brickGrid[brickIndex] == 1);
 }
 
-Bricks.prototype.draw = function(graphics) {
+Bricks.prototype.draw = function(graphics, camera) {
   // what are the top-left most col and row visible on canvas?
-  var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
-  var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
+  var cameraLeftMostCol = Math.floor(camera.panX / BRICK_W);
+  var cameraTopMostRow = Math.floor(camera.panY / BRICK_H);
 
   // how many columns and rows of tiles fit on one screenful of area?
   var colsThatFitOnScreen = Math.floor(GAME_WIDTH / BRICK_W);
