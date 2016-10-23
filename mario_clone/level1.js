@@ -4,7 +4,7 @@ function Level1() {
 };
 
 Level1.prototype.update = function() {
-  this.jumper.move();
+  this.jumper.move(this.bricks);
 };
 
 Level1.prototype.draw = function(graphics) {

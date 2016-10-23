@@ -23,18 +23,19 @@ var brickGrid = [
 ];
 
 function Bricks() {
+  this.grid = brickGrid.slice();
 };
 
-function brickTileToIndex(tileCol, tileRow) {
+Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
   return (tileCol + BRICK_COLS * tileRow);
 }
 
-function isBrickAtTileCoord(brickTileCol, brickTileRow) {
-  var brickIndex = brickTileToIndex(brickTileCol, brickTileRow);
+Bricks.prototype.isBrickAtTileCoord = function(brickTileCol, brickTileRow) {
+  var brickIndex = this.brickTileToIndex(brickTileCol, brickTileRow);
   return (brickGrid[brickIndex] == 1);
 }
 
-function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
+Bricks.prototype.isBrickAtPixelCoord = function (hitPixelX, hitPixelY) {
   var tileCol = hitPixelX / BRICK_W;
   var tileRow = hitPixelY / BRICK_H;
 
@@ -48,14 +49,14 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
      return false;
   }
 
-  var brickIndex = brickTileToIndex(tileCol, tileRow);
-  return (brickGrid[brickIndex] == 1);
+  var brickIndex = this.brickTileToIndex(tileCol, tileRow);
+  return (this.grid[brickIndex] == 1);
 }
 
 Bricks.prototype.draw = function(graphics) {
   for (var eachCol = 0; eachCol < BRICK_COLS; eachCol++) {
     for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
-      if (isBrickAtTileCoord(eachCol, eachRow)) {
+      if (this.isBrickAtTileCoord(eachCol, eachRow)) {
         var brickLeftEdgeX = eachCol * BRICK_W;
         var brickTopEdgeY = eachRow * BRICK_H;
         graphics.colorRect(brickLeftEdgeX, brickTopEdgeY,

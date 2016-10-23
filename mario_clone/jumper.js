@@ -14,7 +14,7 @@ function Jumper() {
   jumperY = GAME_HEIGHT / 2;
 };
 
-Jumper.prototype.move = function() {
+Jumper.prototype.move = function(bricks) {
   if(jumperOnGround) {
      jumperSpeedX *= GROUND_FRICTION;
    } else {
@@ -32,23 +32,28 @@ Jumper.prototype.move = function() {
      jumperSpeedX = RUN_SPEED;
    }
 
-   if(jumperSpeedY < 0 && isBrickAtPixelCoord(jumperX, jumperY - JUMPER_RADIUS) == 1) {
+   if (jumperSpeedY < 0 &&
+       bricks.isBrickAtPixelCoord(jumperX, jumperY - JUMPER_RADIUS) == 1) {
      jumperY = (Math.floor(jumperY / BRICK_H)) * BRICK_H + JUMPER_RADIUS;
      jumperSpeedY = 0.0;
    }
 
-   if(jumperSpeedY > 0 && isBrickAtPixelCoord(jumperX, jumperY + JUMPER_RADIUS) == 1) {
+   if (jumperSpeedY > 0 &&
+       bricks.isBrickAtPixelCoord(jumperX, jumperY + JUMPER_RADIUS) == 1) {
      jumperY = (1 + Math.floor(jumperY / BRICK_H)) * BRICK_H - JUMPER_RADIUS;
      jumperOnGround = true;
      jumperSpeedY = 0;
-   } else if(isBrickAtPixelCoord(jumperX, jumperY + JUMPER_RADIUS + 2) == 0) {
+   }
+   else if (bricks.isBrickAtPixelCoord(jumperX, jumperY + JUMPER_RADIUS + 2) == 0) {
      jumperOnGround = false;
    }
 
-   if(jumperSpeedX < 0 && isBrickAtPixelCoord(jumperX-JUMPER_RADIUS,jumperY) == 1) {
+   if (jumperSpeedX < 0 &&
+       bricks.isBrickAtPixelCoord(jumperX-JUMPER_RADIUS,jumperY) == 1) {
      jumperX = (Math.floor(jumperX / BRICK_W)) * BRICK_W + JUMPER_RADIUS;
    }
-   if(jumperSpeedX > 0 && isBrickAtPixelCoord(jumperX + JUMPER_RADIUS, jumperY) == 1) {
+   if (jumperSpeedX > 0 &&
+       bricks.isBrickAtPixelCoord(jumperX + JUMPER_RADIUS, jumperY) == 1) {
      jumperX = (1 + Math.floor(jumperX / BRICK_W)) * BRICK_W - JUMPER_RADIUS;
    }
 
