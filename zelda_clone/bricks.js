@@ -21,16 +21,20 @@ var brickGrid = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
 
-function brickTileToIndex (tileCol, tileRow) {
+function Bricks() {
+  this.grid = brickGrid.slice();
+};
+
+Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
   return (tileCol + BRICK_COLS * tileRow);
 }
 
-function isBrickAtTileCoord(brickTileCol, brickTileRow) {
-  var brickIndex = brickTileToIndex(brickTileCol, brickTileRow);
+Bricks.prototype.isBrickAtTileCoord = function(brickTileCol, brickTileRow) {
+  var brickIndex = this.brickTileToIndex(brickTileCol, brickTileRow);
   return (brickGrid[brickIndex] == 1);
 }
 
-function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
+Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
   var tileCol = hitPixelX / BRICK_W;
   var tileRow = hitPixelY / BRICK_H;
 
@@ -44,11 +48,11 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
      return false;
   }
 
-  var brickIndex = brickTileToIndex(tileCol, tileRow);
+  var brickIndex = this.brickTileToIndex(tileCol, tileRow);
   return (brickGrid[brickIndex] == 1);
 }
 
-function drawOnlyBricksOnScreen(graphics) {
+Bricks.prototype.draw = function(graphics) {
   // what are the top-left most col and row visible on canvas?
   var cameraLeftMostCol = Math.floor(camPanX / BRICK_W);
   var cameraTopMostRow = Math.floor(camPanY / BRICK_H);
@@ -65,7 +69,7 @@ function drawOnlyBricksOnScreen(graphics) {
 
   for (var eachCol = cameraLeftMostCol; eachCol < cameraRightMostCol; eachCol++) {
     for (var eachRow = cameraTopMostRow; eachRow < cameraBottomMostRow; eachRow++) {
-      if (isBrickAtTileCoord(eachCol, eachRow)) {
+      if (this.isBrickAtTileCoord(eachCol, eachRow)) {
         var brickLeftEdgeX = eachCol * BRICK_W;
         var brickTopEdgeY = eachRow * BRICK_H;
         graphics.colorRect(brickLeftEdgeX, brickTopEdgeY,

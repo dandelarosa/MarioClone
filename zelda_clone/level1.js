@@ -6,6 +6,7 @@ const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 150;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 
 function Level1() {
+  this.bricks = new Bricks();
   // center slider on screen
   sliderX = GAME_WIDTH / 2;
   sliderY = GAME_HEIGHT / 2;
@@ -33,7 +34,7 @@ Level1.prototype.sliderMove = function(keyEvents) {
     nextY += RUN_SPEED;
   }
 
-  if(isBrickAtPixelCoord(nextX,nextY) == false) {
+  if (this.bricks.isBrickAtPixelCoord(nextX,nextY) == false) {
     sliderX = nextX;
     sliderY = nextY;
   }
@@ -89,8 +90,7 @@ Level1.prototype.draw = function(graphics) {
   // this way we can just draw them at their "actual" position coordinates
   graphics.context2d.translate(-camPanX,-camPanY);
 
-  //drawBricks();
-  drawOnlyBricksOnScreen(graphics);
+  this.bricks.draw(graphics);
 
   graphics.colorCircle(sliderX, sliderY, 10, 'white');
 
