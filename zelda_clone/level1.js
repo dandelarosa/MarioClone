@@ -1,5 +1,3 @@
-const RUN_SPEED = 5.5;
-
 var camPanX = 0.0;
 var camPanY = 0.0;
 const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 150;
@@ -7,37 +5,12 @@ const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 100;
 
 function Level1() {
   this.bricks = new Bricks();
-  // center slider on screen
-  sliderX = GAME_WIDTH / 2;
-  sliderY = GAME_HEIGHT / 2;
+  this.slider = new Slider();
 };
 
 Level1.prototype.update = function(keyEvents) {
-  this.sliderMove(keyEvents, this.bricks);
+  this.slider.move(keyEvents, this.bricks);
   this.cameraFollow();
-};
-
-Level1.prototype.sliderMove = function(keyEvents, bricks) {
-  var nextX = sliderX;
-  var nextY = sliderY;
-
-  if(keyEvents.holdLeft) {
-    nextX += -RUN_SPEED;
-  }
-  if(keyEvents.holdRight) {
-    nextX += RUN_SPEED;
-  }
-  if(keyEvents.holdUp) {
-    nextY += -RUN_SPEED;
-  }
-  if(keyEvents.holdDown) {
-    nextY += RUN_SPEED;
-  }
-
-  if (bricks.isBrickAtPixelCoord(nextX,nextY) == false) {
-    sliderX = nextX;
-    sliderY = nextY;
-  }
 };
 
 Level1.prototype.cameraFollow = function() {
