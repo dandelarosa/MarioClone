@@ -1,13 +1,13 @@
 const RUN_SPEED = 5.5;
 
 function Slider() {
-  sliderX = GAME_WIDTH / 2;
-  sliderY = GAME_HEIGHT / 2;
+  this.x = GAME_WIDTH / 2;
+  this.y = GAME_HEIGHT / 2;
 };
 
 Slider.prototype.move = function(keyEvents, bricks) {
-  var nextX = sliderX;
-  var nextY = sliderY;
+  var nextX = this.x;
+  var nextY = this.y;
 
   if (keyEvents.holdLeft) {
     nextX += -RUN_SPEED;
@@ -23,7 +23,11 @@ Slider.prototype.move = function(keyEvents, bricks) {
   }
 
   if (bricks.isBrickAtPixelCoord(nextX,nextY) == false) {
-    sliderX = nextX;
-    sliderY = nextY;
+    this.x = nextX;
+    this.y = nextY;
   }
+};
+
+Slider.prototype.draw = function(graphics) {
+  graphics.colorCircle(this.x, this.y, 10, 'white');
 };

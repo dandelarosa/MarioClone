@@ -10,25 +10,25 @@ function Level1() {
 
 Level1.prototype.update = function(keyEvents) {
   this.slider.move(keyEvents, this.bricks);
-  this.cameraFollow();
+  this.cameraFollow(this.slider);
 };
 
-Level1.prototype.cameraFollow = function() {
+Level1.prototype.cameraFollow = function(object) {
   var cameraFocusCenterX = camPanX + GAME_WIDTH / 2;
   var cameraFocusCenterY = camPanY + GAME_HEIGHT / 2;
 
-  var playerDistFromCameraFocusX = Math.abs(sliderX-cameraFocusCenterX);
-  var playerDistFromCameraFocusY = Math.abs(sliderY-cameraFocusCenterY);
+  var playerDistFromCameraFocusX = Math.abs(object.x - cameraFocusCenterX);
+  var playerDistFromCameraFocusY = Math.abs(object.y - cameraFocusCenterY);
 
   if(playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
-    if(cameraFocusCenterX < sliderX)  {
+    if(cameraFocusCenterX < object.x)  {
       camPanX += RUN_SPEED;
     } else {
       camPanX -= RUN_SPEED;
     }
   }
   if(playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
-    if(cameraFocusCenterY < sliderY)  {
+    if(cameraFocusCenterY < object.y)  {
       camPanY += RUN_SPEED;
     } else {
       camPanY -= RUN_SPEED;
@@ -57,9 +57,10 @@ Level1.prototype.draw = function(graphics) {
   graphics.fillWholeScreen('black');
 
   var bricks = this.bricks;
+  var slider = this.slider;
   graphics.drawInCamera(camPanX, camPanY, function() {
     bricks.draw(graphics);
-    graphics.colorCircle(sliderX, sliderY, 10, 'white');
+    slider.draw(graphics);
   });
 
   graphics.colorText("Arrow keys to slide, scrolling demo", 8, 14, 'white');
