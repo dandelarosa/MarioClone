@@ -83,8 +83,9 @@ Level1.prototype.cameraFollow = function() {
 Level1.prototype.draw = function(graphics) {
   graphics.fillWholeScreen('black');
 
+  var bricks = this.bricks;
   graphics.drawInCamera(camPanX, camPanY, function() {
-    this.bricks.draw(graphics);
+    bricks.draw(graphics);
     graphics.colorCircle(sliderX, sliderY, 10, 'white');
   });
 
