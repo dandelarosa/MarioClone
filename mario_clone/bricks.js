@@ -22,6 +22,9 @@ var brickGrid = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 ];
 
+function Bricks() {
+};
+
 function brickTileToIndex(tileCol, tileRow) {
   return (tileCol + BRICK_COLS * tileRow);
 }
@@ -48,3 +51,16 @@ function isBrickAtPixelCoord(hitPixelX, hitPixelY) {
   var brickIndex = brickTileToIndex(tileCol, tileRow);
   return (brickGrid[brickIndex] == 1);
 }
+
+Bricks.prototype.draw = function(graphics) {
+  for (var eachCol = 0; eachCol < BRICK_COLS; eachCol++) {
+    for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
+      if (isBrickAtTileCoord(eachCol, eachRow)) {
+        var brickLeftEdgeX = eachCol * BRICK_W;
+        var brickTopEdgeY = eachRow * BRICK_H;
+        graphics.colorRect(brickLeftEdgeX, brickTopEdgeY,
+                 BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'blue');
+      }
+    }
+  }
+};
