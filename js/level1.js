@@ -8,7 +8,7 @@ function Level1() {
   };
 };
 
-Level1.prototype.update = function() {
+Level1.prototype.update = function(keyEvents) {
 
 };
 

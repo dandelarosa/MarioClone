@@ -3,8 +3,8 @@ function Level1() {
   this.jumper = new Jumper();
 };
 
-Level1.prototype.update = function() {
-  this.jumper.move(this.bricks);
+Level1.prototype.update = function(keyEvents) {
+  this.jumper.move(keyEvents, this.bricks);
 };
 
 Level1.prototype.draw = function(graphics) {

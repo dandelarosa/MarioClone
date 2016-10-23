@@ -14,7 +14,7 @@ function Jumper() {
   this.onGround = false;
 };
 
-Jumper.prototype.move = function(bricks) {
+Jumper.prototype.move = function(keyEvents, bricks) {
   if (holdJump && this.onGround) {
     this.speedY = -JUMP_POWER;
   }

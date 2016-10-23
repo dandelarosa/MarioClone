@@ -10,7 +10,7 @@ window.onload = function() {
   document.addEventListener("keyup", keyReleased);
 
   var firstLevel = new window[firstLevelClass];
-  game = new window[gameClass](graphics, firstLevel);
+  game = new window[gameClass](keyEvents, graphics, firstLevel);
 
   setInterval(perFrame, 1000 / game.FRAMES_PER_SECOND);
 }
