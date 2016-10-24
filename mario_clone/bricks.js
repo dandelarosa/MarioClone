@@ -1,15 +1,14 @@
-const BRICK_W = 40;
-const BRICK_H = 40;
+const BRICK_W = 60;
+const BRICK_H = 60;
 const BRICK_GAP = 1;
 const BRICK_COLS = 20;
 const BRICK_ROWS = 15;
-
 var brickGrid = [
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
   1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
   1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
-  1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
+  1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
   1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1,
   1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
   1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1,
@@ -35,7 +34,7 @@ Bricks.prototype.isBrickAtTileCoord = function(brickTileCol, brickTileRow) {
   return (brickGrid[brickIndex] == 1);
 }
 
-Bricks.prototype.isBrickAtPixelCoord = function (hitPixelX, hitPixelY) {
+Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
   var tileCol = hitPixelX / BRICK_W;
   var tileRow = hitPixelY / BRICK_H;
 
@@ -53,14 +52,28 @@ Bricks.prototype.isBrickAtPixelCoord = function (hitPixelX, hitPixelY) {
   return (this.grid[brickIndex] == 1);
 }
 
-Bricks.prototype.draw = function(graphics) {
-  for (var eachCol = 0; eachCol < BRICK_COLS; eachCol++) {
-    for (var eachRow = 0; eachRow < BRICK_ROWS; eachRow++) {
+Bricks.prototype.draw = function(graphics, camera) {
+  // what are the top-left most col and row visible on canvas?
+  var cameraLeftMostCol = Math.floor(camera.panX / BRICK_W);
+  var cameraTopMostRow = Math.floor(camera.panY / BRICK_H);
+
+  // how many columns and rows of tiles fit on one screenful of area?
+  var colsThatFitOnScreen = Math.floor(GAME_WIDTH / BRICK_W);
+  var rowsThatFitOnScreen = Math.floor(GAME_HEIGHT / BRICK_H);
+
+  // finding the rightmost and bottommost tiles to draw.
+  // the +1 and + 2 on each pushes the new tile popping in off visible area
+  // +2 for columns since BRICK_W doesn't divide evenly into canvas.width
+  var cameraRightMostCol = cameraLeftMostCol + colsThatFitOnScreen + 2;
+  var cameraBottomMostRow = cameraTopMostRow + rowsThatFitOnScreen + 1;
+
+  for (var eachCol = cameraLeftMostCol; eachCol < cameraRightMostCol; eachCol++) {
+    for (var eachRow = cameraTopMostRow; eachRow < cameraBottomMostRow; eachRow++) {
       if (this.isBrickAtTileCoord(eachCol, eachRow)) {
         var brickLeftEdgeX = eachCol * BRICK_W;
         var brickTopEdgeY = eachRow * BRICK_H;
         graphics.colorRect(brickLeftEdgeX, brickTopEdgeY,
-                 BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'blue');
+          BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP, 'blue');
       }
     }
   }
