@@ -7,6 +7,8 @@ function Level1() {
   this.camera = new Camera();
   this.camera.width = GAME_WIDTH;
   this.camera.height = GAME_HEIGHT;
+  this.camera.thresholdFromCenterX = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X;
+  this.camera.thresholdFromCenterY = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y;
   this.camera.speed = RUN_SPEED;
 };
 
@@ -22,14 +24,14 @@ Level1.prototype.cameraFollow = function(object) {
   var playerDistFromCameraFocusX = Math.abs(object.x - cameraFocusCenterX);
   var playerDistFromCameraFocusY = Math.abs(object.y - cameraFocusCenterY);
 
-  if(playerDistFromCameraFocusX > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X) {
+  if(playerDistFromCameraFocusX > this.camera.thresholdFromCenterX) {
     if(cameraFocusCenterX < object.x)  {
       this.camera.panX += this.camera.speed;
     } else {
       this.camera.panX -= this.camera.speed;
     }
   }
-  if(playerDistFromCameraFocusY > PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y) {
+  if(playerDistFromCameraFocusY > this.camera.thresholdFromCenterY) {
     if(cameraFocusCenterY < object.y)  {
       this.camera.panY += this.camera.speed;
     } else {
