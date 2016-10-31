@@ -36,4 +36,7 @@ Editor.prototype.draw = function(graphics) {
   });
 
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
+
+  // TODO: print grid coordinates instead
+  graphics.colorText(mouseX + ',' + mouseY, mouseX, mouseY, 'yellow');
 };
