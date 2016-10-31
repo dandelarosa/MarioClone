@@ -1,5 +1,6 @@
-function Game(keyEvents, graphics, firstLevel) {
+function Game(keyEvents, mouse, graphics, firstLevel) {
   this.keyEvents = keyEvents;
+  this.mouse = mouse;
   this.graphics = graphics;
   this.currentLevel = firstLevel;
 };
@@ -12,7 +13,7 @@ Game.prototype.perFrame = function() {
 }
 
 Game.prototype.update = function() {
-  this.currentLevel.update(this.keyEvents);
+  this.currentLevel.update(this.keyEvents, mouse);
 };
 
 Game.prototype.draw = function() {

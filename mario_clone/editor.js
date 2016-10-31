@@ -12,9 +12,11 @@ function Editor() {
   this.camera.speed = RUN_SPEED;
 };
 
-Editor.prototype.update = function(keyEvents) {
+Editor.prototype.update = function(keyEvents, mouse) {
   this.slider.move(keyEvents, this.bricks);
   this.camera.follow(this.slider, this.levelDimensions());
+  this.mouseX = mouse.x;
+  this.mouseY = mouse.y;
 };
 
 Editor.prototype.levelDimensions = function() {
@@ -38,5 +40,5 @@ Editor.prototype.draw = function(graphics) {
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
 
   // TODO: print grid coordinates instead
-  graphics.colorText(mouseX + ',' + mouseY, mouseX, mouseY, 'yellow');
+  graphics.colorText(this.mouseX + ',' + this.mouseY, this.mouseX, this.mouseY, 'yellow');
 };

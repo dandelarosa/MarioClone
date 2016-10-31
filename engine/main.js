@@ -2,14 +2,12 @@ var game;
 var keyEvents;
 var mouse;
 
-var mouseX = 0;
-var mouseY = 0;
-
 window.onload = function() {
   var canvas = document.getElementById('gameCanvas');
   var graphics = new Graphics(canvas);
 
-  mouse = new Mouse();
+  var root = document.documentElement;
+  mouse = new Mouse(canvas, root);
   canvas.addEventListener('mousemove', updateMousePos);
 
   keyEvents = new KeyEvents();
@@ -17,18 +15,13 @@ window.onload = function() {
   document.addEventListener("keyup", keyReleased);
 
   var firstLevel = new window[firstLevelClass];
-  game = new window[gameClass](keyEvents, graphics, firstLevel);
+  game = new window[gameClass](keyEvents, mouse, graphics, firstLevel);
 
   setInterval(perFrame, 1000 / game.FRAMES_PER_SECOND);
 }
 
 function updateMousePos(evt) {
-  var canvas = document.getElementById('gameCanvas');
-  var rect = canvas.getBoundingClientRect();
-  var root = document.documentElement;
-
-  mouseX = evt.clientX - rect.left - root.scrollLeft;
-  mouseY = evt.clientY - rect.top - root.scrollTop;
+  mouse.update(evt);
 }
 
 function keyPressed(evt) {
