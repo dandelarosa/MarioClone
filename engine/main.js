@@ -1,5 +1,6 @@
 var game;
 var keyEvents;
+var mouse;
 
 var mouseX = 0;
 var mouseY = 0;
@@ -8,6 +9,7 @@ window.onload = function() {
   var canvas = document.getElementById('gameCanvas');
   var graphics = new Graphics(canvas);
 
+  mouse = new Mouse();
   canvas.addEventListener('mousemove', updateMousePos);
 
   keyEvents = new KeyEvents();
