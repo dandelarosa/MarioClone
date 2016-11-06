@@ -12,7 +12,9 @@ function Level1() {
   this.camera.speed = RUN_SPEED;
 };
 
-Level1.prototype.update = function(keyEvents) {
+Level1.prototype.update = function(services) {
+  var keyboard = services.keyboard;
+  var keyEvents = keyboard.keyEvents;
   this.jumper.move(keyEvents, this.bricks);
   this.camera.follow(this.jumper, this.levelDimensions());
 };

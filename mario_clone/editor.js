@@ -12,7 +12,11 @@ function Editor() {
   this.camera.speed = RUN_SPEED;
 };
 
-Editor.prototype.update = function(keyEvents, mouse) {
+Editor.prototype.update = function(services) {
+  var keyboard = services.keyboard;
+  var mouse = services.mouse;
+
+  var keyEvents = keyboard.keyEvents;
   this.slider.move(keyEvents, this.bricks);
   this.camera.follow(this.slider, this.levelDimensions());
   this.mouseX = mouse.x;

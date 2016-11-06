@@ -8,5 +8,5 @@ Keyboard.prototype.keydown = function(evt) {
 };
 
 Keyboard.prototype.keyup = function(evt) {
-  keyEvents.setKeyHoldState(evt.keyCode, false);
+  this.keyEvents.setKeyHoldState(evt.keyCode, false);
 };
