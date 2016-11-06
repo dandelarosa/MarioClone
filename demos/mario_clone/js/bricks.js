@@ -32,7 +32,7 @@ Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
 Bricks.prototype.isBrickAtTileCoord = function(brickTileCol, brickTileRow) {
   var brickIndex = this.brickTileToIndex(brickTileCol, brickTileRow);
   return (brickGrid[brickIndex] == 1);
-}
+};
 
 Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
   var tileCol = hitPixelX / BRICK_W;
@@ -50,6 +50,14 @@ Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
 
   var brickIndex = this.brickTileToIndex(tileCol, tileRow);
   return (this.grid[brickIndex] == 1);
+};
+
+Bricks.prototype.colForX = function(x) {
+  return Math.floor(x / BRICK_W);
+};
+
+Bricks.prototype.rowForY = function(y) {
+  return Math.floor(y / BRICK_H);
 }
 
 Bricks.prototype.draw = function(graphics, camera) {

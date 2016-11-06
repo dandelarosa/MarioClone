@@ -42,7 +42,8 @@ Editor.prototype.draw = function(services) {
 
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
 
-  // TODO: print grid coordinates instead
   var mouse = services.mouse;
-  graphics.colorText(mouse.x + ',' + mouse.y, mouse.x, mouse.y, 'yellow');
+  col = bricks.colForX(mouse.x);
+  row = bricks.rowForY(mouse.y);
+  graphics.colorText(col + ',' + row, mouse.x, mouse.y, 'yellow');
 };
