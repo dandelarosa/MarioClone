@@ -1,5 +1,5 @@
 function Editor() {
-  this.bricks = new Bricks();
+  this.bricks = new CustomBricks();
   this.camera = new EditorCamera();
   this.camera.width = GAME_WIDTH;
   this.camera.height = GAME_HEIGHT;
