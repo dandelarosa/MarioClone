@@ -9,10 +9,8 @@ function Level1() {
 };
 
 Level1.prototype.update = function(services) {
+  var graphics = services.graphics;
 
-};
-
-Level1.prototype.draw = function(graphics) {
   graphics.fillWholeScreen('black');
 
   // this is a dude

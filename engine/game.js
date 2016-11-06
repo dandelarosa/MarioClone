@@ -7,7 +7,5 @@ Game.prototype.FRAMES_PER_SECOND = 30;
 
 Game.prototype.update = function() {
   var services = this.services;
-  var graphics = this.services.graphics;
   this.currentLevel.update(services);
-  this.currentLevel.draw(graphics);
 };

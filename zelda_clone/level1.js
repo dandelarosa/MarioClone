@@ -17,6 +17,9 @@ Level1.prototype.update = function(services) {
   var keyEvents = keyboard.keyEvents;
   this.slider.move(keyEvents, this.bricks);
   this.camera.follow(this.slider, this.levelDimensions());
+  
+  var graphics = services.graphics;
+  this.draw(graphics);
 };
 
 Level1.prototype.levelDimensions = function() {

@@ -21,6 +21,9 @@ Editor.prototype.update = function(services) {
   this.camera.follow(this.slider, this.levelDimensions());
   this.mouseX = mouse.x;
   this.mouseY = mouse.y;
+
+  var graphics = services.graphics;
+  this.draw(graphics);
 };
 
 Editor.prototype.levelDimensions = function() {
