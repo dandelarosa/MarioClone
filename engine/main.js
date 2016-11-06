@@ -1,14 +1,13 @@
 var game;
 var keyEvents;
-var mouse;
 
 window.onload = function() {
   var canvas = document.getElementById('gameCanvas');
   var graphics = new Graphics(canvas);
 
   var root = document.documentElement;
-  mouse = new Mouse(canvas, root);
-  canvas.addEventListener('mousemove', updateMousePos);
+  var mouse = new Mouse(canvas, root);
+  canvas.addEventListener('mousemove', gameMousemove);
 
   keyEvents = new KeyEvents();
   document.addEventListener("keydown", keyPressed);
@@ -16,6 +15,7 @@ window.onload = function() {
 
   var services = {
     graphics: graphics,
+    mouse: mouse,
   };
 
   var firstLevel = new window[firstLevelClass];
@@ -24,7 +24,8 @@ window.onload = function() {
   setInterval(gameUpdate, 1000 / game.FRAMES_PER_SECOND);
 }
 
-function updateMousePos(evt) {
+function gameMousemove(evt) {
+  var mouse = game.services.mouse;
   mouse.update(evt);
 }
 
