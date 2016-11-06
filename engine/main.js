@@ -14,10 +14,14 @@ window.onload = function() {
   document.addEventListener("keydown", keyPressed);
   document.addEventListener("keyup", keyReleased);
 
-  var firstLevel = new window[firstLevelClass];
-  game = new window[gameClass](keyEvents, mouse, graphics, firstLevel);
+  var services = {
+    graphics: graphics,
+  };
 
-  setInterval(perFrame, 1000 / game.FRAMES_PER_SECOND);
+  var firstLevel = new window[firstLevelClass];
+  game = new window[gameClass](services, keyEvents, mouse, firstLevel);
+
+  setInterval(gameUpdate, 1000 / game.FRAMES_PER_SECOND);
 }
 
 function updateMousePos(evt) {
@@ -33,6 +37,6 @@ function keyReleased(evt) {
   keyEvents.setKeyHoldState(evt.keyCode, false);
 };
 
-function perFrame() {
-  game.perFrame();
+function gameUpdate() {
+  game.update();
 }
