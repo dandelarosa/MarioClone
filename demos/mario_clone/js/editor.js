@@ -1,48 +1,39 @@
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X = 0;
-const PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y = 0;
-
 function Editor() {
   this.bricks = new Bricks();
-  this.slider = new Slider();
-  this.camera = new Camera();
+  this.camera = new EditorCamera();
   this.camera.width = GAME_WIDTH;
   this.camera.height = GAME_HEIGHT;
-  this.camera.thresholdFromCenterX = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_X;
-  this.camera.thresholdFromCenterY = PLAYER_DIST_FROM_CENTER_BEFORE_CAMERA_PAN_Y;
-  this.camera.speed = RUN_SPEED;
+  this.bounds = {
+    minX: 0,
+    minY: 0,
+    maxX: BRICK_W * BRICK_COLS,
+    maxY: BRICK_H * BRICK_ROWS
+  };
 };
 
 Editor.prototype.update = function(services) {
   var keyboard = services.keyboard;
-  this.slider.move(keyboard, this.bricks);
-  this.camera.follow(this.slider, this.levelDimensions());
+  this.camera.update(keyboard, this.bounds);
 
   this.draw(services);
 };
-
-Editor.prototype.levelDimensions = function() {
-  return {
-    width: BRICK_COLS * BRICK_W,
-    height: BRICK_ROWS * BRICK_H
-  }
-}
 
 Editor.prototype.draw = function(services) {
   var graphics = services.graphics;
   graphics.fillWholeScreen('black');
 
   var bricks = this.bricks;
-  var slider = this.slider;
   var camera = this.camera;
-  graphics.drawInCamera(this.camera.panX, this.camera.panY, function() {
+  graphics.drawInCamera(this.camera.x, this.camera.y, function() {
     bricks.draw(graphics, camera);
-    slider.draw(graphics);
   });
 
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
 
   var mouse = services.mouse;
-  col = bricks.colForX(mouse.x);
-  row = bricks.rowForY(mouse.y);
+  var absoluteX = mouse.x + camera.x;
+  var absoluteY = mouse.y + camera.y;
+  col = bricks.colForX(absoluteX);
+  row = bricks.rowForY(absoluteY);
   graphics.colorText(col + ',' + row, mouse.x, mouse.y, 'yellow');
 };
