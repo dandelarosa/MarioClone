@@ -1,5 +1,4 @@
 var game;
-var keyEvents;
 
 window.onload = function() {
   var canvas = document.getElementById('gameCanvas');
@@ -9,17 +8,20 @@ window.onload = function() {
   var mouse = new Mouse(canvas, root);
   canvas.addEventListener('mousemove', gameMousemove);
 
-  keyEvents = new KeyEvents();
-  document.addEventListener("keydown", keyPressed);
-  document.addEventListener("keyup", keyReleased);
+  var keyEvents = new KeyEvents();
+  document.addEventListener("keydown", gameKeydown);
+  document.addEventListener("keyup", gameKeyup);
+
+  var keyboard = new Keyboard(keyEvents);
 
   var services = {
     graphics: graphics,
+    keyboard: keyboard,
     mouse: mouse,
   };
 
   var firstLevel = new window[firstLevelClass];
-  game = new window[gameClass](services, keyEvents, mouse, firstLevel);
+  game = new window[gameClass](services, firstLevel);
 
   setInterval(gameUpdate, 1000 / game.FRAMES_PER_SECOND);
 }
@@ -29,13 +31,14 @@ function gameMousemove(evt) {
   mouse.update(evt);
 }
 
-function keyPressed(evt) {
-  keyEvents.setKeyHoldState(evt.keyCode, true);
-  evt.preventDefault(); // without this, arrow keys scroll the browser!
+function gameKeydown(evt) {
+  var keyboard = game.services.keyboard;
+  keyboard.keydown(evt);
 };
 
-function keyReleased(evt) {
-  keyEvents.setKeyHoldState(evt.keyCode, false);
+function gameKeyup(evt) {
+  var keyboard = game.services.keyboard;
+  keyboard.keyup(evt);
 };
 
 function gameUpdate() {
