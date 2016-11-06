@@ -14,8 +14,7 @@ function Level1() {
 
 Level1.prototype.update = function(services) {
   var keyboard = services.keyboard;
-  var keyEvents = keyboard.keyEvents;
-  this.jumper.move(keyEvents, this.bricks);
+  this.jumper.move(keyboard, this.bricks);
   this.camera.follow(this.jumper, this.levelDimensions());
 
   var graphics = services.graphics;

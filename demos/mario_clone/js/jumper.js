@@ -14,8 +14,10 @@ function Jumper() {
   this.onGround = false;
 };
 
-Jumper.prototype.move = function(keyEvents, bricks) {
-  if (keyEvents.holdJump && this.onGround) {
+Jumper.prototype.move = function(keyboard, bricks) {
+  var jumpPressed = keyboard.isKeyPressed(KEY_UP_ARROW) ||
+    keyboard.isKeyPressed(KEY_SPACE);
+  if (jumpPressed && this.onGround) {
     this.speedY = -JUMP_POWER;
   }
 
@@ -31,10 +33,10 @@ Jumper.prototype.move = function(keyEvents, bricks) {
      }
    }
 
-   if (keyEvents.holdLeft) {
+   if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
      this.speedX = -RUN_SPEED;
    }
-   if (keyEvents.holdRight) {
+   if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
      this.speedX = RUN_SPEED;
    }
 
