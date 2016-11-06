@@ -14,16 +14,11 @@ function Editor() {
 
 Editor.prototype.update = function(services) {
   var keyboard = services.keyboard;
-  var mouse = services.mouse;
-
   var keyEvents = keyboard.keyEvents;
   this.slider.move(keyEvents, this.bricks);
   this.camera.follow(this.slider, this.levelDimensions());
-  this.mouseX = mouse.x;
-  this.mouseY = mouse.y;
 
-  var graphics = services.graphics;
-  this.draw(graphics);
+  this.draw(services);
 };
 
 Editor.prototype.levelDimensions = function() {
@@ -33,7 +28,8 @@ Editor.prototype.levelDimensions = function() {
   }
 }
 
-Editor.prototype.draw = function(graphics) {
+Editor.prototype.draw = function(services) {
+  var graphics = services.graphics;
   graphics.fillWholeScreen('black');
 
   var bricks = this.bricks;
@@ -47,5 +43,6 @@ Editor.prototype.draw = function(graphics) {
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
 
   // TODO: print grid coordinates instead
-  graphics.colorText(this.mouseX + ',' + this.mouseY, this.mouseX, this.mouseY, 'yellow');
+  var mouse = services.mouse;
+  graphics.colorText(mouse.x + ',' + mouse.y, mouse.x, mouse.y, 'yellow');
 };
