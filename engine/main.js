@@ -8,11 +8,10 @@ window.onload = function() {
   var mouse = new Mouse(canvas, root);
   canvas.addEventListener('mousemove', gameMousemove);
 
-  var keyEvents = new KeyEvents();
   document.addEventListener("keydown", gameKeydown);
   document.addEventListener("keyup", gameKeyup);
 
-  var keyboard = new Keyboard(keyEvents);
+  var keyboard = new Keyboard();
 
   var services = {
     graphics: graphics,

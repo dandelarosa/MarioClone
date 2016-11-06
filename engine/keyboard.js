@@ -1,16 +1,13 @@
-function Keyboard(keyEvents) {
-  this.keyEvents = keyEvents;
+function Keyboard() {
   this.keyPressed = {};
 };
 
 Keyboard.prototype.keydown = function(evt) {
-  this.keyEvents.setKeyHoldState(evt.keyCode, true);
   this.keyPressed[evt.keyCode] = true;
   evt.preventDefault(); // without this, arrow keys scroll the browser!
 };
 
 Keyboard.prototype.keyup = function(evt) {
-  this.keyEvents.setKeyHoldState(evt.keyCode, false);
   this.keyPressed[evt.keyCode] = false;
 };
 
