@@ -5,20 +5,20 @@ function Slider() {
   this.y = GAME_HEIGHT / 2;
 };
 
-Slider.prototype.move = function(keyEvents, bricks) {
+Slider.prototype.move = function(keyboard, bricks) {
   var nextX = this.x;
   var nextY = this.y;
 
-  if (keyEvents.holdLeft) {
+  if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
     nextX += -RUN_SPEED;
   }
-  if (keyEvents.holdRight) {
+  if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
     nextX += RUN_SPEED;
   }
-  if (keyEvents.holdUp) {
+  if (keyboard.isKeyPressed(KEY_UP_ARROW)) {
     nextY += -RUN_SPEED;
   }
-  if (keyEvents.holdDown) {
+  if (keyboard.isKeyPressed(KEY_DOWN_ARROW)) {
     nextY += RUN_SPEED;
   }
 

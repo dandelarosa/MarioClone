@@ -14,8 +14,7 @@ function Editor() {
 
 Editor.prototype.update = function(services) {
   var keyboard = services.keyboard;
-  var keyEvents = keyboard.keyEvents;
-  this.slider.move(keyEvents, this.bricks);
+  this.slider.move(keyboard, this.bricks);
   this.camera.follow(this.slider, this.levelDimensions());
 
   this.draw(services);
