@@ -3,7 +3,7 @@ function Mouse(canvas, documentRoot) {
   this.documentRoot = documentRoot;
   this.x = 0;
   this.y = 0;
-};
+}
 
 Mouse.prototype.update = function(evt) {
   var canvas = this.canvas;

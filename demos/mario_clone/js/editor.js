@@ -29,11 +29,4 @@ Editor.prototype.draw = function(services) {
   });
 
   graphics.colorText("Arrow keys to run, spacebar to jump", 8, 14, "white");
-
-  var mouse = services.mouse;
-  var absoluteX = mouse.x + camera.x;
-  var absoluteY = mouse.y + camera.y;
-  col = bricks.colForX(absoluteX);
-  row = bricks.rowForY(absoluteY);
-  graphics.colorText(col + ',' + row, mouse.x, mouse.y, 'yellow');
 };
