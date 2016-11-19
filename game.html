@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <!-- Begin Imports -->
-    <!-- End Imports -->
-    <title>My New Game POC</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <!-- Begin Imports -->
+  <script src="js/game.js"></script>
+  <script src="js/globals.js"></script>
+  <!-- End Imports -->
+  <title>My New Game POC</title>
 </head>
 
 <body>
 <center>
+<!-- TODO: make this an NES screen size -->
 <canvas id="gameCanvas" width="800" height="600"></canvas>
 </center>
 
 <script>
-// TODO: create game object
-// TODO: set up game loop
+window.onload = function() {
+  globals.setup();
+  setInterval(gameUpdate, 1000 / game.fps);
+};
+function gameUpdate() {
+  game.update();
+}
 </script>
 
 </body>
