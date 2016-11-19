@@ -5,4 +5,6 @@ function Game() {
 };
 
 Game.prototype.update = function() {
-}
+  var graphics = globals.graphics;
+  graphics.fillCanvas('black');
+};
