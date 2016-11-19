@@ -2,6 +2,7 @@ var globals = new Globals();
 
 function Globals() {
   var globals = {
+    mouse: null,
     setup: setup,
   };
   return globals;
