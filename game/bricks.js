@@ -14,3 +14,19 @@ Bricks.prototype.drawAll = function(graphics) {
     }
   }
 };
+
+Bricks.prototype.maxX = function() {
+  return this.grid.maxX();
+};
+
+Bricks.prototype.maxY = function() {
+  return this.grid.maxY();
+};
+
+Bricks.prototype.minX = function() {
+  return this.grid.minX();
+};
+
+Bricks.prototype.minY = function() {
+  return this.grid.minY();
+};

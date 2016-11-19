@@ -31,6 +31,22 @@ Grid.prototype.colForIndex = function(index) {
   return index % this.numCols;
 }
 
+Grid.prototype.maxX = function() {
+  return this.numCols * BRICK_W;
+}
+
+Grid.prototype.maxY = function() {
+  return this.numRows * BRICK_H;
+}
+
+Grid.prototype.minX = function() {
+  return 0;
+}
+
+Grid.prototype.minY = function() {
+  return 0;
+}
+
 Grid.prototype.rowForIndex = function(index) {
   return Math.floor(index / this.numCols);
 };

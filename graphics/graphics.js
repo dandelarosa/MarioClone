@@ -11,3 +11,15 @@ Graphics.prototype.fillRect = function(x, y, width, height, color) {
   this.context2d.fillStyle = color;
   this.context2d.fillRect(x, y, width, height);
 };
+
+Graphics.prototype.popState = function() {
+  this.context2d.restore();
+};
+
+Graphics.prototype.pushState = function() {
+  this.context2d.save();
+};
+
+Graphics.prototype.translate = function(x, y) {
+  this.context2d.translate(x, y);
+};
