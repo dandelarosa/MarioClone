@@ -1,7 +1,30 @@
 const BRICK_GAP = 1;
 
 function Bricks() {
-  this.grid = new Grid();
+  var gridBuilder = {
+    cellWidth: 16,
+    cellHeight: 16,
+    data: [
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+      1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+      1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+      1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
+      1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1,
+      1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+      1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1,
+      1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+      1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+      1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1,
+      1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+      1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
+      1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    ],
+    numCols: 20,
+    numRows: 15,
+  };
+  this.grid = new Grid(gridBuilder);
 }
 
 Bricks.prototype.drawAll = function(graphics) {
@@ -9,8 +32,8 @@ Bricks.prototype.drawAll = function(graphics) {
     if (this.grid.valueAtIndex(index) === 1) {
       var leftX = this.grid.xForIndex(index);
       var topY = this.grid.yForIndex(index);
-      graphics.fillRect(leftX , topY, BRICK_W - BRICK_GAP, BRICK_H - BRICK_GAP,
-        'blue');
+      graphics.fillRect(leftX , topY, this.grid.cellWidth - BRICK_GAP,
+        this.grid.cellHeight - BRICK_GAP, 'blue');
     }
   }
 };

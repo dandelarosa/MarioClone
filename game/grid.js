@@ -1,30 +1,10 @@
-const BRICK_W = 16;
-const BRICK_H = 16;
-const DEFAULT_COLS = 20;
-const DEFAULT_ROWS = 15;
-const DEFAULT_DATA = [
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-  1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-  1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
-  1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1,
-  1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1,
-  1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-  1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1,
-  1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1,
-  1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-  1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1,
-  1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
-  1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1,
-  1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-];
-
-function Grid() {
-  this.data = DEFAULT_DATA;
-  this.length = DEFAULT_DATA.length;
-  this.numCols = DEFAULT_COLS;
-  this.numRows = DEFAULT_ROWS;
+function Grid(builder) {
+  this.cellHeight = builder.cellHeight;
+  this.cellWidth = builder.cellWidth;
+  this.data = builder.data.slice(); // Defensive copy
+  this.length = this.data.length;
+  this.numCols = builder.numCols;
+  this.numRows = builder.numRows;
 }
 
 Grid.prototype.colForIndex = function(index) {
@@ -32,11 +12,11 @@ Grid.prototype.colForIndex = function(index) {
 }
 
 Grid.prototype.maxX = function() {
-  return this.numCols * BRICK_W;
+  return this.numCols * this.cellWidth;
 }
 
 Grid.prototype.maxY = function() {
-  return this.numRows * BRICK_H;
+  return this.numRows * this.cellHeight;
 }
 
 Grid.prototype.minX = function() {
@@ -56,9 +36,9 @@ Grid.prototype.valueAtIndex = function(index) {
 };
 
 Grid.prototype.xForIndex = function(index) {
-  return this.colForIndex(index) * BRICK_W;
+  return this.colForIndex(index) * this.cellWidth;
 };
 
 Grid.prototype.yForIndex = function(index) {
-  return this.rowForIndex(index) * BRICK_H;
+  return this.rowForIndex(index) * this.cellHeight;
 };
