@@ -23,3 +23,7 @@ Graphics.prototype.pushState = function() {
 Graphics.prototype.translate = function(x, y) {
   this.context2d.translate(x, y);
 };
+
+Graphics.prototype.scale = function(x, y) {
+  this.context2d.scale(x, y);
+};

@@ -1,5 +1,5 @@
-const BRICK_W = 60;
-const BRICK_H = 60;
+const BRICK_W = 16;
+const BRICK_H = 16;
 const DEFAULT_COLS = 20;
 const DEFAULT_ROWS = 15;
 const DEFAULT_DATA = [
