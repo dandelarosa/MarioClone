@@ -3,6 +3,9 @@ function Keyboard() {
 };
 
 Keyboard.prototype.keydown = function(evt) {
+  if (document.activeElement.id === 'levelData.data') {
+    return;
+  }
   this.keyPressed[evt.keyCode] = true;
   evt.preventDefault(); // without this, arrow keys scroll the browser!
 };
