@@ -38,12 +38,37 @@ Game.prototype.reset = function() {
   this.camera = new Camera(0, 0, this.width, this.height);
 }
 
+Game.prototype.switchToEditorMode = function() {
+  this.isEditing = true;
+};
+
+Game.prototype.switchToPlayerMode = function() {
+  this.isEditing = false;
+};
+
 Game.prototype.update = function() {
   var keyboard = globals.keyboard;
   if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
-    this.isEditing = !this.isEditing;
+    if (this.isEditing) {
+      this.switchToPlayerMode();
+    }
+    else {
+      this.switchToEditorMode();
+    }
   }
 
+  if (this.isEditing) {
+    this.updateEditorMode();
+  }
+  else {
+    this.updatePlayerMode();
+  }
+
+  keyboard.resetKeyStateChanges();
+};
+
+Game.prototype.updateEditorMode = function() {
+  var keyboard = globals.keyboard;
   this.camera.update(keyboard, this.bricks);
 
   var graphics = globals.graphics;
@@ -57,13 +82,15 @@ Game.prototype.update = function() {
   graphics.popState();
   graphics.popState();
 
-  if (this.isEditing) {
-    graphics.fillText('Editor Mode', 5, 15, 'yellow');
+  graphics.fillText('Editor Mode', 5, 15, 'yellow');
+};
 
-  }
-  else {
-    graphics.fillText('Player Mode', 5, 15, 'yellow');
-  }
+Game.prototype.updatePlayerMode = function() {
+  var graphics = globals.graphics;
+  graphics.pushState();
+  graphics.scale(this.scaleX, this.scaleY);
+  graphics.fillCanvas('black');
+  graphics.popState();
 
-  keyboard.resetKeyStateChanges();
+  graphics.fillText('Player Mode', 5, 15, 'yellow');
 };
