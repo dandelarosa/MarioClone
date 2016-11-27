@@ -21,6 +21,7 @@ function Game() {
     1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   ];
+  this.isEditing = true;
   this.reset();
 };
 
@@ -38,7 +39,12 @@ Game.prototype.reset = function() {
 }
 
 Game.prototype.update = function() {
-  this.camera.update(globals.keyboard, this.bricks);
+  var keyboard = globals.keyboard;
+  if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
+    this.isEditing = !this.isEditing;
+  }
+
+  this.camera.update(keyboard, this.bricks);
 
   var graphics = globals.graphics;
   graphics.pushState();
@@ -50,4 +56,14 @@ Game.prototype.update = function() {
   this.bricks.drawAll(graphics);
   graphics.popState();
   graphics.popState();
+
+  if (this.isEditing) {
+    graphics.fillText('Editor Mode', 5, 15, 'yellow');
+
+  }
+  else {
+    graphics.fillText('Player Mode', 5, 15, 'yellow');
+  }
+
+  keyboard.resetKeyStateChanges();
 };
