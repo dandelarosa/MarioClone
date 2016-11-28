@@ -6,15 +6,15 @@ const GRAVITY = 0.6;
 
 var JUMPER_RADIUS = 10;
 
-function Jumper() {
-  this.x = GAME_WIDTH / 2;
-  this.y = GAME_HEIGHT / 2;
+function Player(x, y) {
+  this.x = x;
+  this.y = y;
   this.speedX = 0;
   this.speedY = 0;
   this.onGround = false;
 };
 
-Jumper.prototype.move = function(keyboard, bricks) {
+Player.prototype.move = function(keyboard, bricks) {
   var jumpPressed = keyboard.isKeyPressed(KEY_UP_ARROW) ||
     keyboard.isKeyPressed(KEY_SPACE);
   if (jumpPressed && this.onGround) {
@@ -42,13 +42,13 @@ Jumper.prototype.move = function(keyboard, bricks) {
 
    if (this.speedY < 0 &&
        bricks.isBrickAtPixelCoord(this.x, this.y - JUMPER_RADIUS) == 1) {
-     this.y = (Math.floor(this.y / BRICK_H)) * BRICK_H + JUMPER_RADIUS;
+     this.y = (Math.floor(this.y / bricks.grid.cellHeight)) * bricks.grid.cellHeight + JUMPER_RADIUS;
      this.speedY = 0.0;
    }
 
    if (this.speedY > 0 &&
        bricks.isBrickAtPixelCoord(this.x, this.y + JUMPER_RADIUS) == 1) {
-     this.y = (1 + Math.floor(this.y / BRICK_H)) * BRICK_H - JUMPER_RADIUS;
+     this.y = (1 + Math.floor(this.y / bricks.grid.cellHeight)) * bricks.grid.cellHeight - JUMPER_RADIUS;
      this.onGround = true;
      this.speedY = 0;
    }
@@ -58,17 +58,17 @@ Jumper.prototype.move = function(keyboard, bricks) {
 
    if (this.speedX < 0 &&
        bricks.isBrickAtPixelCoord(this.x - JUMPER_RADIUS,this.y) == 1) {
-     this.x = (Math.floor(this.x / BRICK_W)) * BRICK_W + JUMPER_RADIUS;
+     this.x = (Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth + JUMPER_RADIUS;
    }
    if (this.speedX > 0 &&
        bricks.isBrickAtPixelCoord(this.x + JUMPER_RADIUS, this.y) == 1) {
-     this.x = (1 + Math.floor(this.x / BRICK_W)) * BRICK_W - JUMPER_RADIUS;
+     this.x = (1 + Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth - JUMPER_RADIUS;
    }
 
    this.x += this.speedX; // move the jumper based on its current horizontal speed
    this.y += this.speedY; // same as above, but for vertical
 };
 
-Jumper.prototype.draw = function(graphics) {
-  graphics.colorCircle(this.x, this.y, JUMPER_RADIUS, 'white');
+Player.prototype.draw = function(graphics) {
+  graphics.fillCircle(this.x, this.y, JUMPER_RADIUS, 'white');
 };

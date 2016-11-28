@@ -35,6 +35,8 @@ Game.prototype.reset = function() {
   };
   var grid = new Grid(gridBuilder);
   this.bricks = new Bricks(grid);
+  this.player = new Player(this.width/2, this.height/2);
+  this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.camera = new Camera(0, 0, this.width, this.height);
 }
 
@@ -86,10 +88,20 @@ Game.prototype.updateEditorMode = function() {
 };
 
 Game.prototype.updatePlayerMode = function() {
+  var keyboard = globals.keyboard;
+  this.player.move(keyboard, this.bricks);
+  this.playerCamera.follow(this.player, this.bricks);
+
   var graphics = globals.graphics;
   graphics.pushState();
   graphics.scale(this.scaleX, this.scaleY);
   graphics.fillCanvas('black');
+
+  graphics.pushState();
+  graphics.translate(-this.playerCamera.x, -this.playerCamera.y);
+  this.bricks.drawAll(graphics);
+  this.player.draw(graphics);
+  graphics.popState();
   graphics.popState();
 
   graphics.fillText('Player Mode', 5, 15, 'yellow');

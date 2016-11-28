@@ -7,6 +7,13 @@ Graphics.prototype.fillCanvas = function(color) {
   this.fillRect(0, 0, this.canvas.width, this.canvas.height, color);
 };
 
+Graphics.prototype.fillCircle = function (centerX, centerY, radius, fillColor) {
+  this.context2d.fillStyle = fillColor;
+  this.context2d.beginPath();
+  this.context2d.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+  this.context2d.fill();
+};
+
 Graphics.prototype.fillRect = function(x, y, width, height, color) {
   this.context2d.fillStyle = color;
   this.context2d.fillRect(x, y, width, height);
