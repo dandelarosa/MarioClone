@@ -1,13 +1,13 @@
 const CAMERA_SPEED = 20;
 
-function Camera(x, y, width, height) {
+function EditorCamera(x, y, width, height) {
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
 }
 
-Camera.prototype.update = function(keyboard, bricks) {
+EditorCamera.prototype.update = function(keyboard, bricks) {
   var nextX = this.x;
   var nextY = this.y;
 

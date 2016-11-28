@@ -37,7 +37,7 @@ Game.prototype.reset = function() {
   this.bricks = new Bricks(grid);
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
-  this.camera = new Camera(0, 0, this.width, this.height);
+  this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
 }
 
 Game.prototype.switchToEditorMode = function() {
@@ -71,7 +71,7 @@ Game.prototype.update = function() {
 
 Game.prototype.updateEditorMode = function() {
   var keyboard = globals.keyboard;
-  this.camera.update(keyboard, this.bricks);
+  this.editorCamera.update(keyboard, this.bricks);
 
   var graphics = globals.graphics;
   graphics.pushState();
@@ -79,7 +79,7 @@ Game.prototype.updateEditorMode = function() {
   graphics.fillCanvas('black');
 
   graphics.pushState();
-  graphics.translate(-this.camera.x, -this.camera.y);
+  graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
   this.bricks.drawAll(graphics);
   graphics.popState();
   graphics.popState();
