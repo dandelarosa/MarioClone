@@ -4,6 +4,7 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
   <!-- Begin Imports -->
+  <script src="editor/editor.js"></script>
   <script src="game/bricks.js"></script>
   <script src="game/editor_camera.js"></script>
   <script src="game/game.js"></script>
@@ -42,24 +43,6 @@ function gameUpdate() {
   <input id="levelData.data" type="text" value=""/>
   <input type="submit" value="Update grid"/>
 </form>
-<script>
-function displayLevelData() {
-  var input = document.getElementById('levelData.data');
-  var value = game.gridData.toString();
-  input.value = value;
-}
-function updateLevelData() {
-  var input = document.getElementById('levelData.data');
-  var value = input.value;
-  var data = value.split(',');
-  var finalData = [];
-  for (var i = 0; i < data.length; i++) {
-    finalData.push(parseInt(data[i]));
-  }
-  game.gridData = finalData;
-  game.reset();
-}
-</script>
 
 </body>
 </html>
