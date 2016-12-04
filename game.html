@@ -39,6 +39,11 @@ function gameUpdate() {
 }
 </script>
 
+<form id="levelWidth">
+  <input id="levelWidth.numCols" type="text" value="" readonly/>
+  <input type="button" onclick="addColumns(16);" value="Add 16 columns"/> 
+</form>
+
 <form id="levelData" action="javascript:updateLevelData();">
   <input id="levelData.data" type="text" value=""/>
   <input type="submit" value="Update grid"/>

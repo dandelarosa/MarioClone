@@ -2,6 +2,8 @@ function displayLevelData() {
   var input = document.getElementById('levelData.data');
   var value = game.gridData.toString();
   input.value = value;
+
+  displayNumCols();
 }
 
 function updateLevelData() {
@@ -14,4 +16,18 @@ function updateLevelData() {
   }
   game.gridData = finalData;
   game.reset();
+}
+
+function displayNumCols() {
+  var numColsElement = document.getElementById('levelWidth.numCols');
+  numColsElement.value = game.numCols.toString();
+}
+
+function addColumns(colsToAdd) {
+  console.log("Columns to add: " + colsToAdd);
+  alert('Not implemented yet!');
+  // TODO: turn 1D array into 2D array
+  // TODO: add columns to 2D array (default value?)
+  // TODO: turn 2D array back into 1D array
+  // TODO: update level information
 }

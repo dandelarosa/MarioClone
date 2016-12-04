@@ -21,6 +21,7 @@ function Game() {
     1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
   ];
+  this.numCols = 20;
   this.isEditing = true;
   this.reset();
 };
@@ -30,7 +31,7 @@ Game.prototype.reset = function() {
     cellWidth: 16,
     cellHeight: 16,
     data: this.gridData,
-    numCols: 20,
+    numCols: this.numCols,
     numRows: 15,
   };
   var grid = new Grid(gridBuilder);
