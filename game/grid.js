@@ -15,6 +15,10 @@ Grid.prototype.colForIndex = function(index) {
   return index % this.numCols;
 }
 
+Grid.prototype.getData = function() {
+  return this.data.slice();
+};
+
 Grid.prototype.indexForColAndRow = function(col, row) {
   return col + row * this.numCols;
 }

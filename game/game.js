@@ -70,6 +70,8 @@ Game.prototype.updateEditorMode = function() {
   var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
   if (mouse.isPressedThisFrame()) {
     this.bricks.toggleValueAtColRow(mouseCol, mouseRow);
+    this.gridData = this.bricks.getGridData();
+    displayLevelData();
   }
 
   var graphics = globals.graphics;

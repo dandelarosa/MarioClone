@@ -24,6 +24,10 @@ Bricks.prototype.drawAll = function(graphics) {
   }
 };
 
+Bricks.prototype.getGridData = function() {
+  return this.grid.getData();
+};
+
 Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
   var tileCol = hitPixelX / this.grid.cellWidth;
   var tileRow = hitPixelY / this.grid.cellHeight;
