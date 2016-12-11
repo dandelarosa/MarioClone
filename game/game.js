@@ -78,8 +78,12 @@ Game.prototype.updateEditorMode = function() {
   var mouse = globals.mouse;
   var mouseX = mouse.x;
   var mouseY = mouse.y;
-  graphics.fillText('(' + mouseX + ', ' + mouseY + ')',
-    mouseX, mouseY, 'yellow');
+  var mousePlusCameraX = mouse.x / 2 + camera.x;
+  var mousePlusCameraY = mouse.y / 2 + camera.y;
+  var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
+  var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
+  var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
+  graphics.fillText(mouseColRowText, mouseX, mouseY, 'yellow');
 };
 
 Game.prototype.updatePlayerMode = function() {

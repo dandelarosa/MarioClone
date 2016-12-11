@@ -8,6 +8,11 @@ Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
   return (tileCol + this.grid.numCols * tileRow);
 }
 
+Bricks.prototype.colForPixelX = function(pixelX) {
+  var result = Math.floor(pixelX / this.grid.cellWidth);
+  return result;
+}
+
 Bricks.prototype.drawAll = function(graphics) {
   for (var index = 0; index < this.grid.length; index++) {
     if (this.grid.valueAtIndex(index) === 1) {
@@ -32,7 +37,7 @@ Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
      tileRow < 0 || tileRow >= this.grid.numRows) {
      return false;
   }
-  
+
   var brickIndex = this.brickTileToIndex(tileCol, tileRow);
   return (this.grid.valueAtIndex(brickIndex) == 1);
 };
@@ -52,3 +57,8 @@ Bricks.prototype.minX = function() {
 Bricks.prototype.minY = function() {
   return this.grid.minY();
 };
+
+Bricks.prototype.rowForPixelY = function(pixelY) {
+  var result = Math.floor(pixelY / this.grid.cellHeight);
+  return result;
+}
