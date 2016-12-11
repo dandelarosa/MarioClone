@@ -5,7 +5,7 @@ function PlayerCamera(x, y, width, height) {
   this.width = width;
   this.height = height;
   this.speed = 4;
-  this.thresholdFromCenterX = 150;
+  this.thresholdFromCenterX = 25;
   this.thresholdFromCenterY = 100;
 }
 
