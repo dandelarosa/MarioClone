@@ -24,10 +24,15 @@ function displayNumCols() {
 }
 
 function addColumns(colsToAdd) {
-  console.log("Columns to add: " + colsToAdd);
-  alert('Not implemented yet!');
-  // TODO: turn 1D array into 2D array
-  // TODO: add columns to 2D array (default value?)
-  // TODO: turn 2D array back into 1D array
-  // TODO: update level information
+  var convertedGrid = create2dArray(game.gridData, game.numCols);
+  addColumnsToGrid(convertedGrid, colsToAdd, 0);
+  var convertedBackGrid = create1dArray(convertedGrid);
+  var newNumCols = game.numCols + colsToAdd;
+
+  game.gridData = convertedBackGrid;
+  game.numCols = newNumCols;
+  game.reset();
+
+  // Don't forget to display the changes!
+  displayLevelData();
 }

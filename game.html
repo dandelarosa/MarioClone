@@ -4,6 +4,7 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
   <!-- Begin Imports -->
+  <script src="editor/2darray.js"></script>
   <script src="editor/editor.js"></script>
   <script src="game/bricks.js"></script>
   <script src="game/editor_camera.js"></script>
@@ -41,7 +42,7 @@ function gameUpdate() {
 
 <form id="levelWidth">
   <input id="levelWidth.numCols" type="text" value="" readonly/>
-  <input type="button" onclick="addColumns(16);" value="Add 16 columns"/> 
+  <input type="button" onclick="addColumns(16);" value="Add 16 columns"/>
 </form>
 
 <form id="levelData" action="javascript:updateLevelData();">
