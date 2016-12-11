@@ -43,6 +43,7 @@ function gameUpdate() {
 <form id="levelWidth">
   <input id="levelWidth.numCols" type="text" value="" readonly/>
   <input type="button" onclick="addColumns(16);" value="Add 16 columns"/>
+  <input type="button" onclick="deleteLastColumn();" value="Remove last column"/>
 </form>
 
 <form id="levelData" action="javascript:updateLevelData();">

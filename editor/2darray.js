@@ -22,3 +22,9 @@ function addColumnsToGrid(grid, numberOfColumns, value) {
     }
   }
 }
+
+function removeLastColumnFromGrid(grid) {
+  for (var rowIndex = 0; rowIndex < grid.length; rowIndex++) {
+    grid[rowIndex] = grid[rowIndex].slice(0, grid[rowIndex].length - 1);
+  }
+}

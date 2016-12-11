@@ -36,3 +36,17 @@ function addColumns(colsToAdd) {
   // Don't forget to display the changes!
   displayLevelData();
 }
+
+function deleteLastColumn() {
+  var convertedGrid = create2dArray(game.gridData, game.numCols);
+  removeLastColumnFromGrid(convertedGrid);
+  var convertedBackGrid = create1dArray(convertedGrid);
+  var newNumCols = game.numCols - 1;
+
+  game.gridData = convertedBackGrid;
+  game.numCols = newNumCols;
+  game.reset();
+
+  // Don't forget to display the changes!
+  displayLevelData();
+}
