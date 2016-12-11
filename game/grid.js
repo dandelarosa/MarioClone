@@ -7,8 +7,16 @@ function Grid(builder) {
   this.numRows = builder.numRows;
 }
 
+Grid.prototype.changeValueAtIndex = function(index, value) {
+  this.data[index] = value;
+}
+
 Grid.prototype.colForIndex = function(index) {
   return index % this.numCols;
+}
+
+Grid.prototype.indexForColAndRow = function(col, row) {
+  return col + row * this.numCols;
 }
 
 Grid.prototype.maxX = function() {

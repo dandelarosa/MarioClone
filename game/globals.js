@@ -18,6 +18,8 @@ function Globals() {
 
     globals.mouse = new Mouse(canvas, document.documentElement);
     canvas.addEventListener('mousemove', gameMousemove);
+    canvas.addEventListener('mousedown', gameMousedown);
+    canvas.addEventListener('mouseup', gameMouseup);
   }
 
   function gameKeydown(evt) {
@@ -28,7 +30,15 @@ function Globals() {
     globals.keyboard.keyup(evt);
   };
 
+  function gameMousedown(evt) {
+    globals.mouse.mousedown(evt);
+  }
+
   function gameMousemove(evt) {
     globals.mouse.update(evt);
+  }
+
+  function gameMouseup(evt) {
+    globals.mouse.mouseup(evt);
   }
 }

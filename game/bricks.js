@@ -62,3 +62,13 @@ Bricks.prototype.rowForPixelY = function(pixelY) {
   var result = Math.floor(pixelY / this.grid.cellHeight);
   return result;
 }
+
+Bricks.prototype.toggleValueAtColRow = function(col, row) {
+  var index = this.grid.indexForColAndRow(col, row);
+  if (this.grid.valueAtIndex(index)) {
+    this.grid.changeValueAtIndex(index, 0);
+  }
+  else {
+    this.grid.changeValueAtIndex(index, 1);
+  }
+}

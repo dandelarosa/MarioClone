@@ -35,6 +35,7 @@ Game.prototype.switchToPlayerMode = function() {
 
 Game.prototype.update = function() {
   var keyboard = globals.keyboard;
+  var mouse = globals.mouse;
   if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
     if (this.isEditing) {
       this.switchToPlayerMode();
@@ -52,12 +53,24 @@ Game.prototype.update = function() {
   }
 
   keyboard.resetKeyStateChanges();
+  mouse.resetStateChange();
 };
 
 Game.prototype.updateEditorMode = function() {
   var keyboard = globals.keyboard;
   var camera = this.editorCamera;
   this.editorCamera.update(keyboard, this.bricks);
+
+  var mouse = globals.mouse;
+  var mouseX = mouse.x;
+  var mouseY = mouse.y;
+  var mousePlusCameraX = mouse.x / 2 + camera.x;
+  var mousePlusCameraY = mouse.y / 2 + camera.y;
+  var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
+  var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
+  if (mouse.isPressedThisFrame()) {
+    this.bricks.toggleValueAtColRow(mouseCol, mouseRow);
+  }
 
   var graphics = globals.graphics;
   graphics.pushState();
@@ -75,13 +88,6 @@ Game.prototype.updateEditorMode = function() {
 
   graphics.fillText('Editor Mode', 5, 15, 'yellow');
 
-  var mouse = globals.mouse;
-  var mouseX = mouse.x;
-  var mouseY = mouse.y;
-  var mousePlusCameraX = mouse.x / 2 + camera.x;
-  var mousePlusCameraY = mouse.y / 2 + camera.y;
-  var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
-  var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
   var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
   graphics.fillText(mouseColRowText, mouseX, mouseY, 'yellow');
 };
