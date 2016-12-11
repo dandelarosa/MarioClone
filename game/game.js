@@ -56,6 +56,7 @@ Game.prototype.update = function() {
 
 Game.prototype.updateEditorMode = function() {
   var keyboard = globals.keyboard;
+  var camera = this.editorCamera;
   this.editorCamera.update(keyboard, this.bricks);
 
   var graphics = globals.graphics;
@@ -73,6 +74,12 @@ Game.prototype.updateEditorMode = function() {
   graphics.popState();
 
   graphics.fillText('Editor Mode', 5, 15, 'yellow');
+
+  var mouse = globals.mouse;
+  var mouseX = mouse.x;
+  var mouseY = mouse.y;
+  graphics.fillText('(' + mouseX + ', ' + mouseY + ')',
+    mouseX, mouseY, 'yellow');
 };
 
 Game.prototype.updatePlayerMode = function() {
