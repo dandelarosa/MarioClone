@@ -11,13 +11,7 @@ function Game() {
 };
 
 Game.prototype.reset = function() {
-  var gridBuilder = {
-    cellWidth: 16,
-    cellHeight: 16,
-    data: this.gridData,
-    numCols: this.numCols,
-    numRows: 15,
-  };
+  var gridBuilder = new GridBuilder(this.numCols, this.gridData);
   var grid = new Grid(gridBuilder);
   this.bricks = new Bricks(grid);
   this.player = new Player(this.width/2, this.height/2);
