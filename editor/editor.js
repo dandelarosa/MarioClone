@@ -60,6 +60,9 @@ function selectWorld() {
 
   var selectedWorld = worlds[selectedValue];
   game.loadWorld(selectedWorld);
+
+  // Don't forget to display the changes!
+  displayLevelData();
 }
 
 function rememberSelectedWorld(worldValue) {
