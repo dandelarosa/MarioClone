@@ -76,6 +76,17 @@ function getLastSelectedWorld() {
     return null;
   }
   var storedValue = window.localStorage.getItem("selectedWorld");
+
+  // This might need to be put into its own function. Who knows?
+  var select = document.getElementById('worldSelect');
+  var options = select.options;
+  for (var optionIndex = 0; optionIndex < options.length; optionIndex++) {
+    var optionToCheck = options[optionIndex];
+    if (optionToCheck.value === storedValue) {
+      select.selectedIndex = optionIndex;
+    }
+  }
+
   // TODO: implement for real
   console.log(storedValue);
 
