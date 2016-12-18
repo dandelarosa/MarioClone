@@ -50,3 +50,13 @@ function deleteLastColumn() {
   // Don't forget to display the changes!
   displayLevelData();
 }
+
+function selectWorld() {
+  var select = document.getElementById('worldSelect');
+  var selectedIndex = select.selectedIndex;
+  var selectedOption = select.options[selectedIndex];
+  var selectedValue = selectedOption.value;
+  // TODO: implement for real
+  console.log(selectedIndex);
+  console.log(selectedValue);
+}
