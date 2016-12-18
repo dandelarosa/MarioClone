@@ -4,9 +4,12 @@ function Game() {
   this.height = 240;
   this.scaleX = 2;
   this.scaleY = 2;
-  this.gridData = WORLD_11_GRID_DATA;
-  this.numCols = WORLD_11_NUM_COLS;
   this.isEditing = true;
+};
+
+Game.prototype.loadWorld = function(world) {
+  this.gridData = world.gridData;
+  this.numCols = world.numCols;
   this.reset();
 };
 

@@ -56,10 +56,10 @@ function selectWorld() {
   var selectedIndex = select.selectedIndex;
   var selectedOption = select.options[selectedIndex];
   var selectedValue = selectedOption.value;
-  // TODO: implement for real
-  console.log(selectedIndex);
-  console.log(selectedValue);
   rememberSelectedWorld(selectedValue);
+
+  var selectedWorld = worlds[selectedValue];
+  game.loadWorld(selectedWorld);
 }
 
 function rememberSelectedWorld(worldValue) {
@@ -87,9 +87,6 @@ function getLastSelectedWorld() {
     }
   }
 
-  // TODO: implement for real
-  console.log(storedValue);
-
-  // This will eventually return something, like a World object
-  return null;
+  var selectedWorld = worlds[storedValue];
+  return selectedWorld;
 }
