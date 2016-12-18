@@ -34,6 +34,7 @@ var game;
 window.onload = function() {
   globals.setup();
   game = new Game();
+  var lastSelectedWorld = getLastSelectedWorld();
   displayLevelData();
   setInterval(gameUpdate, 1000 / game.fps);
 };

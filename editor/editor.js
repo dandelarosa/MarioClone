@@ -59,4 +59,26 @@ function selectWorld() {
   // TODO: implement for real
   console.log(selectedIndex);
   console.log(selectedValue);
+  rememberSelectedWorld(selectedValue);
+}
+
+function rememberSelectedWorld(worldValue) {
+  // Check for browser compatibility
+  if (typeof(Storage) === "undefined") {
+    return;
+  }
+  window.localStorage.setItem("selectedWorld", worldValue);
+};
+
+function getLastSelectedWorld() {
+  // Check for browser compatibility
+  if (typeof(Storage) === "undefined") {
+    return null;
+  }
+  var storedValue = window.localStorage.getItem("selectedWorld");
+  // TODO: implement for real
+  console.log(storedValue);
+
+  // This will eventually return something, like a World object
+  return null;
 }
