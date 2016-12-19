@@ -1,14 +1,21 @@
-// Images aren't part of the repository for obvious reasons
-const DEFAULT_LEVEL_IMAGE_LOCATION = '../../../../Downloads/mario_levels/';
-
 var levelImageLoaded = {};
+var levelImages = {};
 
 function levelImageOnload(evt) {
   var imageId = evt.target.id;
   levelImageLoaded[imageId] = true;
 }
 
-var world11image = document.createElement('img');
-world11image.setAttribute('id', 'world_1-1');
-world11image.onload = levelImageOnload;
-world11image.src = DEFAULT_LEVEL_IMAGE_LOCATION + 'smb_1-1.png';
+function getLevelImage(key) {
+  if (levelImages[key]) {
+    return levelImages[key];
+  }
+
+  var newImage = document.createElement('img');
+  newImage.setAttribute('id', key);
+  newImage.onload = levelImageOnload;
+  newImage.src = worlds[key].levelImage;
+  levelImages[key] = newImage;
+
+  return newImage;
+};

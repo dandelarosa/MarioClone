@@ -10,6 +10,8 @@ function Game() {
 Game.prototype.loadWorld = function(world) {
   this.gridData = world.gridData;
   this.numCols = world.numCols;
+  this.levelImage = getLevelImage(world.key);
+  this.levelImageKey = world.key;
   this.reset();
 };
 
@@ -78,8 +80,8 @@ Game.prototype.updateEditorMode = function() {
 
   graphics.pushState();
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
-  if (levelImageLoaded['world_1-1']) {
-    graphics.context2d.drawImage(world11image, 0, 0);
+  if (levelImageLoaded[this.levelImageKey]) {
+    graphics.context2d.drawImage(this.levelImage, 0, 0);
   }
   this.bricks.drawAll(graphics);
   graphics.popState();
