@@ -3,8 +3,8 @@ function Graphics(canvas) {
   this.context2d = canvas.getContext('2d');
 }
 
-Graphics.prototype.drawImage = function(image) {
-  this.context2d.drawImage(image, 0, 0);
+Graphics.prototype.drawImage = function(image, x, y) {
+  this.context2d.drawImage(image, x, y);
 };
 
 Graphics.prototype.fillCanvas = function(color) {

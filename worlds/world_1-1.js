@@ -3,6 +3,7 @@ const WORLD_11_GRID_DATA = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 var world11 = {
   key: '1-1',
+  levelImageOffset: 0,
   numCols: WORLD_11_NUM_COLS,
   gridData: WORLD_11_GRID_DATA,
   levelImage: '../../../../Downloads/mario_levels/smb_1-1.png', // Image isn't part of the repository for obvious reasons

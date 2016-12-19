@@ -12,6 +12,7 @@ Game.prototype.loadWorld = function(world) {
   this.numCols = world.numCols;
   this.levelImage = getLevelImage(world.key);
   this.levelImageKey = world.key;
+  this.levelImageOffset = world.levelImageOffset;
   this.reset();
 };
 
@@ -81,7 +82,7 @@ Game.prototype.updateEditorMode = function() {
   graphics.pushState();
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
   if (levelImageLoaded[this.levelImageKey]) {
-    graphics.drawImage(this.levelImage);
+    graphics.drawImage(this.levelImage, -this.levelImageOffset, 0);
   }
   this.bricks.drawAll(graphics);
   graphics.popState();
