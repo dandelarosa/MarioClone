@@ -81,7 +81,7 @@ Game.prototype.updateEditorMode = function() {
   graphics.pushState();
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
   if (levelImageLoaded[this.levelImageKey]) {
-    graphics.context2d.drawImage(this.levelImage, 0, 0);
+    graphics.drawImage(this.levelImage);
   }
   this.bricks.drawAll(graphics);
   graphics.popState();

@@ -3,6 +3,10 @@ function Graphics(canvas) {
   this.context2d = canvas.getContext('2d');
 }
 
+Graphics.prototype.drawImage = function(image) {
+  this.context2d.drawImage(image, 0, 0);
+};
+
 Graphics.prototype.fillCanvas = function(color) {
   this.fillRect(0, 0, this.canvas.width, this.canvas.height, color);
 };
