@@ -6,6 +6,7 @@ function Game() {
   this.scaleY = 2;
   this.isEditing = true;
   this.isEditorHidingBricks = false;
+  this.selectedTileValue = TILE_BLUE_SKY;
 };
 
 Game.prototype.loadWorld = function(world) {
@@ -81,7 +82,7 @@ Game.prototype.updateEditorMode = function() {
   var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
   var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
   if (mouse.isPressedThisFrame()) {
-    this.bricks.toggleValueAtColRow(mouseCol, mouseRow);
+    this.bricks.toggleValueAtColRow(mouseCol, mouseRow, this.selectedTileValue);
     this.gridData = this.bricks.getGridData();
     displayLevelData();
   }

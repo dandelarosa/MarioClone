@@ -65,13 +65,13 @@ Bricks.prototype.tileValueAtPoint = function(x, y) {
 
 // Editing bricks
 
-Bricks.prototype.toggleValueAtColRow = function(col, row) {
+Bricks.prototype.toggleValueAtColRow = function(col, row, value) {
   var index = this.grid.indexForColAndRow(col, row);
   if (this.grid.valueAtIndex(index)) {
-    this.grid.changeValueAtIndex(index, 0);
+    this.grid.changeValueAtIndex(index, TILE_EMPTY);
   }
   else {
-    this.grid.changeValueAtIndex(index, 1);
+    this.grid.changeValueAtIndex(index, value);
   }
 }
 
