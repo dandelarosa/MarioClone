@@ -7,9 +7,15 @@ function drawTile(graphics, value, x, y) {
       graphics.fillRect(x , y, 16, 16, 'blue');
       break;
     case TILE_BROWN_GROUND:
-      graphics.fillRect(x , y, 16, 16, 'brown');
+      drawTileImage(graphics, value, x, y);
       break;
     default:
       break;
   }
 };
+
+function drawTileImage(graphics, value, x, y) {
+  if (isTileImageLoaded(value)) {
+    graphics.drawImage(getTileImage(value), x, y);
+  }
+}
