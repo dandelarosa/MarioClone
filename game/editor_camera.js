@@ -1,4 +1,4 @@
-const CAMERA_SPEED = 20;
+const CAMERA_SPEED = 16;
 
 function EditorCamera(x, y, width, height) {
   this.x = x;
