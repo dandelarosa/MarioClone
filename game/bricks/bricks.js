@@ -94,10 +94,7 @@ Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
       var leftX = this.grid.xForIndex(tileIndex);
       var topY = this.grid.yForIndex(tileIndex);
       var tileValue = this.grid.valueAtIndex(tileIndex);
-      if (tileValue === TILE_BROWN_GROUND) {
-        graphics.fillRect(leftX , topY, this.grid.cellWidth,
-          this.grid.cellHeight, 'brown');
-      }
+      drawTile(graphics, tileValue, leftX, topY);
     }
   }
 };
