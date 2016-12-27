@@ -24,7 +24,13 @@ Game.prototype.reset = function() {
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
-}
+};
+
+Game.prototype.updateLevel = function() {
+  var gridBuilder = new GridBuilder(this.numCols, this.gridData);
+  var grid = new Grid(gridBuilder);
+  this.bricks = new Bricks(grid);
+};
 
 Game.prototype.switchToEditorMode = function() {
   this.isEditing = true;

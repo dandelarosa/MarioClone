@@ -15,7 +15,7 @@ function updateLevelData() {
     finalData.push(parseInt(data[i]));
   }
   game.gridData = finalData;
-  game.reset();
+  game.updateLevel();
 }
 
 function displayNumCols() {
@@ -31,7 +31,7 @@ function addColumns(colsToAdd) {
 
   game.gridData = convertedBackGrid;
   game.numCols = newNumCols;
-  game.reset();
+  game.updateLevel();
 
   // Don't forget to display the changes!
   displayLevelData();
@@ -45,7 +45,7 @@ function deleteLastColumn() {
 
   game.gridData = convertedBackGrid;
   game.numCols = newNumCols;
-  game.reset();
+  game.updateLevel();
 
   // Don't forget to display the changes!
   displayLevelData();
