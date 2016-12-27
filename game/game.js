@@ -5,6 +5,7 @@ function Game() {
   this.scaleX = 2;
   this.scaleY = 2;
   this.isEditing = true;
+  this.isEditorHidingBricks = false;
 };
 
 Game.prototype.loadWorld = function(world) {
@@ -58,6 +59,11 @@ Game.prototype.update = function() {
 
 Game.prototype.updateEditorMode = function() {
   var keyboard = globals.keyboard;
+
+  if (keyboard.isKeyPressedThisFrame(KEY_0)) {
+    this.isEditorHidingBricks = !this.isEditorHidingBricks;
+  }
+
   var camera = this.editorCamera;
   this.editorCamera.update(keyboard, this.bricks);
 
@@ -84,11 +90,20 @@ Game.prototype.updateEditorMode = function() {
   if (levelImageLoaded[this.levelImageKey]) {
     graphics.drawImage(this.levelImage, -this.levelImageOffset, 0);
   }
-  this.bricks.drawAll(graphics);
+  if (!this.isEditorHidingBricks) {
+    this.bricks.drawAll(graphics);
+  }
   graphics.popState();
   graphics.popState();
 
   graphics.fillText('Editor Mode', 5, 15, 'yellow');
+
+  if (this.isEditorHidingBricks) {
+    graphics.fillText('Press 0 to unhide bricks', 400, 15, 'yellow');
+  }
+  else {
+    graphics.fillText('Press 0 to hide bricks', 400, 15, 'yellow');
+  }
 
   var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
   graphics.fillText(mouseColRowText, mouseX, mouseY, 'yellow');
