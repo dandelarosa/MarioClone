@@ -4,9 +4,11 @@ function Keyboard() {
 };
 
 Keyboard.prototype.keydown = function(evt) {
-  if (document.activeElement.id === 'levelData.data') {
+  if (document.activeElement !== document.body
+      && document.activeElement.type !== 'button') {
     return;
   }
+
   // Don't count as a state change if the key is already down
   if (!this.keyPressed[evt.keyCode]) {
     this.keyStateChanged[evt.keyCode] = true;
