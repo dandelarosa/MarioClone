@@ -41,27 +41,27 @@ Player.prototype.move = function(keyboard, bricks) {
    }
 
    if (this.speedY < 0 &&
-       bricks.isBrickAtPixelCoord(this.x, this.y - JUMPER_RADIUS) == 1) {
+       bricks.isSolidAtPoint(this.x, this.y - JUMPER_RADIUS) == 1) {
      this.y = (Math.floor(this.y / bricks.grid.cellHeight)) * bricks.grid.cellHeight + JUMPER_RADIUS;
      this.speedY = 0.0;
    }
 
    if (this.speedY > 0 &&
-       bricks.isBrickAtPixelCoord(this.x, this.y + JUMPER_RADIUS) == 1) {
+       bricks.isSolidAtPoint(this.x, this.y + JUMPER_RADIUS) == 1) {
      this.y = (1 + Math.floor(this.y / bricks.grid.cellHeight)) * bricks.grid.cellHeight - JUMPER_RADIUS;
      this.onGround = true;
      this.speedY = 0;
    }
-   else if (bricks.isBrickAtPixelCoord(this.x, this.y + JUMPER_RADIUS + 2) == 0) {
+   else if (bricks.isSolidAtPoint(this.x, this.y + JUMPER_RADIUS + 2) == 0) {
      this.onGround = false;
    }
 
    if (this.speedX < 0 &&
-       bricks.isBrickAtPixelCoord(this.x - JUMPER_RADIUS,this.y) == 1) {
+       bricks.isSolidAtPoint(this.x - JUMPER_RADIUS,this.y) == 1) {
      this.x = (Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth + JUMPER_RADIUS;
    }
    if (this.speedX > 0 &&
-       bricks.isBrickAtPixelCoord(this.x + JUMPER_RADIUS, this.y) == 1) {
+       bricks.isSolidAtPoint(this.x + JUMPER_RADIUS, this.y) == 1) {
      this.x = (1 + Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth - JUMPER_RADIUS;
    }
 

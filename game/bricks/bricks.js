@@ -28,24 +28,6 @@ Bricks.prototype.getGridData = function() {
   return this.grid.getData();
 };
 
-Bricks.prototype.isBrickAtPixelCoord = function(hitPixelX, hitPixelY) {
-  var tileCol = hitPixelX / this.grid.cellWidth;
-  var tileRow = hitPixelY / this.grid.cellHeight;
-
-  // using Math.floor to round down to the nearest whole number
-  tileCol = Math.floor(tileCol);
-  tileRow = Math.floor(tileRow);
-
-  // first check whether the jumper is within any part of the brick wall
-  if(tileCol < 0 || tileCol >= this.grid.numCols ||
-     tileRow < 0 || tileRow >= this.grid.numRows) {
-     return false;
-  }
-
-  var brickIndex = this.brickTileToIndex(tileCol, tileRow);
-  return (this.grid.valueAtIndex(brickIndex) == 1);
-};
-
 Bricks.prototype.maxX = function() {
   return this.grid.maxX();
 };
@@ -65,7 +47,34 @@ Bricks.prototype.minY = function() {
 Bricks.prototype.rowForPixelY = function(pixelY) {
   var result = Math.floor(pixelY / this.grid.cellHeight);
   return result;
-}
+};
+
+// Looking at brick values
+
+Bricks.prototype.isSolidAtPoint = function(x, y) {
+  var tileValue = this.tileValueAtPoint(x, y);
+  return tileValue === TILE_BROWN_GROUND;
+};
+
+Bricks.prototype.tileValueAtPoint = function(x, y) {
+  var tileCol = x / this.grid.cellWidth;
+  var tileRow = y / this.grid.cellHeight;
+
+  // using Math.floor to round down to the nearest whole number
+  tileCol = Math.floor(tileCol);
+  tileRow = Math.floor(tileRow);
+
+  // first check whether the jumper is within any part of the brick wall
+  if(tileCol < 0 || tileCol >= this.grid.numCols ||
+     tileRow < 0 || tileRow >= this.grid.numRows) {
+     return TILE_OUT_OF_BOUNDS;
+  }
+
+  var brickIndex = this.brickTileToIndex(tileCol, tileRow);
+  return this.grid.valueAtIndex(brickIndex);
+};
+
+// Editing bricks
 
 Bricks.prototype.toggleValueAtColRow = function(col, row) {
   var index = this.grid.indexForColAndRow(col, row);

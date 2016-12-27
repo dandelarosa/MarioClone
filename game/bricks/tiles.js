@@ -1,0 +1,3 @@
+const TILE_OUT_OF_BOUNDS = -1;
+const TILE_BLUE_SKY = 0;
+const TILE_BROWN_GROUND = 1;
