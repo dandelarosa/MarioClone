@@ -97,7 +97,8 @@ Game.prototype.updateEditorMode = function() {
     graphics.drawImage(this.levelImage, -this.levelImageOffset, 0);
   }
   if (!this.isEditorHidingBricks) {
-    this.bricks.drawAll(graphics);
+    this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
+      camera.height, graphics);
   }
   graphics.popState();
   graphics.popState();
@@ -118,7 +119,9 @@ Game.prototype.updateEditorMode = function() {
 Game.prototype.updatePlayerMode = function() {
   var keyboard = globals.keyboard;
   this.player.move(keyboard, this.bricks);
-  this.playerCamera.follow(this.player, this.bricks);
+
+  var camera = this.playerCamera;
+  camera.follow(this.player, this.bricks);
 
   var graphics = globals.graphics;
   graphics.pushState();
@@ -127,7 +130,8 @@ Game.prototype.updatePlayerMode = function() {
 
   graphics.pushState();
   graphics.translate(-this.playerCamera.x, -this.playerCamera.y);
-  this.bricks.drawAll(graphics);
+  this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
+    camera.height, graphics);
   this.player.draw(graphics);
   graphics.popState();
   graphics.popState();

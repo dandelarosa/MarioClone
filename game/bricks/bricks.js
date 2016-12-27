@@ -13,17 +13,6 @@ Bricks.prototype.colForPixelX = function(pixelX) {
   return result;
 }
 
-Bricks.prototype.drawAll = function(graphics) {
-  for (var index = 0; index < this.grid.length; index++) {
-    if (this.grid.valueAtIndex(index) === 1) {
-      var leftX = this.grid.xForIndex(index);
-      var topY = this.grid.yForIndex(index);
-      graphics.fillRect(leftX , topY, this.grid.cellWidth - BRICK_GAP,
-        this.grid.cellHeight - BRICK_GAP, 'blue');
-    }
-  }
-};
-
 Bricks.prototype.getGridData = function() {
   return this.grid.getData();
 };
@@ -85,3 +74,30 @@ Bricks.prototype.toggleValueAtColRow = function(col, row) {
     this.grid.changeValueAtIndex(index, 1);
   }
 }
+
+// Drawing bricks
+
+Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
+  var leftMostCol = Math.floor(x / this.grid.cellWidth);
+  var topMostRow = Math.floor(y / this.grid.cellHeight);
+
+  var colsThatFitInRect = Math.floor(width / this.grid.cellWidth);
+  var rowsThatFitInRect = Math.floor(height / this.grid.cellHeight);
+
+  // Draw a one-cell buffer on each side
+  var rightMostCol = leftMostCol + colsThatFitInRect + 2;
+  var bottomMostRow = topMostRow + rowsThatFitInRect + 2;
+
+  for (var row = topMostRow; row < bottomMostRow; row++) {
+    for (var col = leftMostCol; col < rightMostCol; col++) {
+      var tileIndex = this.grid.indexForColAndRow(col, row);
+      var leftX = this.grid.xForIndex(tileIndex);
+      var topY = this.grid.yForIndex(tileIndex);
+      var tileValue = this.grid.valueAtIndex(tileIndex);
+      if (tileValue === TILE_BROWN_GROUND) {
+        graphics.fillRect(leftX , topY, this.grid.cellWidth,
+          this.grid.cellHeight, 'brown');
+      }
+    }
+  }
+};
