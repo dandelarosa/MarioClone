@@ -1,6 +1,7 @@
 function Graphics(canvas) {
   this.canvas = canvas;
   this.context2d = canvas.getContext('2d');
+  this.context2d.imageSmoothingEnabled = false;
 }
 
 Graphics.prototype.drawImage = function(image, x, y) {
