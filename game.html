@@ -7,6 +7,8 @@
   <script src="editor/2darray.js"></script>
   <script src="editor/editor.js"></script>
   <script src="editor/levelimages.js"></script>
+  <script src="editor/leveldataform.js"></script>
+  <script src="editor/levelwidthform.js"></script>
   <script src="editor/worldpicker.js"></script>
   <script src="game/bricks/bricks.js"></script>
   <script src="game/bricks/grid_builder.js"></script>
@@ -71,6 +73,8 @@ var game;
 window.onload = function() {
   globals.setup();
   game = new Game();
+  createLevelWidthForm();
+  createLevelDataForm();
   createWorldPicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
@@ -87,16 +91,9 @@ function gameUpdate() {
 }
 </script>
 
-<form id="levelWidth">
-  <input id="levelWidth.numCols" type="text" value="" readonly/>
-  <input type="button" onclick="addColumns(16);" value="Add 16 columns"/>
-  <input type="button" onclick="deleteLastColumn();" value="Remove last column"/>
-</form>
+<form id="levelWidth"></form>
 
-<form id="levelData" action="javascript:updateLevelData();">
-  <input id="levelData.data" type="text" value=""/>
-  <input type="submit" value="Update grid"/>
-</form>
+<form id="levelData" action="javascript:updateLevelData();"></form>
 
 <div id="worldPicker"></div>
 
