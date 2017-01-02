@@ -23,6 +23,10 @@ function createTilePicker() {
     {value: TILE_CASTLE_DOORTOP, displayName: 'Castle - Door Top'},
     {value: TILE_CASTLE_DOORMIDDLE, displayName: 'Castle - Door Middle'},
     {value: TILE_CASTLE_TOPMIDDLE, displayName: 'Castle - Top Middle'},
+    {value: TILE_PIPE_TOP_LEFT, displayName: 'Pipe - Top Left'},
+    {value: TILE_PIPE_TOP_RIGHT, displayName: 'Pipe - Top Right'},
+    {value: TILE_PIPE_MID_LEFT, displayName: 'Pipe - Mid Left'},
+    {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
   ];
   var elements = [];
   elements.push('Select a Tile:');
