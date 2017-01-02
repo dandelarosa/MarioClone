@@ -16,6 +16,13 @@ function createTilePicker() {
     {value: TILE_HILL_RIGHT, displayName: 'Hill - Right'},
     {value: TILE_HILL_EYES, displayName: 'Hill - Eyes'},
     {value: TILE_HILL_NOEYES, displayName: 'Hill - No Eyes'},
+    {value: TILE_CASTLE_TOP, displayName: 'Castle - Top'},
+    {value: TILE_CASTLE_WINDOWLEFT, displayName: 'Castle - Window Left'},
+    {value: TILE_CASTLE_WINDOWRIGHT, displayName: 'Castle - Window Right'},
+    {value: TILE_CASTLE_BRICKS, displayName: 'Castle - All Bricks'},
+    {value: TILE_CASTLE_DOORTOP, displayName: 'Castle - Door Top'},
+    {value: TILE_CASTLE_DOORMIDDLE, displayName: 'Castle - Door Middle'},
+    {value: TILE_CASTLE_TOPMIDDLE, displayName: 'Castle - Top Middle'},
   ];
   var elements = [];
   elements.push('Select a Tile:');
