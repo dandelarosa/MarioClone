@@ -9,6 +9,7 @@
   <script src="editor/levelimages.js"></script>
   <script src="editor/leveldataform.js"></script>
   <script src="editor/levelwidthform.js"></script>
+  <script src="editor/tilepicker.js"></script>
   <script src="editor/worldpicker.js"></script>
   <script src="game/bricks/bricks.js"></script>
   <script src="game/bricks/grid_builder.js"></script>
@@ -76,6 +77,7 @@ window.onload = function() {
   createLevelWidthForm();
   createLevelDataForm();
   createWorldPicker();
+  createTilePicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);
@@ -97,6 +99,9 @@ function gameUpdate() {
       <form id="levelWidth"></form>
       <form id="levelData" action="javascript:updateLevelData();"></form>
       <div id="worldPicker"></div>
+    </td>
+    <td>
+      <div id="tilePicker"></div>
     </td>
   </tr>
 </table>
