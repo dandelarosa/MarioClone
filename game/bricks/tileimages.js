@@ -29,6 +29,18 @@ function filenameForKey(key) {
   switch(key) {
     case TILE_BROWN_GROUND:
       return 'block1.png';
+    case TILE_CLOUD_UL:
+      return 'cloud_ul.png';
+    case TILE_CLOUD_UC:
+      return 'cloud_uc.png';
+    case TILE_CLOUD_UR:
+      return 'cloud_ur.png';
+    case TILE_CLOUD_LL:
+      return 'cloud_ll.png';
+    case TILE_CLOUD_LC:
+      return 'cloud_lc.png';
+    case TILE_CLOUD_LR:
+      return 'cloud_lr.png';
   }
 }
 

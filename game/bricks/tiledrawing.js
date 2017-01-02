@@ -10,22 +10,22 @@ function drawTile(graphics, value, x, y) {
       drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_UL:
-      graphics.fillRect(x , y, 16, 16, 'red');
+      drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_UC:
-      graphics.fillRect(x , y, 16, 16, 'orange');
+      drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_UR:
-      graphics.fillRect(x , y, 16, 16, 'yellow');
+      drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_LL:
-      graphics.fillRect(x , y, 16, 16, 'green');
+      drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_LC:
-      graphics.fillRect(x , y, 16, 16, 'cyan');
+      drawTileImage(graphics, value, x, y);
       break;
     case TILE_CLOUD_LR:
-      graphics.fillRect(x , y, 16, 16, 'violet');
+      drawTileImage(graphics, value, x, y);
       break;
     default:
       break;
