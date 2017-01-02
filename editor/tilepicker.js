@@ -27,6 +27,8 @@ function createTilePicker() {
     {value: TILE_PIPE_TOP_RIGHT, displayName: 'Pipe - Top Right'},
     {value: TILE_PIPE_MID_LEFT, displayName: 'Pipe - Mid Left'},
     {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
+    {value: TILE_FLAGPOLE_TOP, displayName: 'Flagpole - Top'},
+    {value: TILE_FLAGPOLE_MID, displayName: 'Flagpole - Middle'},
   ];
   var elements = [];
   elements.push('Select a Tile:');
