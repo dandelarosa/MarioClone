@@ -47,6 +47,11 @@ function filenameForKey(key) {
       return 'bush-center.png';
     case TILE_BUSH_RIGHT:
       return 'bush-right.png';
+    case TILE_HILL_LEFT: return 'hill-left.png';
+    case TILE_HILL_TOP: return 'hill-top.png';
+    case TILE_HILL_RIGHT: return 'hill-right.png';
+    case TILE_HILL_EYES: return 'hill-eyes.png';
+    case TILE_HILL_NOEYES: return 'hill-noeyes.png';
   }
 }
 

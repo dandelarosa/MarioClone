@@ -11,6 +11,11 @@ function createTilePicker() {
     {value: TILE_BUSH_LEFT, displayName: 'Bush Left'},
     {value: TILE_BUSH_CENTER, displayName: 'Bush Center'},
     {value: TILE_BUSH_RIGHT, displayName: 'Bush Right'},
+    {value: TILE_HILL_LEFT, displayName: 'Hill - Left Slope'},
+    {value: TILE_HILL_TOP, displayName: 'Hill - Top'},
+    {value: TILE_HILL_RIGHT, displayName: 'Hill - Right'},
+    {value: TILE_HILL_EYES, displayName: 'Hill - Eyes'},
+    {value: TILE_HILL_NOEYES, displayName: 'Hill - No Eyes'},
   ];
   var elements = [];
   elements.push('Select a Tile:');

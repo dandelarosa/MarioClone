@@ -13,3 +13,9 @@ const TILE_CLOUD_LR = 8;
 const TILE_BUSH_LEFT = 9;
 const TILE_BUSH_CENTER = 10;
 const TILE_BUSH_RIGHT = 11;
+
+const TILE_HILL_LEFT = 12;
+const TILE_HILL_TOP = 13;
+const TILE_HILL_RIGHT = 14;
+const TILE_HILL_EYES = 15;
+const TILE_HILL_NOEYES = 16;
