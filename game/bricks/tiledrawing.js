@@ -4,7 +4,7 @@ function drawTile(graphics, value, x, y) {
     case TILE_OUT_OF_BOUNDS:
       break;
     case TILE_BLUE_SKY:
-      graphics.fillRect(x , y, 16, 16, 'blue');
+      graphics.fillRect(x , y, 16, 16, '#aaccff');
       break;
     case TILE_BROWN_GROUND:
       drawTileImage(graphics, value, x, y);
