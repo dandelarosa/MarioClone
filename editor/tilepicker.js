@@ -8,6 +8,9 @@ function createTilePicker() {
     {value: TILE_CLOUD_LL, displayName: 'Cloud Lower Left'},
     {value: TILE_CLOUD_LC, displayName: 'Cloud Lower Center'},
     {value: TILE_CLOUD_LR, displayName: 'Cloud Lower Right'},
+    {value: TILE_BUSH_LEFT, displayName: 'Bush Left'},
+    {value: TILE_BUSH_CENTER, displayName: 'Bush Center'},
+    {value: TILE_BUSH_RIGHT, displayName: 'Bush Right'},
   ];
   var elements = [];
   elements.push('Select a Tile:');

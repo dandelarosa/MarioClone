@@ -41,6 +41,12 @@ function filenameForKey(key) {
       return 'cloud_lc.png';
     case TILE_CLOUD_LR:
       return 'cloud_lr.png';
+    case TILE_BUSH_LEFT:
+      return 'bush-left.png';
+    case TILE_BUSH_CENTER:
+      return 'bush-center.png';
+    case TILE_BUSH_RIGHT:
+      return 'bush-right.png';
   }
 }
 
