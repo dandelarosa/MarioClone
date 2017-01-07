@@ -30,6 +30,23 @@ function createTilePicker() {
     {value: TILE_FLAGPOLE_TOP, displayName: 'Flagpole - Top'},
     {value: TILE_FLAGPOLE_MID, displayName: 'Flagpole - Middle'},
   ];
+  var underground_tiles = [
+    {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
+    {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
+    {value: TILE_BLUE_BLOCK, displayName: 'Underground Solid Block'},
+    {value: TILE_BLUE_BRICK_BLOCK, displayName: 'Underground Brick Block'},
+    {value: TILE_UNDERGROUND_PIPE_TOP_END_LEFT, displayName: 'Underground Pipe - Top End Left'},
+    {value: TILE_UNDERGROUND_PIPE_TOP_END_RIGHT, displayName: 'Underground Pipe - Top End Right'},
+    {value: TILE_UNDERGROUND_PIPE_V_LEFT, displayName: 'Undeground Pipe - Vertical Left'},
+    {value: TILE_UNDERGROUND_PIPE_V_RIGHT, displayName: 'Undeground Pipe - Vertical Right'},
+    {value: TILE_UNDERGROUND_PIPE_H_TOP, displayName: 'Underground Pipe - Horizontal Top'},
+    {value: TILE_UNDERGROUND_PIPE_H_BOTTOM, displayName: 'Underground Pipe - Horizontal Bottom'},
+    {value: TILE_UNDERGROUND_PIPE_LEFT_END_TOP, displayName: 'Underground Pipe - Left End Top'},
+    {value: TILE_UNDERGROUND_PIPE_LEFT_END_BOTTOM, displayName: 'Underground Pipe - Left End Bottom'},
+    {value: TILE_UNDERGROUND_PIPE_LEFT_INT_TOP, displayName: 'Underground Pipe - Left Intersection Top'},
+    {value: TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM, displayName: 'Underground Pipe - Left Intersection Bottom'},
+  ];
+  tiles = tiles.concat(underground_tiles);
   var elements = [];
   elements.push('Select a Tile:');
   elements.push('<select id="tileSelect" onchange="selectTile();">');
