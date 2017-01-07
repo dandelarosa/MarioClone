@@ -47,8 +47,8 @@ function createTilePicker() {
     {value: TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM, displayName: 'Underground Pipe - Left Intersection Bottom'},
   ];
   var tiles = [];
-  tiles = tiles.concat(underground_tiles);
   tiles = tiles.concat(plain_tiles);
+  tiles = tiles.concat(underground_tiles);
   var elements = [];
   elements.push('Select a Tile:');
   elements.push('<select id="tileSelect" onchange="selectTile();">');
