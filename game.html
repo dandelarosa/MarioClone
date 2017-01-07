@@ -78,6 +78,7 @@ window.onload = function() {
   createLevelDataForm();
   createWorldPicker();
   createTilePicker();
+  selectTile();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);
