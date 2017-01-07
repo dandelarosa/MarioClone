@@ -1,5 +1,5 @@
 function createTilePicker() {
-  var tiles = [
+  var plain_tiles = [
     {value: TILE_BLUE_SKY, displayName: 'Blue Sky'},
     {value: TILE_BROWN_GROUND, displayName: 'Brown Ground'},
     {value: TILE_CLOUD_UL, displayName: 'Cloud Upper Left'},
@@ -46,7 +46,9 @@ function createTilePicker() {
     {value: TILE_UNDERGROUND_PIPE_LEFT_INT_TOP, displayName: 'Underground Pipe - Left Intersection Top'},
     {value: TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM, displayName: 'Underground Pipe - Left Intersection Bottom'},
   ];
+  var tiles = [];
   tiles = tiles.concat(underground_tiles);
+  tiles = tiles.concat(plain_tiles);
   var elements = [];
   elements.push('Select a Tile:');
   elements.push('<select id="tileSelect" onchange="selectTile();">');
