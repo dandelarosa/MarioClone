@@ -52,7 +52,19 @@ function createTilePicker() {
     {value: TILE_UNDERGROUND_PIPE_LEFT_INT_TOP, displayName: 'Underground Pipe - Left Intersection Top'},
     {value: TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM, displayName: 'Underground Pipe - Left Intersection Bottom'},
   ];
+  var castle_tiles = [
+    {value: TILE_CASTLE_BG, displayName: 'Castle Background'},
+    {value: TILE_CASTLE_SOLID_BLOCK, displayName: 'Castle Solid Block'},
+    {value: TILE_CASTLE_LAVA_TOP, displayName: 'Castle Lava Top'},
+    {value: TILE_CASTLE_LAVA_MIDDLE, displayName: 'Castle Lava Middle'},
+    {value: TILE_CASTLE_EMPTY_BLOCK, displayName: 'Castle Empty Block'},
+    {value: TILE_CASTLE_ITEM_BLOCK, displayName: 'Castle Item Block'},
+    {value: TILE_CASTLE_BRIDGE, displayName: 'Castle Bridge'},
+    {value: TILE_CASTLE_CHAIN, displayName: 'Castle Chain'},
+    {value: TILE_CASTLE_AXE, displayName: 'Castle Axe'},
+  ];
   var tiles = [];
+  tiles = tiles.concat(castle_tiles);
   tiles = tiles.concat(plain_tiles);
   tiles = tiles.concat(underground_tiles);
   var elements = [];
