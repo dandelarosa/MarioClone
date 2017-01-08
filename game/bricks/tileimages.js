@@ -79,6 +79,12 @@ function filenameForKey(key) {
     case TILE_UNDERGROUND_PIPE_LEFT_END_BOTTOM: return 'underground/pipe-leftbottom.png';
     case TILE_UNDERGROUND_PIPE_LEFT_INT_TOP: return 'underground/pipe-leftinttop.png';
     case TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM: return 'underground/pipe-leftintbottom.png';
+    case TILE_SOLID_BLOCK: return 'plain/block.png';
+    case TILE_ITEM_BLOCK: return 'plain/itemblock.png';
+    case TILE_TREE_TOP_LEFT: return 'plain/treetop-left.png';
+    case TILE_TREE_TOP_CENTER: return 'plain/treetop-center.png';
+    case TILE_TREE_TOP_RIGHT: return 'plain/treetop-right.png';
+    case TILE_TREE_TRUNK: return 'plain/treetrunk.png';
   }
 }
 

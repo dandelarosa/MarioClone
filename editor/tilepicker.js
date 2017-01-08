@@ -29,6 +29,12 @@ function createTilePicker() {
     {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
     {value: TILE_FLAGPOLE_TOP, displayName: 'Flagpole - Top'},
     {value: TILE_FLAGPOLE_MID, displayName: 'Flagpole - Middle'},
+    {value: TILE_SOLID_BLOCK, displayName: 'Solid Block'},
+    {value: TILE_ITEM_BLOCK, displayName: 'Generic Item Block'},
+    {value: TILE_TREE_TOP_LEFT, displayName: 'Treetop Left'},
+    {value: TILE_TREE_TOP_CENTER, displayName: 'Treetop Center'},
+    {value: TILE_TREE_TOP_RIGHT, displayName: 'Treetop Right'},
+    {value: TILE_TREE_TRUNK, displayName: 'Tree Trunk'},
   ];
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
