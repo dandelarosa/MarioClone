@@ -1,6 +1,6 @@
 function displayLevelData() {
   var input = document.getElementById('levelData.data');
-  var value = game.gridData.toString();
+  var value = twoDigitHexArray(game.gridData);
   input.value = value;
 
   displayNumCols();
