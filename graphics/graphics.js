@@ -2,6 +2,14 @@ function Graphics(canvas) {
   this.canvas = canvas;
   this.context2d = canvas.getContext('2d');
   this.context2d.imageSmoothingEnabled = false;
+  var graphics = this;
+  graphics.drawClippedImage = drawClippedImage;
+
+  // Drawing Images
+
+  function drawClippedImage(img, sx, sy, sw, sh, ix, iy, iw, ih) {
+    graphics.context2d.drawImage(img, sx, sy, sw, sh, ix, iy, iw, ih);
+  }
 }
 
 Graphics.prototype.drawImage = function(image, x, y) {
