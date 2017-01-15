@@ -1,4 +1,20 @@
 function createTilePicker() {
+  var tilevalues_v2 = [
+    TILE_V2_EMPTY,
+    TILE_V2_CLOUD_UPPER_LEFT,
+    TILE_V2_CLOUD_UPPER_CENTER,
+    TILE_V2_CLOUD_UPPER_RIGHT,
+    TILE_V2_CLOUD_LOWER_LEFT,
+    TILE_V2_CLOUD_LOWER_CENTER,
+    TILE_V2_CLOUD_LOWER_RIGHT,
+  ];
+  var tiles_v2 = [];
+  tilevalues_v2.forEach(function(element) {
+    tiles_v2.push({
+      value: element,
+      displayName: TILE_DETAILS[element].displayName,
+    });
+  });
   var plain_tiles = [
     {value: TILE_BLUE_SKY, displayName: 'Blue Sky'},
     {value: TILE_BROWN_GROUND, displayName: 'Brown Ground'},
@@ -64,6 +80,7 @@ function createTilePicker() {
     {value: TILE_CASTLE_AXE, displayName: 'Castle Axe'},
   ];
   var tiles = [];
+  tiles = tiles.concat(tiles_v2);
   tiles = tiles.concat(castle_tiles);
   tiles = tiles.concat(plain_tiles);
   tiles = tiles.concat(underground_tiles);
