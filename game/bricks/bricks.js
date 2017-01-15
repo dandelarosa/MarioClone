@@ -2,6 +2,8 @@ const BRICK_GAP = 1;
 
 function Bricks(grid) {
   this.grid = grid;
+  // TODO: inject this object
+  this.tileset = new Tileset();
 }
 
 Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
@@ -94,7 +96,7 @@ Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
       var leftX = this.grid.xForIndex(tileIndex);
       var topY = this.grid.yForIndex(tileIndex);
       var tileValue = this.grid.valueAtIndex(tileIndex);
-      drawTile(graphics, tileValue, leftX, topY);
+      this.tileset.drawTile(graphics, tileValue, leftX, topY);
     }
   }
 };
