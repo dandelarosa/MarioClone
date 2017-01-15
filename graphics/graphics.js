@@ -8,6 +8,13 @@ Graphics.prototype.drawImage = function(image, x, y) {
   this.context2d.drawImage(image, x, y);
 };
 
+Graphics.prototype.drawImageWithAlpha = function(image, x, y, alpha) {
+  this.context2d.save();
+  this.context2d.globalAlpha = alpha;
+  this.context2d.drawImage(image, x, y);
+  this.context2d.restore();
+};
+
 Graphics.prototype.fillCanvas = function(color) {
   this.fillRect(0, 0, this.canvas.width, this.canvas.height, color);
 };

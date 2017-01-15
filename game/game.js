@@ -5,7 +5,7 @@ function Game() {
   this.scaleX = 2;
   this.scaleY = 2;
   this.isEditing = true;
-  this.isEditorHidingBricks = false;
+  this.levelMockupAlpha = 0.5;
   this.selectedTileValue = TILE_BLUE_SKY;
 };
 
@@ -68,7 +68,12 @@ Game.prototype.updateEditorMode = function() {
   var keyboard = globals.keyboard;
 
   if (keyboard.isKeyPressedThisFrame(KEY_0)) {
-    this.isEditorHidingBricks = !this.isEditorHidingBricks;
+    if (this.levelMockupAlpha === 0.0) {
+      this.levelMockupAlpha = 0.5;
+    }
+    else {
+      this.levelMockupAlpha = 0.0;
+    }
   }
 
   var camera = this.editorCamera;
@@ -94,24 +99,18 @@ Game.prototype.updateEditorMode = function() {
 
   graphics.pushState();
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
+  this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
+    camera.height, graphics);
   if (levelImageLoaded[this.levelImageKey]) {
-    graphics.drawImage(this.levelImage, -this.levelImageOffset, 0);
-  }
-  if (!this.isEditorHidingBricks) {
-    this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
-      camera.height, graphics);
+    graphics.drawImageWithAlpha(this.levelImage, -this.levelImageOffset, 0,
+      this.levelMockupAlpha);
   }
   graphics.popState();
   graphics.popState();
 
   graphics.fillText('Editor Mode', 5, 15, 'yellow');
 
-  if (this.isEditorHidingBricks) {
-    graphics.fillText('Press 0 to unhide bricks', 400, 15, 'yellow');
-  }
-  else {
-    graphics.fillText('Press 0 to hide bricks', 400, 15, 'yellow');
-  }
+  graphics.fillText('Press 0 to toggle level mockup', 370, 15, 'yellow');
 
   var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
   graphics.fillText(mouseColRowText, mouseX, mouseY, 'yellow');
