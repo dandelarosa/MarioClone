@@ -7,6 +7,9 @@ function levelImageOnload(evt) {
 }
 
 function getLevelImage(key) {
+  if (!worlds[key].levelImage) {
+    return;
+  }
   if (levelImages[key]) {
     return levelImages[key];
   }
