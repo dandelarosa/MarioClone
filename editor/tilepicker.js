@@ -7,6 +7,14 @@ function createTilePicker() {
     TILE_V2_CLOUD_LOWER_LEFT,
     TILE_V2_CLOUD_LOWER_CENTER,
     TILE_V2_CLOUD_LOWER_RIGHT,
+    TILE_V2_HILL_LEFT,
+    TILE_V2_HILL_TOP,
+    TILE_V2_HILL_RIGHT,
+    TILE_V2_HILL_EYES,
+    TILE_V2_HILL_NOEYES,
+    TILE_V2_BUSH_LEFT,
+    TILE_V2_BUSH_CENTER,
+    TILE_V2_BUSH_RIGHT,
   ];
   var tiles_v2 = [];
   tilevalues_v2.forEach(function(element) {
