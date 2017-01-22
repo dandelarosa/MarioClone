@@ -3,6 +3,7 @@ function createTilePicker() {
     TILE_V2_EMPTY,
     TILE_V2_GROUND_BLOCK,
     TILE_V2_SOLID_BLOCK,
+    TILE_V2_BRICK_BLOCK,
     TILE_V2_CLOUD_UPPER_LEFT,
     TILE_V2_CLOUD_UPPER_CENTER,
     TILE_V2_CLOUD_UPPER_RIGHT,
@@ -48,7 +49,6 @@ function createTilePicker() {
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
-    {value: TILE_BLUE_BRICK_BLOCK, displayName: 'Underground Brick Block'},
     {value: TILE_UNDERGROUND_PIPE_TOP_END_LEFT, displayName: 'Underground Pipe - Top End Left'},
     {value: TILE_UNDERGROUND_PIPE_TOP_END_RIGHT, displayName: 'Underground Pipe - Top End Right'},
     {value: TILE_UNDERGROUND_PIPE_V_LEFT, displayName: 'Underground Pipe - Vertical Left'},

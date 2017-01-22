@@ -101,3 +101,9 @@ TILE_DETAILS[TILE_V2_SOLID_BLOCK] = {
   sampleY: 0,
   displayName: 'V2 Solid Block',
 };
+
+TILE_DETAILS[TILE_V2_BRICK_BLOCK] = {
+  sampleX: 48,
+  sampleY: 0,
+  displayName: 'V2 Brick Block',
+};
