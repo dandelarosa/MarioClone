@@ -2,6 +2,7 @@ function createTilePicker() {
   var tilevalues_v2 = [
     TILE_V2_EMPTY,
     TILE_V2_GROUND_BLOCK,
+    TILE_V2_SOLID_BLOCK,
     TILE_V2_CLOUD_UPPER_LEFT,
     TILE_V2_CLOUD_UPPER_CENTER,
     TILE_V2_CLOUD_UPPER_RIGHT,
@@ -38,7 +39,6 @@ function createTilePicker() {
     {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
     {value: TILE_FLAGPOLE_TOP, displayName: 'Flagpole - Top'},
     {value: TILE_FLAGPOLE_MID, displayName: 'Flagpole - Middle'},
-    {value: TILE_SOLID_BLOCK, displayName: 'Solid Block'},
     {value: TILE_ITEM_BLOCK, displayName: 'Generic Item Block'},
     {value: TILE_TREE_TOP_LEFT, displayName: 'Treetop Left'},
     {value: TILE_TREE_TOP_CENTER, displayName: 'Treetop Center'},
@@ -48,7 +48,6 @@ function createTilePicker() {
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
-    {value: TILE_BLUE_BLOCK, displayName: 'Underground Solid Block'},
     {value: TILE_BLUE_BRICK_BLOCK, displayName: 'Underground Brick Block'},
     {value: TILE_UNDERGROUND_PIPE_TOP_END_LEFT, displayName: 'Underground Pipe - Top End Left'},
     {value: TILE_UNDERGROUND_PIPE_TOP_END_RIGHT, displayName: 'Underground Pipe - Top End Right'},

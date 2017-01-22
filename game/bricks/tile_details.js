@@ -95,3 +95,9 @@ TILE_DETAILS[TILE_V2_GROUND_BLOCK] = {
   sampleY: 0,
   displayName: 'V2 Ground Block',
 };
+
+TILE_DETAILS[TILE_V2_SOLID_BLOCK] = {
+  sampleX: 32,
+  sampleY: 0,
+  displayName: 'V2 Solid Block',
+};

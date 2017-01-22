@@ -18,3 +18,4 @@ const TILE_V2_BUSH_CENTER = 0x4d;
 const TILE_V2_BUSH_RIGHT = 0x4e;
 
 const TILE_V2_GROUND_BLOCK = 0x4f;
+const TILE_V2_SOLID_BLOCK = 0x50;
