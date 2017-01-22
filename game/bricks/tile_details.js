@@ -107,3 +107,15 @@ TILE_DETAILS[TILE_V2_BRICK_BLOCK] = {
   sampleY: 0,
   displayName: 'V2 Brick Block',
 };
+
+TILE_DETAILS[TILE_V2_ITEM_BLOCK] = {
+  sampleX: 64,
+  sampleY: 0,
+  displayName: 'V2 Item Block',
+};
+
+TILE_DETAILS[TILE_V2_EMPTY_BLOCK] = {
+  sampleX: 80,
+  sampleY: 0,
+  displayName: 'V2 Empty Block',
+};
