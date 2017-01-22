@@ -1,6 +1,7 @@
 function createTilePicker() {
   var tilevalues_v2 = [
     TILE_V2_EMPTY,
+    TILE_V2_GROUND_BLOCK,
     TILE_V2_CLOUD_UPPER_LEFT,
     TILE_V2_CLOUD_UPPER_CENTER,
     TILE_V2_CLOUD_UPPER_RIGHT,

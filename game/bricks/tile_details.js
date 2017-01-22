@@ -89,3 +89,9 @@ TILE_DETAILS[TILE_V2_BUSH_RIGHT] = {
   sampleY: 80,
   displayName: 'V2 Bush Right',
 };
+
+TILE_DETAILS[TILE_V2_GROUND_BLOCK] = {
+  sampleX: 16,
+  sampleY: 0,
+  displayName: 'V2 Ground Block',
+};

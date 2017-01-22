@@ -16,3 +16,5 @@ const TILE_V2_HILL_NOEYES = 0x4b;
 const TILE_V2_BUSH_LEFT = 0x4c;
 const TILE_V2_BUSH_CENTER = 0x4d;
 const TILE_V2_BUSH_RIGHT = 0x4e;
+
+const TILE_V2_GROUND_BLOCK = 0x4f;
