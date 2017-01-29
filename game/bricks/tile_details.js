@@ -203,3 +203,63 @@ TILE_DETAILS[TILE_V2_COIN] = {
   sampleY: 48,
   displayName: 'V2 Coin',
 };
+
+TILE_DETAILS[TILE_V2_PIPE_TOP_END_LEFT] = {
+  sampleX: 80,
+  sampleY: 16,
+  displayName: 'V2 Pipe - Top End Left',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_TOP_END_RIGHT] = {
+  sampleX: 96,
+  sampleY: 16,
+  displayName: 'V2 Pipe - Top End Right',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_V_LEFT] = {
+  sampleX: 80,
+  sampleY: 32,
+  displayName: 'V2 Pipe - Vertical Left',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_V_RIGHT] = {
+  sampleX: 96,
+  sampleY: 32,
+  displayName: 'V2 Pipe - Vertical Right',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_H_TOP] = {
+  sampleX: 64,
+  sampleY: 48,
+  displayName: 'V2 Pipe - Horizontal Top',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_H_BOTTOM] = {
+  sampleX: 64,
+  sampleY: 64,
+  displayName: 'V2 Pipe - Horizontal Bottom',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_LEFT_END_TOP] = {
+  sampleX: 48,
+  sampleY: 48,
+  displayName: 'V2 Pipe - Left End Top',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_LEFT_END_BOTTOM] = {
+  sampleX: 48,
+  sampleY: 64,
+  displayName: 'V2 Pipe - Left End Bottom',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_LEFT_INT_TOP] = {
+  sampleX: 80,
+  sampleY: 48,
+  displayName: 'V2 Pipe - Left Intersection Top',
+};
+
+TILE_DETAILS[TILE_V2_PIPE_LEFT_INT_BOTTOM] = {
+  sampleX: 80,
+  sampleY: 64,
+  displayName: 'V2 Pipe - Left Intersection Bottom',
+};

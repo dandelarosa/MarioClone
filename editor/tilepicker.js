@@ -7,6 +7,16 @@ function createTilePicker() {
     TILE_V2_ITEM_BLOCK,
     TILE_V2_EMPTY_BLOCK,
     TILE_V2_COIN,
+    TILE_V2_PIPE_TOP_END_LEFT,
+    TILE_V2_PIPE_TOP_END_RIGHT,
+    TILE_V2_PIPE_V_LEFT,
+    TILE_V2_PIPE_V_RIGHT,
+    TILE_V2_PIPE_H_TOP,
+    TILE_V2_PIPE_H_BOTTOM,
+    TILE_V2_PIPE_LEFT_END_TOP,
+    TILE_V2_PIPE_LEFT_END_BOTTOM,
+    TILE_V2_PIPE_LEFT_INT_TOP,
+    TILE_V2_PIPE_LEFT_INT_BOTTOM,
     TILE_V2_CLOUD_UPPER_LEFT,
     TILE_V2_CLOUD_UPPER_CENTER,
     TILE_V2_CLOUD_UPPER_RIGHT,
@@ -43,25 +53,11 @@ function createTilePicker() {
     });
   });
   var plain_tiles = [
-    {value: TILE_PIPE_TOP_LEFT, displayName: 'Pipe - Top Left'},
-    {value: TILE_PIPE_TOP_RIGHT, displayName: 'Pipe - Top Right'},
-    {value: TILE_PIPE_MID_LEFT, displayName: 'Pipe - Mid Left'},
-    {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
     {value: TILE_ITEM_BLOCK, displayName: 'Generic Item Block'},
   ];
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
-    {value: TILE_UNDERGROUND_PIPE_TOP_END_LEFT, displayName: 'Underground Pipe - Top End Left'},
-    {value: TILE_UNDERGROUND_PIPE_TOP_END_RIGHT, displayName: 'Underground Pipe - Top End Right'},
-    {value: TILE_UNDERGROUND_PIPE_V_LEFT, displayName: 'Underground Pipe - Vertical Left'},
-    {value: TILE_UNDERGROUND_PIPE_V_RIGHT, displayName: 'Underground Pipe - Vertical Right'},
-    {value: TILE_UNDERGROUND_PIPE_H_TOP, displayName: 'Underground Pipe - Horizontal Top'},
-    {value: TILE_UNDERGROUND_PIPE_H_BOTTOM, displayName: 'Underground Pipe - Horizontal Bottom'},
-    {value: TILE_UNDERGROUND_PIPE_LEFT_END_TOP, displayName: 'Underground Pipe - Left End Top'},
-    {value: TILE_UNDERGROUND_PIPE_LEFT_END_BOTTOM, displayName: 'Underground Pipe - Left End Bottom'},
-    {value: TILE_UNDERGROUND_PIPE_LEFT_INT_TOP, displayName: 'Underground Pipe - Left Intersection Top'},
-    {value: TILE_UNDERGROUND_PIPE_LEFT_INT_BOTTOM, displayName: 'Underground Pipe - Left Intersection Bottom'},
   ];
   var castle_tiles = [
     {value: TILE_CASTLE_BG, displayName: 'Castle Background'},
