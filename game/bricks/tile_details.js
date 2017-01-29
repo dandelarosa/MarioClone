@@ -119,3 +119,81 @@ TILE_DETAILS[TILE_V2_EMPTY_BLOCK] = {
   sampleY: 0,
   displayName: 'V2 Empty Block',
 };
+
+TILE_DETAILS[TILE_V2_TREE_TOP_LEFT] = {
+  sampleX: 48,
+  sampleY: 80,
+  displayName: 'V2 Treetop Left',
+};
+
+TILE_DETAILS[TILE_V2_TREE_TOP_CENTER] = {
+  sampleX: 64,
+  sampleY: 80,
+  displayName: 'V2 Treetop Center',
+};
+
+TILE_DETAILS[TILE_V2_TREE_TOP_RIGHT] = {
+  sampleX: 80,
+  sampleY: 80,
+  displayName: 'V2 Treetop Right',
+};
+
+TILE_DETAILS[TILE_V2_TREE_TRUNK] = {
+  sampleX: 96,
+  sampleY: 80,
+  displayName: 'V2 Tree Trunk',
+};
+
+TILE_DETAILS[TILE_V2_FLAGPOLE_TOP] = {
+  sampleX: 48,
+  sampleY: 16,
+  displayName: 'V2 Flagpole - Top',
+};
+
+TILE_DETAILS[TILE_V2_FLAGPOLE_MID] = {
+  sampleX: 48,
+  sampleY: 32,
+  displayName: 'V2 Flagpole - Middle',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_TOP] = {
+  sampleX: 112,
+  sampleY: 16,
+  displayName: 'V2 Castle - Top',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_WINDOWLEFT] = {
+  sampleX: 112,
+  sampleY: 48,
+  displayName: 'V2 Castle - Window Left',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_WINDOWRIGHT] = {
+  sampleX: 112,
+  sampleY: 64,
+  displayName: 'V2 Castle - Window Right',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_BRICKS] = {
+  sampleX: 112,
+  sampleY: 80,
+  displayName: 'V2 Castle - All Bricks',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_DOORTOP] = {
+  sampleX: 96,
+  sampleY: 48,
+  displayName: 'V2 Castle - Door Top',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_DOORMIDDLE] = {
+  sampleX: 96,
+  sampleY: 64,
+  displayName: 'V2 Castle - Door Middle',
+};
+
+TILE_DETAILS[TILE_V2_CASTLE_TOPMIDDLE] = {
+  sampleX: 112,
+  sampleY: 32,
+  displayName: 'V2 Castle - Top Middle',
+};

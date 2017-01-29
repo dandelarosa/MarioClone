@@ -20,6 +20,19 @@ function createTilePicker() {
     TILE_V2_BUSH_LEFT,
     TILE_V2_BUSH_CENTER,
     TILE_V2_BUSH_RIGHT,
+    TILE_V2_TREE_TOP_LEFT,
+    TILE_V2_TREE_TOP_CENTER,
+    TILE_V2_TREE_TOP_RIGHT,
+    TILE_V2_TREE_TRUNK,
+    TILE_V2_FLAGPOLE_TOP,
+    TILE_V2_FLAGPOLE_MID,
+    TILE_V2_CASTLE_TOP,
+    TILE_V2_CASTLE_WINDOWLEFT,
+    TILE_V2_CASTLE_WINDOWRIGHT,
+    TILE_V2_CASTLE_BRICKS,
+    TILE_V2_CASTLE_DOORTOP,
+    TILE_V2_CASTLE_DOORMIDDLE,
+    TILE_V2_CASTLE_TOPMIDDLE,
   ];
   var tiles_v2 = [];
   tilevalues_v2.forEach(function(element) {
@@ -29,24 +42,11 @@ function createTilePicker() {
     });
   });
   var plain_tiles = [
-    {value: TILE_CASTLE_TOP, displayName: 'Castle - Top'},
-    {value: TILE_CASTLE_WINDOWLEFT, displayName: 'Castle - Window Left'},
-    {value: TILE_CASTLE_WINDOWRIGHT, displayName: 'Castle - Window Right'},
-    {value: TILE_CASTLE_BRICKS, displayName: 'Castle - All Bricks'},
-    {value: TILE_CASTLE_DOORTOP, displayName: 'Castle - Door Top'},
-    {value: TILE_CASTLE_DOORMIDDLE, displayName: 'Castle - Door Middle'},
-    {value: TILE_CASTLE_TOPMIDDLE, displayName: 'Castle - Top Middle'},
     {value: TILE_PIPE_TOP_LEFT, displayName: 'Pipe - Top Left'},
     {value: TILE_PIPE_TOP_RIGHT, displayName: 'Pipe - Top Right'},
     {value: TILE_PIPE_MID_LEFT, displayName: 'Pipe - Mid Left'},
     {value: TILE_PIPE_MID_RIGHT, displayName: 'Pipe - Mid Right'},
-    {value: TILE_FLAGPOLE_TOP, displayName: 'Flagpole - Top'},
-    {value: TILE_FLAGPOLE_MID, displayName: 'Flagpole - Middle'},
     {value: TILE_ITEM_BLOCK, displayName: 'Generic Item Block'},
-    {value: TILE_TREE_TOP_LEFT, displayName: 'Treetop Left'},
-    {value: TILE_TREE_TOP_CENTER, displayName: 'Treetop Center'},
-    {value: TILE_TREE_TOP_RIGHT, displayName: 'Treetop Right'},
-    {value: TILE_TREE_TRUNK, displayName: 'Tree Trunk'},
   ];
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
