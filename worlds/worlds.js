@@ -1,5 +1,6 @@
 var worlds = {
   'tilesettest': tilesettest,
+  'tilesettest2': tilesettest2,
   '1-1': world11,
   '1-2': world12,
   '1-3': world13,
