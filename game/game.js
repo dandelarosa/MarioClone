@@ -5,7 +5,7 @@ function Game() {
   this.scaleX = 2;
   this.scaleY = 2;
   this.isEditing = true;
-  this.levelMockupAlpha = 0.5;
+  this.levelMockupAlpha = 0.0;
   this.selectedTileValue = TILE_BLUE_SKY;
 };
 
@@ -113,7 +113,10 @@ Game.prototype.updateEditorMode = function() {
   graphics.fillText('Press 0 to toggle level mockup', 370, 15, 'yellow');
 
   var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
-  graphics.fillText(mouseColRowText, mouseX, mouseY, 'yellow');
+  graphics.fillText(mouseColRowText, mouseX + 5, mouseY, 'yellow');
+
+  var value = this.bricks.tileValueAtColRow(mouseCol, mouseRow);
+  graphics.fillText(twoDigitHexString(value), mouseX + 15, mouseY + 15, 'yellow');
 };
 
 Game.prototype.updatePlayerMode = function() {

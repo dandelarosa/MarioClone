@@ -61,7 +61,11 @@ Bricks.prototype.tileValueAtPoint = function(x, y) {
      return TILE_OUT_OF_BOUNDS;
   }
 
-  var brickIndex = this.brickTileToIndex(tileCol, tileRow);
+  return this.tileValueAtColRow(tileCol, tileRow);
+};
+
+Bricks.prototype.tileValueAtColRow = function(col, row) {
+  var brickIndex = this.brickTileToIndex(col, row);
   return this.grid.valueAtIndex(brickIndex);
 };
 
