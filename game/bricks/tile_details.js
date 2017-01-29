@@ -197,3 +197,9 @@ TILE_DETAILS[TILE_V2_CASTLE_TOPMIDDLE] = {
   sampleY: 32,
   displayName: 'V2 Castle - Top Middle',
 };
+
+TILE_DETAILS[TILE_V2_COIN] = {
+  sampleX: 32,
+  sampleY: 48,
+  displayName: 'V2 Coin',
+};
