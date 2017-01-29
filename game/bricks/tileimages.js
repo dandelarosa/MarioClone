@@ -27,8 +27,6 @@ function createTileImage(key) {
 
 function filenameForKey(key) {
   switch(key) {
-    case TILE_BROWN_GROUND:
-      return 'block1.png';
     case TILE_CLOUD_UL:
       return 'cloud_ul.png';
     case TILE_CLOUD_UC:

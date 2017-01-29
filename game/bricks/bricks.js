@@ -44,7 +44,24 @@ Bricks.prototype.rowForPixelY = function(pixelY) {
 
 Bricks.prototype.isSolidAtPoint = function(x, y) {
   var tileValue = this.tileValueAtPoint(x, y);
-  return tileValue === TILE_BROWN_GROUND;
+  return tileValue === TILE_V2_GROUND_BLOCK
+  || tileValue === TILE_V2_SOLID_BLOCK
+  || tileValue === TILE_V2_BRICK_BLOCK
+  || tileValue === TILE_V2_ITEM_BLOCK
+  || tileValue === TILE_V2_EMPTY_BLOCK
+  || tileValue === TILE_V2_TREE_TOP_LEFT
+  || tileValue === TILE_V2_TREE_TOP_CENTER
+  || tileValue === TILE_V2_TREE_TOP_RIGHT
+  || tileValue === TILE_V2_PIPE_TOP_END_LEFT
+  || tileValue === TILE_V2_PIPE_TOP_END_RIGHT
+  || tileValue === TILE_V2_PIPE_V_LEFT
+  || tileValue === TILE_V2_PIPE_V_RIGHT
+  || tileValue === TILE_V2_PIPE_H_TOP
+  || tileValue === TILE_V2_PIPE_H_BOTTOM
+  || tileValue === TILE_V2_PIPE_LEFT_END_TOP
+  || tileValue === TILE_V2_PIPE_LEFT_END_BOTTOM
+  || tileValue === TILE_V2_PIPE_LEFT_INT_TOP
+  || tileValue === TILE_V2_PIPE_LEFT_INT_BOTTOM;
 };
 
 Bricks.prototype.tileValueAtPoint = function(x, y) {

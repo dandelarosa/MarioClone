@@ -1,6 +1,5 @@
 const TILE_OUT_OF_BOUNDS = -1;
 const TILE_EMPTY = 0;
-const TILE_BROWN_GROUND = 1;
 const TILE_BLUE_SKY = 2;
 
 const TILE_CLOUD_UL = 3;
