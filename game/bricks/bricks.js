@@ -1,9 +1,8 @@
 const BRICK_GAP = 1;
 
-function Bricks(grid) {
+function Bricks(grid, tileset) {
   this.grid = grid;
-  // TODO: inject this object
-  this.tileset = new Tileset();
+  this.tileset = tileset;
 }
 
 Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {

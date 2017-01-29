@@ -12,6 +12,7 @@ function Game() {
 Game.prototype.loadWorld = function(world) {
   this.gridData = world.gridData;
   this.numCols = world.numCols;
+  this.tilesetName = world.tilesetName;
   this.levelImage = getLevelImage(world.key);
   this.levelImageKey = world.key;
   this.levelImageOffset = world.levelImageOffset;
@@ -21,7 +22,8 @@ Game.prototype.loadWorld = function(world) {
 Game.prototype.reset = function() {
   var gridBuilder = new GridBuilder(this.numCols, this.gridData);
   var grid = new Grid(gridBuilder);
-  this.bricks = new Bricks(grid);
+  var tileset = new Tileset(this.tilesetName);
+  this.bricks = new Bricks(grid, tileset);
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
@@ -30,7 +32,8 @@ Game.prototype.reset = function() {
 Game.prototype.updateLevel = function() {
   var gridBuilder = new GridBuilder(this.numCols, this.gridData);
   var grid = new Grid(gridBuilder);
-  this.bricks = new Bricks(grid);
+  var tileset = new Tileset(this.tilesetName);
+  this.bricks = new Bricks(grid, tileset);
 };
 
 Game.prototype.switchToEditorMode = function() {

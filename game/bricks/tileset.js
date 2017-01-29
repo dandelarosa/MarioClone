@@ -1,8 +1,8 @@
-function Tileset() {
+function Tileset(name) {
   var tileset = {
     drawTile: drawTile,
-    image: getTilesetImage('grassland'),
-    name: 'grassland',
+    image: getTilesetImage(name),
+    name: name,
   };
   return tileset;
 
