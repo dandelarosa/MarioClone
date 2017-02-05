@@ -64,14 +64,8 @@ function createTilePicker() {
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
   ];
-  var castle_tiles = [
-    {value: TILE_CASTLE_BRIDGE, displayName: 'Castle Bridge'},
-    {value: TILE_CASTLE_CHAIN, displayName: 'Castle Chain'},
-    {value: TILE_CASTLE_AXE, displayName: 'Castle Axe'},
-  ];
   var tiles = [];
   tiles = tiles.concat(tiles_v2);
-  tiles = tiles.concat(castle_tiles);
   tiles = tiles.concat(plain_tiles);
   tiles = tiles.concat(underground_tiles);
   var elements = [];

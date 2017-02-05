@@ -77,9 +77,6 @@ function filenameForKey(key) {
     case TILE_TREE_TOP_CENTER: return 'plain/treetop-center.png';
     case TILE_TREE_TOP_RIGHT: return 'plain/treetop-right.png';
     case TILE_TREE_TRUNK: return 'plain/treetrunk.png';
-    case TILE_CASTLE_BRIDGE: return 'castle/bridge.png';
-    case TILE_CASTLE_CHAIN: return 'castle/chain.png';
-    case TILE_CASTLE_AXE: return 'castle/axe.png';
   }
 }
 
