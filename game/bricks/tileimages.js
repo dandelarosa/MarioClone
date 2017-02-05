@@ -79,8 +79,6 @@ function filenameForKey(key) {
     case TILE_TREE_TRUNK: return 'plain/treetrunk.png';
     case TILE_CASTLE_LAVA_TOP: return 'castle/lava-top.png';
     case TILE_CASTLE_LAVA_MIDDLE: return 'castle/lava-middle.png';
-    case TILE_CASTLE_EMPTY_BLOCK: return 'castle/emptyblock.png';
-    case TILE_CASTLE_ITEM_BLOCK: return 'castle/itemblock.png';
     case TILE_CASTLE_BRIDGE: return 'castle/bridge.png';
     case TILE_CASTLE_CHAIN: return 'castle/chain.png';
     case TILE_CASTLE_AXE: return 'castle/axe.png';
