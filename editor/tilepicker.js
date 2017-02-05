@@ -62,8 +62,6 @@ function createTilePicker() {
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
   ];
   var castle_tiles = [
-    {value: TILE_CASTLE_LAVA_TOP, displayName: 'Castle Lava Top'},
-    {value: TILE_CASTLE_LAVA_MIDDLE, displayName: 'Castle Lava Middle'},
     {value: TILE_CASTLE_BRIDGE, displayName: 'Castle Bridge'},
     {value: TILE_CASTLE_CHAIN, displayName: 'Castle Chain'},
     {value: TILE_CASTLE_AXE, displayName: 'Castle Axe'},
