@@ -44,6 +44,8 @@ function createTilePicker() {
     TILE_V2_CASTLE_DOORTOP,
     TILE_V2_CASTLE_DOORMIDDLE,
     TILE_V2_CASTLE_TOPMIDDLE,
+    TILE_V2_LAVA_TOP,
+    TILE_V2_LAVA_MIDDLE,
   ];
   var tiles_v2 = [];
   tilevalues_v2.forEach(function(element) {

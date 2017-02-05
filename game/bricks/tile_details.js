@@ -263,3 +263,15 @@ TILE_DETAILS[TILE_V2_PIPE_LEFT_INT_BOTTOM] = {
   sampleY: 64,
   displayName: 'V2 Pipe - Left Intersection Bottom',
 };
+
+TILE_DETAILS[TILE_V2_LAVA_TOP] = {
+  sampleX: 0,
+  sampleY: 96,
+  displayName: 'V2 Lava Top',
+};
+
+TILE_DETAILS[TILE_V2_LAVA_MIDDLE] = {
+  sampleX: 0,
+  sampleY: 112,
+  displayName: 'V2 Lava Middle',
+};
