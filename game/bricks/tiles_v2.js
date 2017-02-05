@@ -54,3 +54,7 @@ const TILE_V2_PIPE_LEFT_INT_BOTTOM = 0x6b;
 
 const TILE_V2_LAVA_TOP = 0x6c;
 const TILE_V2_LAVA_MIDDLE = 0x6d;
+
+const TILE_V2_BRIDGE = 0x6e;
+const TILE_V2_BRIDGE_CHAIN = 0x6f;
+const TILE_V2_AXE = 0x70;

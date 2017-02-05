@@ -275,3 +275,21 @@ TILE_DETAILS[TILE_V2_LAVA_MIDDLE] = {
   sampleY: 112,
   displayName: 'V2 Lava Middle',
 };
+
+TILE_DETAILS[TILE_V2_BRIDGE] = {
+  sampleX: 16,
+  sampleY: 112,
+  displayName: 'V2 Bridge',
+};
+
+TILE_DETAILS[TILE_V2_BRIDGE_CHAIN] = {
+  sampleX: 16,
+  sampleY: 96,
+  displayName: 'V2 Bridge Chain',
+};
+
+TILE_DETAILS[TILE_V2_AXE] = {
+  sampleX: 32,
+  sampleY: 96,
+  displayName: 'V2 Axe',
+};
