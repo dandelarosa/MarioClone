@@ -27,18 +27,6 @@ function createTileImage(key) {
 
 function filenameForKey(key) {
   switch(key) {
-    case TILE_CLOUD_UL:
-      return 'cloud_ul.png';
-    case TILE_CLOUD_UC:
-      return 'cloud_uc.png';
-    case TILE_CLOUD_UR:
-      return 'cloud_ur.png';
-    case TILE_CLOUD_LL:
-      return 'cloud_ll.png';
-    case TILE_CLOUD_LC:
-      return 'cloud_lc.png';
-    case TILE_CLOUD_LR:
-      return 'cloud_lr.png';
     case TILE_HILL_LEFT: return 'hill-left.png';
     case TILE_HILL_TOP: return 'hill-top.png';
     case TILE_HILL_RIGHT: return 'hill-right.png';
