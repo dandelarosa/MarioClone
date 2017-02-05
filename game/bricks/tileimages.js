@@ -44,13 +44,6 @@ function filenameForKey(key) {
     case TILE_HILL_RIGHT: return 'hill-right.png';
     case TILE_HILL_EYES: return 'hill-eyes.png';
     case TILE_HILL_NOEYES: return 'hill-noeyes.png';
-    case TILE_CASTLE_TOP: return 'castle-top.png';
-    case TILE_CASTLE_WINDOWLEFT: return 'castle-windowleft.png';
-    case TILE_CASTLE_WINDOWRIGHT: return 'castle-windowright.png';
-    case TILE_CASTLE_BRICKS: return 'castle-bricks.png';
-    case TILE_CASTLE_DOORTOP: return 'castle-doortop.png';
-    case TILE_CASTLE_DOORMIDDLE: return 'castle-doormiddle.png';
-    case TILE_CASTLE_TOPMIDDLE: return 'castle-topmiddle.png';
     case TILE_PIPE_TOP_LEFT: return 'pipe-topleft.png';
     case TILE_PIPE_TOP_RIGHT: return 'pipe-topright.png';
     case TILE_PIPE_MID_LEFT: return 'pipe-midleft.png';
