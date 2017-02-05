@@ -36,8 +36,6 @@ function filenameForKey(key) {
     case TILE_PIPE_TOP_RIGHT: return 'pipe-topright.png';
     case TILE_PIPE_MID_LEFT: return 'pipe-midleft.png';
     case TILE_PIPE_MID_RIGHT: return 'pipe-midright.png';
-    case TILE_FLAGPOLE_TOP: return 'flagpole-top.png';
-    case TILE_FLAGPOLE_MID: return 'flagpole-middle.png';
     case TILE_UNDERGROUND_BG: return 'underground/bg.png';
     case TILE_BLUE_ROCKS: return 'underground/rocks.png';
     case TILE_BLUE_BLOCK: return 'underground/block.png';
