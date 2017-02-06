@@ -27,11 +27,6 @@ function createTileImage(key) {
 
 function filenameForKey(key) {
   switch(key) {
-    case TILE_HILL_LEFT: return 'hill-left.png';
-    case TILE_HILL_TOP: return 'hill-top.png';
-    case TILE_HILL_RIGHT: return 'hill-right.png';
-    case TILE_HILL_EYES: return 'hill-eyes.png';
-    case TILE_HILL_NOEYES: return 'hill-noeyes.png';
     case TILE_PIPE_TOP_LEFT: return 'pipe-topleft.png';
     case TILE_PIPE_TOP_RIGHT: return 'pipe-topright.png';
     case TILE_PIPE_MID_LEFT: return 'pipe-midleft.png';

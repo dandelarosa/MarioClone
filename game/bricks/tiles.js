@@ -2,12 +2,6 @@ const TILE_OUT_OF_BOUNDS = -1;
 const TILE_EMPTY = 0;
 const TILE_BLUE_SKY = 2;
 
-const TILE_HILL_LEFT = 12;
-const TILE_HILL_TOP = 13;
-const TILE_HILL_RIGHT = 14;
-const TILE_HILL_EYES = 15;
-const TILE_HILL_NOEYES = 16;
-
 const TILE_PIPE_TOP_LEFT = 24;
 const TILE_PIPE_TOP_RIGHT = 25;
 const TILE_PIPE_MID_LEFT = 26;
