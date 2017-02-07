@@ -57,16 +57,12 @@ function createTilePicker() {
       displayName: TILE_DETAILS[element].displayName,
     });
   });
-  var plain_tiles = [
-    {value: TILE_ITEM_BLOCK, displayName: 'Generic Item Block'},
-  ];
   var underground_tiles = [
     {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
   ];
   var tiles = [];
   tiles = tiles.concat(tiles_v2);
-  tiles = tiles.concat(plain_tiles);
   tiles = tiles.concat(underground_tiles);
   var elements = [];
   elements.push('Select a Tile:');
