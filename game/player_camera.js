@@ -6,30 +6,17 @@ function PlayerCamera(x, y, width, height) {
   this.height = height;
   this.speed = 4;
   this.thresholdFromCenterX = 25;
-  this.thresholdFromCenterY = 100;
 }
 
 PlayerCamera.prototype.follow = function(player, bricks) {
   var cameraCenterX = this.x + this.width / 2;
-  var cameraCenterY = this.y + this.height / 2;
-
   var playerDistFromCameraFocusX = Math.abs(player.x - cameraCenterX);
-  var playerDistFromCameraFocusY = Math.abs(player.y - cameraCenterY);
-
   if (playerDistFromCameraFocusX > this.thresholdFromCenterX) {
     if (cameraCenterX < player.x) {
       this.x += this.speed;
     }
     else {
       this.x -= this.speed;
-    }
-  }
-  if (playerDistFromCameraFocusY > this.thresholdFromCenterY) {
-    if(cameraCenterY < player.y) {
-      this.y += this.speed;
-    }
-    else {
-      this.y -= this.speed;
     }
   }
 
