@@ -12,6 +12,19 @@ function Player(x, y) {
   this.speedX = 0;
   this.speedY = 0;
   this.onGround = false;
+
+  this.draw = draw;
+  this.drawBoundingBox = drawBoundingBox;
+  this.height = 16;
+  this.width = 16;
+
+  function draw(graphics) {
+    this.drawBoundingBox(graphics);
+  }
+
+  function drawBoundingBox(graphics) {
+    graphics.fillRect(this.x, this.y, this.width, this.height, 'white');
+  }
 };
 
 Player.prototype.move = function(keyboard, bricks) {
@@ -67,8 +80,4 @@ Player.prototype.move = function(keyboard, bricks) {
 
    this.x += this.speedX; // move the jumper based on its current horizontal speed
    this.y += this.speedY; // same as above, but for vertical
-};
-
-Player.prototype.draw = function(graphics) {
-  graphics.fillCircle(this.x, this.y, JUMPER_RADIUS, 'white');
 };
