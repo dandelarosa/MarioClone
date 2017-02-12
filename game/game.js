@@ -4,7 +4,7 @@ function Game() {
   this.height = 240;
   this.scaleX = 2;
   this.scaleY = 2;
-  this.isEditing = true;
+  this.isEditing = false;
   this.levelMockupAlpha = 0.0;
   this.selectedTileValue = TILE_BLUE_SKY;
 };
