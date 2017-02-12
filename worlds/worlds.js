@@ -1,4 +1,5 @@
 var worlds = {
+  'cameratest': cameratest,
   'tilesettest': tilesettest,
   'tilesettest2': tilesettest2,
   '1-1': world11,
