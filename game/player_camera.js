@@ -4,20 +4,21 @@ function PlayerCamera(x, y, width, height) {
   this.y = y;
   this.width = width;
   this.height = height;
-  this.speed = 4;
-  this.thresholdFromCenterX = 25;
 }
 
 PlayerCamera.prototype.follow = function(player, bricks) {
+  // Values relative to the camera
+  var leftSnapThreshold = 103;
+  var rightSnapThreshold = 153;
   var cameraCenterX = this.x + this.width / 2;
 
   // Left camera threshold
-  if (player.x - cameraCenterX < -this.thresholdFromCenterX) {
-    this.x = player.x + this.thresholdFromCenterX - this.width / 2;
+  if (player.x < this.x + leftSnapThreshold) {
+    this.x = player.x - leftSnapThreshold;
   }
   // Right camera threshold
-  else if (player.x - cameraCenterX > this.thresholdFromCenterX) {
-    this.x = player.x - this.thresholdFromCenterX - this.width / 2;
+  else if (player.x > this.x + rightSnapThreshold) {
+    this.x = player.x - rightSnapThreshold;
   }
 
   // this next code blocks the game from showing out of bounds
