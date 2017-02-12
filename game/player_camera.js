@@ -10,14 +10,14 @@ function PlayerCamera(x, y, width, height) {
 
 PlayerCamera.prototype.follow = function(player, bricks) {
   var cameraCenterX = this.x + this.width / 2;
-  var playerDistFromCameraFocusX = Math.abs(player.x - cameraCenterX);
-  if (playerDistFromCameraFocusX > this.thresholdFromCenterX) {
-    if (cameraCenterX < player.x) {
-      this.x += this.speed;
-    }
-    else {
-      this.x -= this.speed;
-    }
+
+  // Left camera threshold
+  if (player.x - cameraCenterX < -this.thresholdFromCenterX) {
+    this.x -= this.speed;
+  }
+  // Right camera threshold
+  else if (player.x - cameraCenterX > this.thresholdFromCenterX) {
+    this.x += this.speed;
   }
 
   // this next code blocks the game from showing out of bounds
