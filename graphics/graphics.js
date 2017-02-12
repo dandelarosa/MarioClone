@@ -2,13 +2,24 @@ function Graphics(canvas) {
   this.canvas = canvas;
   this.context2d = canvas.getContext('2d');
   this.context2d.imageSmoothingEnabled = false;
-  var graphics = this;
-  graphics.drawClippedImage = drawClippedImage;
+  
+  this.drawClippedImage = drawClippedImage;
+  this.drawLine = drawLine;
+
+  // Basic Drawing
+
+  function drawLine(point1x, point1y, point2x, point2y, color) {
+    this.context2d.strokeStyle = color;
+    this.context2d.beginPath();
+    this.context2d.moveTo(point1x, point1y);
+    this.context2d.lineTo(point2x, point2y);
+    this.context2d.stroke();
+  }
 
   // Drawing Images
 
   function drawClippedImage(img, sx, sy, sw, sh, ix, iy, iw, ih) {
-    graphics.context2d.drawImage(img, sx, sy, sw, sh, ix, iy, iw, ih);
+    this.context2d.drawImage(img, sx, sy, sw, sh, ix, iy, iw, ih);
   }
 }
 

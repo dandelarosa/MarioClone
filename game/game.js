@@ -7,6 +7,22 @@ function Game() {
   this.isEditing = false;
   this.levelMockupAlpha = 0.0;
   this.selectedTileValue = TILE_BLUE_SKY;
+
+  this.drawCameraDebugger = drawCameraDebugger;
+
+  // Drawing
+
+  function drawCameraDebugger(graphics) {
+    var playerX = this.player.x;
+    graphics.drawLine(playerX, 0, playerX, this.height, 'black');
+
+    var cameraMidX = this.playerCamera.x + this.playerCamera.width / 2;
+    var cameraThresholdX = this.playerCamera.thresholdFromCenterX;
+    var leftThreshold = cameraMidX - cameraThresholdX;
+    graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
+    var rightThreshold = cameraMidX + cameraThresholdX;
+    graphics.drawLine(rightThreshold, 0, rightThreshold, this.height, 'black');
+  }
 };
 
 Game.prototype.loadWorld = function(world) {
@@ -139,6 +155,7 @@ Game.prototype.updatePlayerMode = function() {
   this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
   this.player.draw(graphics);
+  this.drawCameraDebugger(graphics);
   graphics.popState();
   graphics.popState();
 
