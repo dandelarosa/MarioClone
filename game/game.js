@@ -16,11 +16,10 @@ function Game() {
     var playerX = this.player.x;
     graphics.drawLine(playerX, 0, playerX, this.height, 'black');
 
-    var cameraMidX = this.playerCamera.x + this.playerCamera.width / 2;
-    var cameraThresholdX = this.playerCamera.thresholdFromCenterX;
-    var leftThreshold = cameraMidX - cameraThresholdX;
+    var camera = this.playerCamera;
+    var leftThreshold = camera.x + camera.leftSnapThreshold;
     graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
-    var rightThreshold = cameraMidX + cameraThresholdX;
+    var rightThreshold = camera.x + camera.rightSnapThreshold;
     graphics.drawLine(rightThreshold, 0, rightThreshold, this.height, 'black');
   }
 };

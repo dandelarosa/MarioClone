@@ -4,12 +4,14 @@ function PlayerCamera(x, y, width, height) {
   this.y = y;
   this.width = width;
   this.height = height;
+  this.leftSnapThreshold = 103;
+  this.rightSnapThreshold = 153;
 }
 
 PlayerCamera.prototype.follow = function(player, bricks) {
   // Values relative to the camera
-  var leftSnapThreshold = 103;
-  var rightSnapThreshold = 153;
+  var leftSnapThreshold = this.leftSnapThreshold ;
+  var rightSnapThreshold = this.rightSnapThreshold;
   var cameraCenterX = this.x + this.width / 2;
 
   // Left camera threshold
