@@ -19,8 +19,8 @@ PlayerCamera.prototype.follow = function(player, bricks) {
     this.x = player.x - leftSnapThreshold;
   }
   // Right camera threshold
-  else if (player.x > this.x + rightSnapThreshold) {
-    this.x = player.x - rightSnapThreshold;
+  else if (player.x + player.width > this.x + rightSnapThreshold) {
+    this.x = player.x + player.width - rightSnapThreshold;
   }
 
   // this next code blocks the game from showing out of bounds
