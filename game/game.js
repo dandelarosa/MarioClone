@@ -9,6 +9,7 @@ function Game() {
   this.selectedTileValue = TILE_BLUE_SKY;
 
   this.drawCameraDebugger = drawCameraDebugger;
+  this.isDebuggingCamera = false;
 
   // Drawing
 
@@ -139,6 +140,10 @@ Game.prototype.updateEditorMode = function() {
 
 Game.prototype.updatePlayerMode = function() {
   var keyboard = globals.keyboard;
+  if (keyboard.isKeyPressedThisFrame(KEY_1)) {
+    this.isDebuggingCamera = !this.isDebuggingCamera;
+  }
+
   this.player.move(keyboard, this.bricks);
 
   var camera = this.playerCamera;
@@ -154,7 +159,9 @@ Game.prototype.updatePlayerMode = function() {
   this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
   this.player.draw(graphics);
-  this.drawCameraDebugger(graphics);
+  if (this.isDebuggingCamera) {
+    this.drawCameraDebugger(graphics);
+  }
   graphics.popState();
   graphics.popState();
 
