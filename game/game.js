@@ -14,9 +14,6 @@ function Game() {
   // Drawing
 
   function drawCameraDebugger(graphics) {
-    var playerX = this.player.x;
-    graphics.drawLine(playerX, 0, playerX, this.height, 'black');
-
     var camera = this.playerCamera;
     var leftThreshold = camera.x + camera.leftSnapThreshold;
     graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
