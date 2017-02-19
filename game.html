@@ -31,6 +31,7 @@
   <script src="input/keys.js"></script>
   <script src="input/mouse.js"></script>
   <script src="utils/hex.js"></script>
+  <script src="utils/persistence.js"></script>
   <script src="worlds/cameratest.js"></script>
   <script src="worlds/tilesettest.js"></script>
   <script src="worlds/tilesettest2.js"></script>
@@ -87,6 +88,7 @@ window.onload = function() {
   createWorldPicker();
   createTilePicker();
   selectTile();
+  game.isDebuggingCamera = getStoredValue('isDebuggingCamera') == 'true';
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);
