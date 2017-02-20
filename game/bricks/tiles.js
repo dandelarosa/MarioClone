@@ -2,7 +2,6 @@ const TILE_OUT_OF_BOUNDS = -1;
 const TILE_EMPTY = 0;
 const TILE_BLUE_SKY = 2;
 
-const TILE_UNDERGROUND_BG = 30;
 const TILE_BLUE_ROCKS = 31;
 const TILE_BLUE_BLOCK = 32;
 const TILE_BLUE_BRICK_BLOCK = 33;

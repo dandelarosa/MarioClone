@@ -58,7 +58,6 @@ function createTilePicker() {
     });
   });
   var underground_tiles = [
-    {value: TILE_UNDERGROUND_BG, displayName: 'Underground Background'},
     {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
   ];
   var tiles = [];

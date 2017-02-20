@@ -27,7 +27,6 @@ function createTileImage(key) {
 
 function filenameForKey(key) {
   switch(key) {
-    case TILE_UNDERGROUND_BG: return 'underground/bg.png';
     case TILE_BLUE_ROCKS: return 'underground/rocks.png';
     case TILE_BLUE_BLOCK: return 'underground/block.png';
     case TILE_BLUE_BRICK_BLOCK: return 'underground/bricks.png';
