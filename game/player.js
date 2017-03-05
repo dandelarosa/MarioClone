@@ -69,13 +69,26 @@ Player.prototype.move = function(keyboard, bricks) {
      this.onGround = false;
    }
 
-   if (this.speedX < 0 &&
-       bricks.isSolidAtPoint(this.x - JUMPER_RADIUS,this.y) == 1) {
-     this.x = (Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth + JUMPER_RADIUS;
+   var rightX = this.x + this.width;
+   // If left side is already inside a wall, push to the column to the right
+   if (this.speedX < 0 && bricks.isSolidAtPoint(this.x, this.y)) {
+     this.x = Math.ceil(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth;
+     this.speedX = 0;
    }
-   if (this.speedX > 0 &&
-       bricks.isSolidAtPoint(this.x + JUMPER_RADIUS, this.y) == 1) {
-     this.x = (1 + Math.floor(this.x / bricks.grid.cellWidth)) * bricks.grid.cellWidth - JUMPER_RADIUS;
+   // If left side is just on a wall, snap to the current column
+   else if (this.speedX < 0 && bricks.isSolidAtPoint(this.x - 1, this.y)) {
+     this.x = Math.floor(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth;
+     this.speedX = 0;
+   }
+   // If right side is already inside a wall, push to the column to the left
+   else if (this.speedX > 0 && bricks.isSolidAtPoint(rightX, this.y)) {
+     this.x = Math.floor(rightX / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
+     this.speedX = 0;
+   }
+   // If right is just on a wall, snap to the current column
+   else if (this.speedX > 0 && bricks.isSolidAtPoint(rightX + 1, this.y)) {
+     this.x = Math.ceil(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
+     this.speedX = 0;
    }
 
    this.x += this.speedX; // move the jumper based on its current horizontal speed
