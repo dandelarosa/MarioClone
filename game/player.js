@@ -53,11 +53,14 @@ Player.prototype.move = function(keyboard, bricks) {
      this.speedX = RUN_SPEED;
    }
 
-   if (this.speedY < 0 &&
-       bricks.isSolidAtPoint(this.x, this.y - JUMPER_RADIUS) == 1) {
-     this.y = (Math.floor(this.y / bricks.grid.cellHeight)) * bricks.grid.cellHeight + JUMPER_RADIUS;
-     this.speedY = 0.0;
-   }
+  var rightX = this.x + this.width;
+  var futureTopY = this.y + this.speedY;
+  // If future top side is inside a wall, push to row below
+  if (this.speedY < 0
+    && (bricks.isSolidAtPoint(this.x, futureTopY) || bricks.isSolidAtPoint(rightX, futureTopY))) {
+    this.y = Math.floor(this.y / bricks.grid.cellHeight) * bricks.grid.cellHeight;
+    this.speedY = 0.0;
+  }
 
    if (this.speedY > 0 &&
        bricks.isSolidAtPoint(this.x, this.y + JUMPER_RADIUS) == 1) {
@@ -69,7 +72,6 @@ Player.prototype.move = function(keyboard, bricks) {
      this.onGround = false;
    }
 
-   var rightX = this.x + this.width;
    // If left side is already inside a wall, push to the column to the right
    if (this.speedX < 0 && bricks.isSolidAtPoint(this.x, this.y)) {
      this.x = Math.ceil(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth;
