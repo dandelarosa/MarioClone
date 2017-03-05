@@ -86,14 +86,20 @@ Player.prototype.move = function(keyboard, bricks) {
   }
 
   // If left side is already inside a wall, push to the column to the right
-  if (this.speedX < 0
-    && (bricks.isSolidAtPoint(futureLeftX, topY))) {
+  if (this.speedX < 0 && (bricks.isSolidAtPoint(futureLeftX, topY))) {
+    this.x = Math.floor(leftX / bricks.grid.cellWidth) * bricks.grid.cellWidth;
+    this.speedX = 0;
+  }
+  else if (this.speedX < 0 && (bricks.isSolidAtPoint(futureLeftX, bottomY - 1))) {
     this.x = Math.floor(leftX / bricks.grid.cellWidth) * bricks.grid.cellWidth;
     this.speedX = 0;
   }
   // If right side is already inside a wall, push to the column to the left
-  else if (this.speedX > 0
-    && (bricks.isSolidAtPoint(futureRightX, topY))) {
+  else if (this.speedX > 0 && (bricks.isSolidAtPoint(futureRightX, topY))) {
+    this.x = Math.ceil(rightX / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
+    this.speedX = 0;
+  }
+  else if (this.speedX > 0 && (bricks.isSolidAtPoint(futureRightX, bottomY - 1))) {
     this.x = Math.ceil(rightX / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
     this.speedX = 0;
   }
