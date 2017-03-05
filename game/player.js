@@ -53,8 +53,13 @@ Player.prototype.move = function(keyboard, bricks) {
      this.speedX = RUN_SPEED;
    }
 
+  var topY = this.y;
+  var bottomY = this.y + this.height;
+  var leftX = this.x;
   var rightX = this.x + this.width;
   var futureTopY = this.y + this.speedY;
+  var futureLeftX = this.x + this.speedX;
+  var futureRightX = this.x + this.width + this.speedX;
   // If future top side is inside a wall, push to row below
   if (this.speedY < 0
     && (bricks.isSolidAtPoint(this.x, futureTopY) || bricks.isSolidAtPoint(rightX, futureTopY))) {
@@ -72,26 +77,18 @@ Player.prototype.move = function(keyboard, bricks) {
      this.onGround = false;
    }
 
-   // If left side is already inside a wall, push to the column to the right
-   if (this.speedX < 0 && bricks.isSolidAtPoint(this.x, this.y)) {
-     this.x = Math.ceil(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth;
-     this.speedX = 0;
-   }
-   // If left side is just on a wall, snap to the current column
-   else if (this.speedX < 0 && bricks.isSolidAtPoint(this.x - 1, this.y)) {
-     this.x = Math.floor(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth;
-     this.speedX = 0;
-   }
-   // If right side is already inside a wall, push to the column to the left
-   else if (this.speedX > 0 && bricks.isSolidAtPoint(rightX, this.y)) {
-     this.x = Math.floor(rightX / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
-     this.speedX = 0;
-   }
-   // If right is just on a wall, snap to the current column
-   else if (this.speedX > 0 && bricks.isSolidAtPoint(rightX + 1, this.y)) {
-     this.x = Math.ceil(this.x / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
-     this.speedX = 0;
-   }
+  // If left side is already inside a wall, push to the column to the right
+  if (this.speedX < 0
+    && (bricks.isSolidAtPoint(futureLeftX, topY))) {
+    this.x = Math.floor(leftX / bricks.grid.cellWidth) * bricks.grid.cellWidth;
+    this.speedX = 0;
+  }
+  // If right side is already inside a wall, push to the column to the left
+  else if (this.speedX > 0
+    && (bricks.isSolidAtPoint(futureRightX, topY))) {
+    this.x = Math.ceil(rightX / bricks.grid.cellWidth) * bricks.grid.cellWidth - this.width;
+    this.speedX = 0;
+  }
 
    this.x += this.speedX; // move the jumper based on its current horizontal speed
    this.y += this.speedY; // same as above, but for vertical
