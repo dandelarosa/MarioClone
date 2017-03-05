@@ -28,8 +28,8 @@ function Player(x, y) {
 };
 
 Player.prototype.move = function(keyboard, bricks) {
-  var jumpPressed = keyboard.isKeyPressed(KEY_UP_ARROW) ||
-    keyboard.isKeyPressed(KEY_SPACE);
+  var jumpPressed = keyboard.isKeyPressedThisFrame(KEY_UP_ARROW) ||
+    keyboard.isKeyPressedThisFrame(KEY_SPACE);
   if (jumpPressed && this.onGround) {
     this.speedY = -JUMP_POWER;
   }
