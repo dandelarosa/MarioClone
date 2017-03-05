@@ -57,12 +57,8 @@ function createTilePicker() {
       displayName: TILE_DETAILS[element].displayName,
     });
   });
-  var underground_tiles = [
-    {value: TILE_BLUE_ROCKS, displayName: 'Underground Rocks'},
-  ];
   var tiles = [];
   tiles = tiles.concat(tiles_v2);
-  tiles = tiles.concat(underground_tiles);
   var elements = [];
   elements.push('Select a Tile:');
   elements.push('<select id="tileSelect" onchange="selectTile();">');

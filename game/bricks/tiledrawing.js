@@ -8,13 +8,6 @@ function drawTile(graphics, value, x, y) {
       graphics.fillRect(x , y, 16, 16, '#aaccff');
       break;
     default:
-      drawTileImage(graphics, value, x, y);
       break;
   }
 };
-
-function drawTileImage(graphics, value, x, y) {
-  if (isTileImageLoaded(value)) {
-    graphics.drawImage(getTileImage(value), x, y);
-  }
-}
