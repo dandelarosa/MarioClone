@@ -17,6 +17,7 @@ function Player(x, y) {
   this.drawBoundingBox = drawBoundingBox;
   this.height = 16;
   this.isJumpButtonPressed = isJumpButtonPressed;
+  this.updateSpeedX = updateSpeedX;
   this.width = 16;
 
   // Input
@@ -25,6 +26,32 @@ function Player(x, y) {
     return keyboard.isKeyPressedThisFrame(KEY_UP_ARROW)
     || keyboard.isKeyPressedThisFrame(KEY_SPACE)
     || keyboard.isKeyPressedThisFrame(KEY_X);
+  }
+
+  // Movement
+
+  function updateSpeedX(keyboard, acceleration, maxSpeed, friction) {
+    if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
+      if (this.speedX < -maxSpeed) {
+        this.speedX *= friction;
+      }
+      else {
+        this.speedX -= acceleration;
+        this.speedX = Math.max(this.speedX, -maxSpeed);
+      }
+    }
+    else if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
+      if (this.speedX > maxSpeed) {
+        this.speedX *= friction;
+      }
+      else {
+        this.speedX += acceleration;
+        this.speedX = Math.min(this.speedX, maxSpeed);
+      }
+    }
+    else {
+      this.speedX *= friction;
+    }
   }
 
   // Drawing
@@ -45,22 +72,20 @@ Player.prototype.move = function(keyboard, bricks) {
   }
 
   if (this.onGround) {
-    this.speedX *= GROUND_FRICTION;
+    if (keyboard.isKeyPressed(KEY_Z)) {
+      this.updateSpeedX(keyboard, 0.5, 6.0, GROUND_FRICTION);
+    }
+    else {
+      this.updateSpeedX(keyboard, 0.3, 3.0, GROUND_FRICTION);
+    }
   }
   else {
-    this.speedX *= AIR_RESISTANCE;
+    this.updateSpeedX(keyboard, 0.3, 3.0, AIR_RESISTANCE);
     this.speedY += GRAVITY;
     // cheap test to ensure can't fall through floor
     if (this.speedY > JUMPER_RADIUS) {
       this.speedY = JUMPER_RADIUS;
     }
-  }
-
-  if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
-    this.speedX = -RUN_SPEED;
-  }
-  if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
-    this.speedX = RUN_SPEED;
   }
 
   var topY = this.y;
