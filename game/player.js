@@ -16,7 +16,18 @@ function Player(x, y) {
   this.draw = draw;
   this.drawBoundingBox = drawBoundingBox;
   this.height = 16;
+  this.isJumpButtonPressed = isJumpButtonPressed;
   this.width = 16;
+
+  // Input
+  
+  function isJumpButtonPressed(keyboard) {
+    return keyboard.isKeyPressedThisFrame(KEY_UP_ARROW)
+    || keyboard.isKeyPressedThisFrame(KEY_SPACE)
+    || keyboard.isKeyPressedThisFrame(KEY_X);
+  }
+
+  // Drawing
 
   function draw(graphics) {
     this.drawBoundingBox(graphics);
@@ -28,8 +39,7 @@ function Player(x, y) {
 };
 
 Player.prototype.move = function(keyboard, bricks) {
-  var jumpPressed = keyboard.isKeyPressedThisFrame(KEY_UP_ARROW) ||
-    keyboard.isKeyPressedThisFrame(KEY_SPACE);
+  var jumpPressed = this.isJumpButtonPressed(keyboard);
   if (jumpPressed && this.onGround) {
     this.speedY = -JUMP_POWER;
   }

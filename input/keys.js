@@ -13,3 +13,6 @@ const KEY_5 = 53;
 const KEY_7 = 55;
 const KEY_8 = 56;
 const KEY_9 = 57;
+
+const KEY_X = 88;
+const KEY_Z = 90;
