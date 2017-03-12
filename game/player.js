@@ -61,6 +61,16 @@ Player.prototype.move = function(keyboard, bricks) {
   var futureBottomY = this.y + this.height + this.speedY;
   var futureLeftX = this.x + this.speedX;
   var futureRightX = this.x + this.width + this.speedX;
+
+  if (this.speedX < 0 && leftX <= bricks.minX()) {
+    this.x = bricks.minX();
+    this.speedX = 0.0;
+  }
+  else if (this.speedX > 0 && rightX >= bricks.maxX()) {
+    this.x = bricks.maxX() - this.width;
+    this.speedX = 0.0;
+  }
+
   // If future top side is inside a wall, push to row below
   if (this.speedY < 0 && bricks.isSolidAtPoint(this.x, futureTopY)) {
     this.y = Math.floor(this.y / bricks.grid.cellHeight) * bricks.grid.cellHeight;
