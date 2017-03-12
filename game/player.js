@@ -20,7 +20,7 @@ function Player(x, y) {
   this.width = 16;
 
   // Input
-  
+
   function isJumpButtonPressed(keyboard) {
     return keyboard.isKeyPressedThisFrame(KEY_UP_ARROW)
     || keyboard.isKeyPressedThisFrame(KEY_SPACE)
@@ -45,23 +45,23 @@ Player.prototype.move = function(keyboard, bricks) {
   }
 
   if (this.onGround) {
-     this.speedX *= GROUND_FRICTION;
-   }
-   else {
-     this.speedX *= AIR_RESISTANCE;
-     this.speedY += GRAVITY;
-     // cheap test to ensure can't fall through floor
-     if (this.speedY > JUMPER_RADIUS) {
-       this.speedY = JUMPER_RADIUS;
-     }
-   }
+    this.speedX *= GROUND_FRICTION;
+  }
+  else {
+    this.speedX *= AIR_RESISTANCE;
+    this.speedY += GRAVITY;
+    // cheap test to ensure can't fall through floor
+    if (this.speedY > JUMPER_RADIUS) {
+      this.speedY = JUMPER_RADIUS;
+    }
+  }
 
-   if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
-     this.speedX = -RUN_SPEED;
-   }
-   if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
-     this.speedX = RUN_SPEED;
-   }
+  if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
+    this.speedX = -RUN_SPEED;
+  }
+  if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
+    this.speedX = RUN_SPEED;
+  }
 
   var topY = this.y;
   var bottomY = this.y + this.height;
@@ -124,6 +124,6 @@ Player.prototype.move = function(keyboard, bricks) {
     this.speedX = 0;
   }
 
-   this.x += this.speedX; // move the jumper based on its current horizontal speed
-   this.y += this.speedY; // same as above, but for vertical
+  this.x += this.speedX; // move the jumper based on its current horizontal speed
+  this.y += this.speedY; // same as above, but for vertical
 };
