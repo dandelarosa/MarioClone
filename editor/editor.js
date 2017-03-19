@@ -112,6 +112,7 @@ Editor.prototype.loadWorld = function(world) {
   this.levelImage = getLevelImage(world.key);
   this.levelImageKey = world.key;
   this.levelImageOffset = world.levelImageOffset;
+  this.obstacles = world.obstacles;
   this.reset();
 };
 
