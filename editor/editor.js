@@ -63,6 +63,7 @@ function selectWorld() {
 
   // Don't forget to display the changes!
   displayLevelData();
+  displayObstacleData();
 }
 
 function rememberSelectedWorld(worldValue) {
