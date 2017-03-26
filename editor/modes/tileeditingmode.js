@@ -1,5 +1,6 @@
 function TileEditingMode() {
   return {
+    displayText: 'Editing Tiles',
     handleClickAtColRow: handleClickAtColRow,
     selectedTileValue: TILE_BLUE_SKY,
   };

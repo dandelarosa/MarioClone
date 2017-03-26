@@ -104,7 +104,15 @@ function Editor() {
   this.isEditing = true;
   this.levelMockupAlpha = 0.0;
   this.tileEditingMode = new TileEditingMode();
-  this.currentEditingMode = this.tileEditingMode;
+  this.obstacleEditingMode = new ObstacleEditingMode();
+
+  var savedEditingMode = parseInt(getStoredValue('editingMode', EDITING_MODE.TILES));
+  if (savedEditingMode === EDITING_MODE.OBSTACLES) {
+    this.currentEditingMode = this.obstacleEditingMode;
+  }
+  else {
+    this.currentEditingMode = this.tileEditingMode;
+  }
 };
 
 Editor.prototype.loadWorld = function(world) {
@@ -186,6 +194,17 @@ Editor.prototype.updateEditorMode = function() {
     }
   }
 
+  if (keyboard.isKeyPressedThisFrame(KEY_1)) {
+    if (this.currentEditingMode == this.tileEditingMode) {
+      this.currentEditingMode = this.obstacleEditingMode;
+      setStoredValue('editingMode', EDITING_MODE.OBSTACLES);
+    }
+    else {
+      this.currentEditingMode = this.tileEditingMode;
+      setStoredValue('editingMode', EDITING_MODE.TILES);
+    }
+  }
+
   var camera = this.editorCamera;
   this.editorCamera.update(keyboard, this.bricks);
 
@@ -217,6 +236,7 @@ Editor.prototype.updateEditorMode = function() {
   graphics.popState();
 
   graphics.fillText('Editor Mode', 5, 15, 'yellow');
+  graphics.fillText(this.currentEditingMode.displayText, 5, 25, 'yellow');
 
   graphics.fillText('Press 0 to toggle level mockup', 370, 15, 'yellow');
 
