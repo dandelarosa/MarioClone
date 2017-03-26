@@ -142,6 +142,7 @@ Editor.prototype.reset = function() {
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
+  this.obstacleGrid = new ObstacleGrid(this.obstacles, this.numCols);
 };
 
 Editor.prototype.updateLevel = function() {

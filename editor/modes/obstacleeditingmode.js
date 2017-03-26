@@ -5,6 +5,9 @@ function ObstacleEditingMode() {
   };
 
   function handleClickAtColRow(col, row, game) {
-    // TODO: implement
+    // TODO: implement obstacle picker
+    game.obstacleGrid.setValueAtColRow(OBSTACLE_GOOMBA, col, row);
+    game.obstacles = game.obstacleGrid.data;
+    displayObstacleData();
   }
 }
