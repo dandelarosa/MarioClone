@@ -13,6 +13,7 @@
   <script src="editor/modes/obstacleeditingmode.js"></script>
   <script src="editor/modes/tileeditingmode.js"></script>
   <script src="editor/obstacledataform.js"></script>
+  <script src="editor/obstaclepicker.js"></script>
   <script src="editor/tilepicker.js"></script>
   <script src="editor/worldpicker.js"></script>
   <script src="game/bricks/bricks.js"></script>
@@ -94,6 +95,7 @@ window.onload = function() {
   createWorldPicker();
   createTilePicker();
   selectTile();
+  createObstaclePicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);
@@ -120,6 +122,7 @@ function gameUpdate() {
     </td>
     <td>
       <div id="tilePicker"></div>
+      <div id="obstaclePicker"></div>
     </td>
   </tr>
 </table>

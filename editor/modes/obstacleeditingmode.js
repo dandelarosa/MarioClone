@@ -2,11 +2,11 @@ function ObstacleEditingMode() {
   return {
     displayText: 'Editing Obstacles',
     handleClickAtColRow: handleClickAtColRow,
+    selectedValue: OBSTACLE_EMPTY,
   };
 
   function handleClickAtColRow(col, row, game) {
-    // TODO: implement obstacle picker
-    game.obstacleGrid.setValueAtColRow(OBSTACLE_GOOMBA, col, row);
+    game.obstacleGrid.setValueAtColRow(this.selectedValue, col, row);
     game.obstacles = game.obstacleGrid.data;
     displayObstacleData();
   }
