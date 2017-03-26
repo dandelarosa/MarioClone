@@ -103,7 +103,8 @@ function Editor() {
   this.scaleY = 2;
   this.isEditing = true;
   this.levelMockupAlpha = 0.0;
-  this.selectedTileValue = TILE_BLUE_SKY;
+  this.tileEditingMode = new TileEditingMode();
+  this.currentEditingMode = this.tileEditingMode;
 };
 
 Editor.prototype.loadWorld = function(world) {
@@ -196,9 +197,7 @@ Editor.prototype.updateEditorMode = function() {
   var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
   var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
   if (mouse.isPressedThisFrame()) {
-    this.bricks.toggleValueAtColRow(mouseCol, mouseRow, this.selectedTileValue);
-    this.gridData = this.bricks.getGridData();
-    displayLevelData();
+    this.currentEditingMode.handleClickAtColRow(mouseCol, mouseRow, this);
   }
 
   var graphics = globals.graphics;

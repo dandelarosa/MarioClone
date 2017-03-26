@@ -76,5 +76,5 @@ function selectTile() {
   var selectedIndex = select.selectedIndex;
   var selectedOption = select.options[selectedIndex];
   var selectedValue = parseInt(selectedOption.value);
-  game.selectedTileValue = selectedValue;
+  game.tileEditingMode.selectedTileValue = selectedValue;
 }
