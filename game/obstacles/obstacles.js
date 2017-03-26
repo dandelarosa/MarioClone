@@ -1,0 +1,1 @@
+const OBSTACLE_EMPTY = 0x00;

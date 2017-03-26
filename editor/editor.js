@@ -113,6 +113,14 @@ Editor.prototype.loadWorld = function(world) {
   this.levelImageKey = world.key;
   this.levelImageOffset = world.levelImageOffset;
   this.obstacles = world.obstacles;
+  // Not sure of the best place to put this
+  if (!this.obstacles || this.obstacles.length === 0) {
+    var newObstacles = [];
+    for (var i = 0; i < this.gridData.length; i++) {
+      newObstacles.push(OBSTACLE_EMPTY);
+    }
+    this.obstacles = newObstacles;
+  }
   this.reset();
 };
 

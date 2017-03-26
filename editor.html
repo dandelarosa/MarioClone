@@ -9,6 +9,7 @@
   <script src="editor/levelimages.js"></script>
   <script src="editor/leveldataform.js"></script>
   <script src="editor/levelwidthform.js"></script>
+  <script src="editor/obstacledataform.js"></script>
   <script src="editor/tilepicker.js"></script>
   <script src="editor/worldpicker.js"></script>
   <script src="game/bricks/bricks.js"></script>
@@ -23,6 +24,7 @@
   <script src="game/editor_camera.js"></script>
   <script src="game/game.js"></script>
   <script src="game/globals.js"></script>
+  <script src="game/obstacles/obstacles.js"></script>
   <script src="game/player_camera.js"></script>
   <script src="game/player.js"></script>
   <script src="graphics/graphics.js"></script>
@@ -83,6 +85,7 @@ window.onload = function() {
   game = new Editor();
   createLevelWidthForm();
   createLevelDataForm();
+  createObstacleDataForm();
   createWorldPicker();
   createTilePicker();
   selectTile();
@@ -94,6 +97,7 @@ window.onload = function() {
     game.loadWorld(worlds['1-1']);
   }
   displayLevelData();
+  displayObstacleData();
   setInterval(gameUpdate, 1000 / game.fps);
 };
 function gameUpdate() {
@@ -106,6 +110,7 @@ function gameUpdate() {
     <td>
       <form id="levelWidth"></form>
       <form id="levelData" action="javascript:updateLevelData();"></form>
+      <div id="obstacleData"></div>
       <div id="worldPicker"></div>
     </td>
     <td>
