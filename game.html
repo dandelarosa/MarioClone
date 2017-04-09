@@ -87,7 +87,7 @@ window.onload = function() {
   createWorldPicker();
   createTilePicker();
   selectTile();
-  game.isDebuggingCamera = getStoredValue('isDebuggingCamera') == 'true';
+  game.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);

@@ -6,14 +6,6 @@ function setStoredValue(key, value) {
   window.localStorage.setItem(key, value);
 }
 
-function getStoredValue(key, fallbackValue) {
-  // Check for browser compatibility
-  if (typeof(Storage) === "undefined") {
-    return fallbackValue;
-  }
-  return window.localStorage.getItem(key);
-}
-
 function Persistence() {
   return {
     getValue: getValue,
@@ -30,6 +22,9 @@ function Persistence() {
       }
       if (value === null) {
         return fallbackValue;
+      }
+      if (type === 'bool') {
+        return value === 'true';
       }
       if (type === 'int') {
         return parseInt(value);

@@ -106,7 +106,7 @@ function Editor() {
   this.tileEditingMode = new TileEditingMode();
   this.obstacleEditingMode = new ObstacleEditingMode();
 
-  var savedEditingMode = parseInt(getStoredValue('editingMode', EDITING_MODE.TILES));
+  var savedEditingMode = persistence.getValue('editingMode', 'int', EDITING_MODE.TILES);
   if (savedEditingMode === EDITING_MODE.OBSTACLES) {
     this.currentEditingMode = this.obstacleEditingMode;
   }
