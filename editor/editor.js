@@ -229,6 +229,8 @@ Editor.prototype.updateEditorMode = function() {
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
   this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
+  this.obstacleGrid.draw(camera.x, camera.y, camera.width,
+    camera.height, graphics);
   if (levelImageLoaded[this.levelImageKey]) {
     graphics.drawImageWithAlpha(this.levelImage, -this.levelImageOffset, 0,
       this.levelMockupAlpha);
