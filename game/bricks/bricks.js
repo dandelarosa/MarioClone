@@ -95,10 +95,10 @@ Bricks.prototype.tileValueAtColRow = function(col, row) {
 Bricks.prototype.toggleValueAtColRow = function(col, row, value) {
   var index = this.grid2d.indexForColAndRow(col, row);
   if (this.grid2d.valueAtIndex(index) === value) {
-    this.grid2d.changeValueAtIndex(index, TILE_EMPTY);
+    this.grid2d.setValueAtIndex(TILE_EMPTY, index);
   }
   else {
-    this.grid2d.changeValueAtIndex(index, value);
+    this.grid2d.setValueAtIndex(value, index);
   }
 }
 
