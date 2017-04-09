@@ -6,7 +6,7 @@ function ObstacleEditingMode() {
   };
 
   function handleClickAtColRow(col, row, game) {
-    game.obstacleGrid.setValueAtColRow(this.selectedValue, col, row);
+    game.obstacleGrid.setValueAtColAndRow(this.selectedValue, col, row);
     game.obstacles = game.obstacleGrid.data;
     displayObstacleData();
   }

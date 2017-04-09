@@ -1,34 +1,21 @@
 function ObstacleGrid(data, numCols) {
   return {
-    data: data,
     draw: draw,
-    indexForColAndRow: indexForColAndRow,
-    numCols: numCols,
-    setValueAtColRow: setValueAtColRow,
-    valueAtColAndRow: valueAtColAndRow,
-    valueAtIndex: valueAtIndex,
+    getData: getData,
+    grid: new Grid2D(data, numCols),
+    setValueAtColAndRow: setValueAtColAndRow,
   };
 
   // Querying Data
 
-  function indexForColAndRow(col, row) {
-    return col + row * this.numCols;
-  }
-
-  function valueAtIndex(index) {
-    return this.data[index];
-  }
-
-  function valueAtColAndRow(col, row) {
-    var index = this.indexForColAndRow(col, row);
-    return this.valueAtIndex(index);
+  function getData() {
+    return this.grid.getData();
   }
 
   // Modifying Data
 
-  function setValueAtColRow(value, col, row) {
-    var index = this.indexForColAndRow(col, row);
-    this.data[index] = value;
+  function setValueAtColAndRow(value, col, row) {
+    this.grid.setValueAtColAndRow(value, col, row);
   }
 
   // Drawing
@@ -49,11 +36,10 @@ function ObstacleGrid(data, numCols) {
 
     for (var row = topMostRow; row < bottomMostRow; row++) {
       for (var col = leftMostCol; col < rightMostCol; col++) {
-        var obstacleIndex = this.indexForColAndRow(col, row);
-        var obstacleValue = this.valueAtIndex(obstacleIndex);
+        var obstacleValue = this.grid.valueAtColAndRow(col, row);
         if (typeof obstacleValue === 'number' && obstacleValue > OBSTACLE_EMPTY) {
-          var rectX = row * obstacleWidth;
-          var rectY = col * obstacleHeight;
+          var rectX = col * obstacleWidth;
+          var rectY = row * obstacleHeight;
           var rectWidth = obstacleWidth;
           var rectHeight = obstacleHeight;
           graphics.fillRect(rectX, rectY, rectWidth, rectHeight, 'blue');
