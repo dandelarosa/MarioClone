@@ -1,41 +1,46 @@
-const BRICK_GAP = 1;
+const BRICK_WIDTH = 16;
+const BRICK_HEIGHT = 16;
 
 function Bricks(grid, tileset) {
   this.grid = grid;
+  this.grid2d = new Grid2D(grid.data, grid.numCols);
   this.tileset = tileset;
 }
 
+// Grid Info
+
 Bricks.prototype.brickTileToIndex = function(tileCol, tileRow) {
-  return (tileCol + this.grid.numCols * tileRow);
+  return (tileCol + this.grid2d.numCols * tileRow);
 }
 
 Bricks.prototype.colForPixelX = function(pixelX) {
-  var result = Math.floor(pixelX / this.grid.cellWidth);
+  var result = Math.floor(pixelX / BRICK_WIDTH);
   return result;
 }
 
 Bricks.prototype.getGridData = function() {
-  return this.grid.getData();
+  return this.grid2d.getData();
 };
 
 Bricks.prototype.maxX = function() {
-  return this.grid.maxX();
+  return this.grid2d.numCols * BRICK_WIDTH;
 };
 
 Bricks.prototype.maxY = function() {
-  return this.grid.maxY();
+  var numRows = this.getGridData().length / this.grid2d.numCols;
+  return numRows * BRICK_HEIGHT;
 };
 
 Bricks.prototype.minX = function() {
-  return this.grid.minX();
+  return 0;
 };
 
 Bricks.prototype.minY = function() {
-  return this.grid.minY();
+  return 0;
 };
 
 Bricks.prototype.rowForPixelY = function(pixelY) {
-  var result = Math.floor(pixelY / this.grid.cellHeight);
+  var result = Math.floor(pixelY / BRICK_HEIGHT);
   return result;
 };
 
@@ -64,16 +69,17 @@ Bricks.prototype.isSolidAtPoint = function(x, y) {
 };
 
 Bricks.prototype.tileValueAtPoint = function(x, y) {
-  var tileCol = x / this.grid.cellWidth;
-  var tileRow = y / this.grid.cellHeight;
+  var tileCol = x / BRICK_WIDTH;
+  var tileRow = y / BRICK_HEIGHT;
 
   // using Math.floor to round down to the nearest whole number
   tileCol = Math.floor(tileCol);
   tileRow = Math.floor(tileRow);
 
   // first check whether the jumper is within any part of the brick wall
-  if(tileCol < 0 || tileCol >= this.grid.numCols ||
-     tileRow < 0 || tileRow >= this.grid.numRows) {
+  var numRows = this.getGridData().length / this.grid2d.numCols;
+  if(tileCol < 0 || tileCol >= this.grid2d.numCols ||
+     tileRow < 0 || tileRow >= numRows) {
      return TILE_OUT_OF_BOUNDS;
   }
 
@@ -82,29 +88,29 @@ Bricks.prototype.tileValueAtPoint = function(x, y) {
 
 Bricks.prototype.tileValueAtColRow = function(col, row) {
   var brickIndex = this.brickTileToIndex(col, row);
-  return this.grid.valueAtIndex(brickIndex);
+  return this.grid2d.valueAtIndex(brickIndex);
 };
 
 // Editing bricks
 
 Bricks.prototype.toggleValueAtColRow = function(col, row, value) {
-  var index = this.grid.indexForColAndRow(col, row);
-  if (this.grid.valueAtIndex(index) === value) {
-    this.grid.changeValueAtIndex(index, TILE_EMPTY);
+  var index = this.grid2d.indexForColAndRow(col, row);
+  if (this.grid2d.valueAtIndex(index) === value) {
+    this.grid2d.changeValueAtIndex(index, TILE_EMPTY);
   }
   else {
-    this.grid.changeValueAtIndex(index, value);
+    this.grid2d.changeValueAtIndex(index, value);
   }
 }
 
 // Drawing bricks
 
 Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
-  var leftMostCol = Math.floor(x / this.grid.cellWidth);
-  var topMostRow = Math.floor(y / this.grid.cellHeight);
+  var leftMostCol = Math.floor(x / BRICK_WIDTH);
+  var topMostRow = Math.floor(y / BRICK_HEIGHT);
 
-  var colsThatFitInRect = Math.floor(width / this.grid.cellWidth);
-  var rowsThatFitInRect = Math.floor(height / this.grid.cellHeight);
+  var colsThatFitInRect = Math.floor(width / BRICK_WIDTH);
+  var rowsThatFitInRect = Math.floor(height / BRICK_HEIGHT);
 
   // Draw a one-cell buffer on each side
   var rightMostCol = leftMostCol + colsThatFitInRect + 2;
@@ -112,10 +118,10 @@ Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
 
   for (var row = topMostRow; row < bottomMostRow; row++) {
     for (var col = leftMostCol; col < rightMostCol; col++) {
-      var tileIndex = this.grid.indexForColAndRow(col, row);
-      var leftX = this.grid.xForIndex(tileIndex);
-      var topY = this.grid.yForIndex(tileIndex);
-      var tileValue = this.grid.valueAtIndex(tileIndex);
+      var tileIndex = this.grid2d.indexForColAndRow(col, row);
+      var leftX = col * BRICK_WIDTH;
+      var topY = row * BRICK_HEIGHT;
+      var tileValue = this.grid2d.valueAtIndex(tileIndex);
       this.tileset.drawTile(graphics, tileValue, leftX, topY);
     }
   }
