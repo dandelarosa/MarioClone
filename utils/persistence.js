@@ -1,11 +1,3 @@
-function setStoredValue(key, value) {
-  // Check for browser compatibility
-  if (typeof(Storage) === "undefined") {
-    return;
-  }
-  window.localStorage.setItem(key, value);
-}
-
 function Persistence() {
   return {
     getValue: getValue,

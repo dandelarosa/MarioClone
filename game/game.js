@@ -139,7 +139,7 @@ Game.prototype.updatePlayerMode = function() {
   var keyboard = globals.keyboard;
   if (keyboard.isKeyPressedThisFrame(KEY_1)) {
     this.isDebuggingCamera = !this.isDebuggingCamera;
-    setStoredValue('isDebuggingCamera', this.isDebuggingCamera);
+    persistence.setValue('isDebuggingCamera', this.isDebuggingCamera);
   }
 
   this.player.move(keyboard, this.bricks);

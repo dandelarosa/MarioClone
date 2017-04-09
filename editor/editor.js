@@ -198,11 +198,11 @@ Editor.prototype.updateEditorMode = function() {
   if (keyboard.isKeyPressedThisFrame(KEY_1)) {
     if (this.currentEditingMode == this.tileEditingMode) {
       this.currentEditingMode = this.obstacleEditingMode;
-      setStoredValue('editingMode', EDITING_MODE.OBSTACLES);
+      persistence.setValue('editingMode', EDITING_MODE.OBSTACLES);
     }
     else {
       this.currentEditingMode = this.tileEditingMode;
-      setStoredValue('editingMode', EDITING_MODE.TILES);
+      persistence.setValue('editingMode', EDITING_MODE.TILES);
     }
   }
 
