@@ -135,8 +135,7 @@ Editor.prototype.loadWorld = function(world) {
 };
 
 Editor.prototype.reset = function() {
-  var gridBuilder = new GridBuilder(this.numCols, this.gridData);
-  var grid = new Grid(gridBuilder);
+  var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
   this.bricks = new Bricks(grid, tileset);
   this.player = new Player(this.width/2, this.height/2);
@@ -146,8 +145,7 @@ Editor.prototype.reset = function() {
 };
 
 Editor.prototype.updateLevel = function() {
-  var gridBuilder = new GridBuilder(this.numCols, this.gridData);
-  var grid = new Grid(gridBuilder);
+  var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
   this.bricks = new Bricks(grid, tileset);
 };

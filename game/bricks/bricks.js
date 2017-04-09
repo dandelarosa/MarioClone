@@ -2,8 +2,7 @@ const BRICK_WIDTH = 16;
 const BRICK_HEIGHT = 16;
 
 function Bricks(grid, tileset) {
-  this.grid = grid;
-  this.grid2d = new Grid2D(grid.data, grid.numCols);
+  this.grid2d = grid;
   this.tileset = tileset;
 }
 
