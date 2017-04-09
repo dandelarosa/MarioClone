@@ -85,8 +85,10 @@
 </center>
 
 <script>
+var persistence;
 var game;
 window.onload = function() {
+  persistence = new Persistence();
   globals.setup();
   game = new Editor();
   createLevelWidthForm();
