@@ -150,7 +150,7 @@ Editor.prototype.loadWorld = function(world) {
 Editor.prototype.reset = function() {
   var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
-  this.bricks = new TileGrid(grid, tileset);
+  this.tiles = new TileGrid(grid, tileset);
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
@@ -160,7 +160,7 @@ Editor.prototype.reset = function() {
 Editor.prototype.updateLevel = function() {
   var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
-  this.bricks = new TileGrid(grid, tileset);
+  this.tiles = new TileGrid(grid, tileset);
 };
 
 Editor.prototype.switchToEditorMode = function() {
@@ -218,15 +218,15 @@ Editor.prototype.updateEditorMode = function() {
   }
 
   var camera = this.editorCamera;
-  this.editorCamera.update(keyboard, this.bricks);
+  this.editorCamera.update(keyboard, this.tiles);
 
   var mouse = globals.mouse;
   var mouseX = mouse.x;
   var mouseY = mouse.y;
   var mousePlusCameraX = mouse.x / 2 + camera.x;
   var mousePlusCameraY = mouse.y / 2 + camera.y;
-  var mouseCol = this.bricks.colForPixelX(mousePlusCameraX);
-  var mouseRow = this.bricks.rowForPixelY(mousePlusCameraY);
+  var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
+  var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
   if (mouse.isPressedThisFrame()) {
     this.currentEditingMode.handleClickAtColRow(mouseCol, mouseRow, this);
   }
@@ -238,7 +238,7 @@ Editor.prototype.updateEditorMode = function() {
 
   graphics.pushState();
   graphics.translate(-this.editorCamera.x, -this.editorCamera.y);
-  this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
+  this.tiles.drawInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
   this.obstacleGrid.draw(camera.x, camera.y, camera.width,
     camera.height, graphics);
@@ -257,7 +257,7 @@ Editor.prototype.updateEditorMode = function() {
   var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
   graphics.fillText(mouseColRowText, mouseX + 5, mouseY, 'yellow');
 
-  var value = this.bricks.tileValueAtColRow(mouseCol, mouseRow);
+  var value = this.tiles.tileValueAtColRow(mouseCol, mouseRow);
   if (typeof value === 'number') {
     var displayValue = twoDigitHexString(value);
     graphics.fillText(displayValue, mouseX + 15, mouseY + 15, 'yellow');
@@ -271,10 +271,10 @@ Editor.prototype.updatePlayerMode = function() {
     persistence.setValue('isDebuggingCamera', this.isDebuggingCamera);
   }
 
-  this.player.move(keyboard, this.bricks);
+  this.player.move(keyboard, this.tiles);
 
   var camera = this.playerCamera;
-  camera.follow(this.player, this.bricks);
+  camera.follow(this.player, this.tiles);
 
   var graphics = globals.graphics;
   graphics.pushState();
@@ -283,7 +283,7 @@ Editor.prototype.updatePlayerMode = function() {
 
   graphics.pushState();
   graphics.translate(-this.playerCamera.x, -this.playerCamera.y);
-  this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
+  this.tiles.drawInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
   this.player.draw(graphics);
   if (this.isDebuggingCamera) {

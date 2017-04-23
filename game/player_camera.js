@@ -8,7 +8,7 @@ function PlayerCamera(x, y, width, height) {
   this.rightSnapThreshold = 153;
 }
 
-PlayerCamera.prototype.follow = function(player, bricks) {
+PlayerCamera.prototype.follow = function(player, tiles) {
   // Values relative to the camera
   var leftSnapThreshold = this.leftSnapThreshold ;
   var rightSnapThreshold = this.rightSnapThreshold;
@@ -25,14 +25,14 @@ PlayerCamera.prototype.follow = function(player, bricks) {
 
   // this next code blocks the game from showing out of bounds
   // (this isn't required, if you don't mind seeing beyond edges)
-  if (this.x < bricks.minX()) {
-    this.x = bricks.minX();
+  if (this.x < tiles.minX()) {
+    this.x = tiles.minX();
   }
-  if (this.y < bricks.minY()) {
-    this.y = bricks.minY();
+  if (this.y < tiles.minY()) {
+    this.y = tiles.minY();
   }
-  var maxPanRight = bricks.maxX() - this.width;
-  var maxPanTop = bricks.maxY() - this.height;
+  var maxPanRight = tiles.maxX() - this.width;
+  var maxPanTop = tiles.maxY() - this.height;
   if (this.x > maxPanRight) {
     this.x = maxPanRight;
   }

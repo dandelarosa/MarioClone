@@ -6,8 +6,8 @@ function TileEditingMode() {
   };
 
   function handleClickAtColRow(col, row, game) {
-    game.bricks.toggleValueAtColRow(col, row, this.selectedTileValue);
-    game.gridData = game.bricks.getGridData();
+    game.tiles.toggleValueAtColRow(col, row, this.selectedTileValue);
+    game.gridData = game.tiles.getGridData();
     displayLevelData();
   }
 }

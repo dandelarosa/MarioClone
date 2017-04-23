@@ -7,7 +7,7 @@ function EditorCamera(x, y, width, height) {
   this.height = height;
 }
 
-EditorCamera.prototype.update = function(keyboard, bricks) {
+EditorCamera.prototype.update = function(keyboard, tiles) {
   var nextX = this.x;
   var nextY = this.y;
 
@@ -24,17 +24,17 @@ EditorCamera.prototype.update = function(keyboard, bricks) {
     nextY += CAMERA_SPEED;
   }
 
-  if (nextX < bricks.minX()) {
-    nextX = bricks.minX();
+  if (nextX < tiles.minX()) {
+    nextX = tiles.minX();
   }
-  if (nextY < bricks.minY()) {
-    nextY = bricks.minY();
+  if (nextY < tiles.minY()) {
+    nextY = tiles.minY();
   }
-  if (nextX + this.width > bricks.maxX()) {
-    nextX = bricks.maxX() - this.width;
+  if (nextX + this.width > tiles.maxX()) {
+    nextX = tiles.maxX() - this.width;
   }
-  if (nextY + this.height > bricks.maxY()) {
-    nextY = bricks.maxY() - this.height;
+  if (nextY + this.height > tiles.maxY()) {
+    nextY = tiles.maxY() - this.height;
   }
 
   this.x = nextX;

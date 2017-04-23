@@ -10,7 +10,7 @@ TileGrid.prototype = (function() {
   return {
     brickTileToIndex: brickTileToIndex,
     colForPixelX: colForPixelX,
-    drawBricksInRect: drawBricksInRect,
+    drawInRect: drawInRect,
     getGridData: getGridData,
     getTileHeight: getTileHeight,
     getTileWidth: getTileWidth,
@@ -131,7 +131,7 @@ TileGrid.prototype = (function() {
 
   // Drawing bricks
 
-  function drawBricksInRect(x, y, width, height, graphics) {
+  function drawInRect(x, y, width, height, graphics) {
     var leftMostCol = Math.floor(x / TILE_WIDTH);
     var topMostRow = Math.floor(y / TILE_HEIGHT);
 
