@@ -150,7 +150,7 @@ Editor.prototype.loadWorld = function(world) {
 Editor.prototype.reset = function() {
   var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
-  this.bricks = new Bricks(grid, tileset);
+  this.bricks = new TileGrid(grid, tileset);
   this.player = new Player(this.width/2, this.height/2);
   this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
   this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
@@ -160,7 +160,7 @@ Editor.prototype.reset = function() {
 Editor.prototype.updateLevel = function() {
   var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
-  this.bricks = new Bricks(grid, tileset);
+  this.bricks = new TileGrid(grid, tileset);
 };
 
 Editor.prototype.switchToEditorMode = function() {
