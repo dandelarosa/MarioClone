@@ -113,6 +113,19 @@ function Editor() {
   else {
     this.currentEditingMode = this.tileEditingMode;
   }
+
+  this.drawCameraDebugger = drawCameraDebugger;
+  this.isDebuggingCamera = false;
+
+  // Drawing
+
+  function drawCameraDebugger(graphics) {
+    var camera = this.playerCamera;
+    var leftThreshold = camera.x + camera.leftSnapThreshold;
+    graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
+    var rightThreshold = camera.x + camera.rightSnapThreshold;
+    graphics.drawLine(rightThreshold, 0, rightThreshold, this.height, 'black');
+  }
 };
 
 Editor.prototype.loadWorld = function(world) {
@@ -253,6 +266,11 @@ Editor.prototype.updateEditorMode = function() {
 
 Editor.prototype.updatePlayerMode = function() {
   var keyboard = globals.keyboard;
+  if (keyboard.isKeyPressedThisFrame(KEY_1)) {
+    this.isDebuggingCamera = !this.isDebuggingCamera;
+    persistence.setValue('isDebuggingCamera', this.isDebuggingCamera);
+  }
+
   this.player.move(keyboard, this.bricks);
 
   var camera = this.playerCamera;
@@ -268,6 +286,9 @@ Editor.prototype.updatePlayerMode = function() {
   this.bricks.drawBricksInRect(camera.x, camera.y, camera.width,
     camera.height, graphics);
   this.player.draw(graphics);
+  if (this.isDebuggingCamera) {
+    this.drawCameraDebugger(graphics);
+  }
   graphics.popState();
   graphics.popState();
 
