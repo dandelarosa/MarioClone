@@ -69,6 +69,16 @@ function createTilePicker() {
   });
 
   document.getElementById('tilePicker').innerHTML = elements.join('');
+
+  var storedValue = persistence.getValue('lastTileSelected', 'int', TILE_V2_EMPTY);
+  var indexOfStoredValue = 0;
+  for (var i = 0; i < tiles.length; i++) {
+    if (tiles[i].value === storedValue) {
+      indexOfStoredValue = i;
+      break;
+    }
+  }
+  document.getElementById('tileSelect').selectedIndex = indexOfStoredValue;
 }
 
 function selectTile() {
@@ -77,4 +87,5 @@ function selectTile() {
   var selectedOption = select.options[selectedIndex];
   var selectedValue = parseInt(selectedOption.value);
   game.tileEditingMode.selectedTileValue = selectedValue;
+  persistence.setValue('lastTileSelected', selectedValue);
 }
