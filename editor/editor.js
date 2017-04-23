@@ -245,7 +245,10 @@ Editor.prototype.updateEditorMode = function() {
   graphics.fillText(mouseColRowText, mouseX + 5, mouseY, 'yellow');
 
   var value = this.bricks.tileValueAtColRow(mouseCol, mouseRow);
-  graphics.fillText(twoDigitHexString(value), mouseX + 15, mouseY + 15, 'yellow');
+  if (typeof value === 'number') {
+    var displayValue = twoDigitHexString(value);
+    graphics.fillText(displayValue, mouseX + 15, mouseY + 15, 'yellow');
+  }
 };
 
 Editor.prototype.updatePlayerMode = function() {
