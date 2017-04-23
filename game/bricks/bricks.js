@@ -43,6 +43,14 @@ Bricks.prototype.rowForPixelY = function(pixelY) {
   return result;
 };
 
+Bricks.prototype.getTileWidth = function() {
+  return BRICK_WIDTH;
+}
+
+Bricks.prototype.getTileHeight = function() {
+  return BRICK_HEIGHT;
+}
+
 // Looking at brick values
 
 Bricks.prototype.isSolidAtPoint = function(x, y) {
