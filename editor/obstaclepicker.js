@@ -17,6 +17,24 @@ function createObstaclePicker() {
     selectElement.appendChild(optionElement);
   });
   selectElement.onchange = function() {
-    game.obstacleEditingMode.selectedValue = selectElement.selectedIndex;
+    obstaclePickerOnchange(selectElement);
   };
+
+  var storedValue = persistence.getValue('lastObstacleSelected', 'int', OBSTACLE_EMPTY);
+  var indexOfStoredValue = 0;
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].value === storedValue) {
+      indexOfStoredValue = i;
+      break;
+    }
+  }
+  selectElement.selectedIndex = indexOfStoredValue;
+}
+
+function obstaclePickerOnchange(selectElement) {
+  var selectedIndex = selectElement.selectedIndex;
+  var selectedOption = selectElement.options[selectedIndex];
+  var selectedValue = parseInt(selectedOption.value);
+  game.obstacleEditingMode.selectedValue = selectedValue;
+  persistence.setValue('lastObstacleSelected', selectedValue);
 }
