@@ -105,6 +105,9 @@ function Editor() {
   this.levelMockupAlpha = 0.0;
   this.tileEditingMode = new TileEditingMode();
   this.obstacleEditingMode = new ObstacleEditingMode();
+  this.playerMode = new PlayerMode();
+  this.editorMode = new EditorMode();
+  this.currentMode = this.editorMode;
 
   var savedEditingMode = persistence.getValue('editingMode', 'int', EDITING_MODE.TILES);
   if (savedEditingMode === EDITING_MODE.OBSTACLES) {
@@ -189,6 +192,8 @@ Editor.prototype.update = function() {
   else {
     this.updatePlayerMode();
   }
+  this.currentMode.update();
+  this.currentMode.draw();
 
   keyboard.resetKeyStateChanges();
   mouse.resetStateChange();
