@@ -106,33 +106,41 @@ function Editor() {
   this.currentMode = this.editorMode;
 };
 
-Editor.prototype.loadWorld = function(world) {
-  this.playerMode.loadWorld(world);
-  this.editorMode.loadWorld(world);
-};
+Editor.prototype = (function() {
+  return {
+    loadWorld: loadWorld,
+    update: update,
+    updateLevel: updateLevel,
+  };
 
-Editor.prototype.updateLevel = function() {
-  var grid = new Grid2D(this.gridData, this.numCols);
-  var tileset = new Tileset(this.tilesetName);
-  this.playerMode.tiles = new TileGrid(grid, tileset);
-  this.editorMode.tiles = new TileGrid(grid, tileset);
-};
-
-Editor.prototype.update = function() {
-  var keyboard = globals.keyboard;
-  var mouse = globals.mouse;
-  if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
-    if (this.currentMode == this.playerMode) {
-      this.currentMode = this.editorMode;
-    }
-    else {
-      this.currentMode = this.playerMode;
-    }
+  function loadWorld(world) {
+    this.playerMode.loadWorld(world);
+    this.editorMode.loadWorld(world);
   }
 
-  this.currentMode.update();
-  this.currentMode.draw();
+  function updateLevel() {
+    var grid = new Grid2D(this.gridData, this.numCols);
+    var tileset = new Tileset(this.tilesetName);
+    this.playerMode.tiles = new TileGrid(grid, tileset);
+    this.editorMode.tiles = new TileGrid(grid, tileset);
+  }
 
-  keyboard.resetKeyStateChanges();
-  mouse.resetStateChange();
-};
+  function update() {
+    var keyboard = globals.keyboard;
+    var mouse = globals.mouse;
+    if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
+      if (this.currentMode == this.playerMode) {
+        this.currentMode = this.editorMode;
+      }
+      else {
+        this.currentMode = this.playerMode;
+      }
+    }
+
+    this.currentMode.update();
+    this.currentMode.draw();
+
+    keyboard.resetKeyStateChanges();
+    mouse.resetStateChange();
+  }
+})();
