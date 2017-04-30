@@ -148,6 +148,7 @@ Editor.prototype.loadWorld = function(world) {
     this.obstacles = newObstacles;
   }
   this.reset();
+  this.editorMode.loadWorld(world);
 };
 
 Editor.prototype.reset = function() {
@@ -187,7 +188,6 @@ Editor.prototype.update = function() {
   }
 
   if (this.isEditing) {
-    this.updateEditorMode();
   }
   else {
     this.updatePlayerMode();

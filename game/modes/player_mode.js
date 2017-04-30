@@ -1,7 +1,7 @@
 function PlayerMode() {
 }
 
-EditorMode.prototype = (function() {
+PlayerMode.prototype = (function() {
   return {
     draw: draw,
     update: update,
