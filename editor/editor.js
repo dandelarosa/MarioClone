@@ -116,19 +116,6 @@ function Editor() {
   else {
     this.currentEditingMode = this.tileEditingMode;
   }
-
-  this.drawCameraDebugger = drawCameraDebugger;
-  this.isDebuggingCamera = false;
-
-  // Drawing
-
-  function drawCameraDebugger(graphics) {
-    var camera = this.playerCamera;
-    var leftThreshold = camera.x + camera.leftSnapThreshold;
-    graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
-    var rightThreshold = camera.x + camera.rightSnapThreshold;
-    graphics.drawLine(rightThreshold, 0, rightThreshold, this.height, 'black');
-  }
 };
 
 Editor.prototype.loadWorld = function(world) {
@@ -148,6 +135,7 @@ Editor.prototype.loadWorld = function(world) {
     this.obstacles = newObstacles;
   }
   this.reset();
+  this.playerMode.loadWorld(world);
   this.editorMode.loadWorld(world);
 };
 
@@ -169,10 +157,12 @@ Editor.prototype.updateLevel = function() {
 
 Editor.prototype.switchToEditorMode = function() {
   this.isEditing = true;
+  this.currentMode = this.editorMode;
 };
 
 Editor.prototype.switchToPlayerMode = function() {
   this.isEditing = false;
+  this.currentMode = this.playerMode;
 };
 
 Editor.prototype.update = function() {
@@ -187,45 +177,9 @@ Editor.prototype.update = function() {
     }
   }
 
-  if (this.isEditing) {
-  }
-  else {
-    this.updatePlayerMode();
-  }
   this.currentMode.update();
   this.currentMode.draw();
 
   keyboard.resetKeyStateChanges();
   mouse.resetStateChange();
-};
-
-Editor.prototype.updatePlayerMode = function() {
-  var keyboard = globals.keyboard;
-  if (keyboard.isKeyPressedThisFrame(KEY_1)) {
-    this.isDebuggingCamera = !this.isDebuggingCamera;
-    persistence.setValue('isDebuggingCamera', this.isDebuggingCamera);
-  }
-
-  this.player.move(keyboard, this.tiles);
-
-  var camera = this.playerCamera;
-  camera.follow(this.player, this.tiles);
-
-  var graphics = globals.graphics;
-  graphics.pushState();
-  graphics.scale(this.scaleX, this.scaleY);
-  graphics.fillCanvas('black');
-
-  graphics.pushState();
-  graphics.translate(-this.playerCamera.x, -this.playerCamera.y);
-  this.tiles.drawInRect(camera.x, camera.y, camera.width,
-    camera.height, graphics);
-  this.player.draw(graphics);
-  if (this.isDebuggingCamera) {
-    this.drawCameraDebugger(graphics);
-  }
-  graphics.popState();
-  graphics.popState();
-
-  graphics.fillText('Player Mode', 5, 15, 'yellow');
 };
