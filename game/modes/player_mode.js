@@ -5,7 +5,7 @@ function PlayerMode() {
   this.width = 256;
   this.height = 240;
 
-  this.isDebuggingCamera = false;
+  this.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
 }
 
 PlayerMode.prototype = (function() {
