@@ -18,7 +18,7 @@ function Game() {
 Game.prototype = (function() {
   return {
     loadWorld: loadWorld,
-    update: update,
+    runLoop: runLoop,
     updateLevel: updateLevel,
   };
 
@@ -34,7 +34,7 @@ Game.prototype = (function() {
     this.editorMode.tiles = new TileGrid(grid, tileset);
   }
 
-  function update() {
+  function runLoop() {
     var keyboard = globals.keyboard;
     var mouse = globals.mouse;
     if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
