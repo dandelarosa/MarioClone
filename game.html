@@ -9,11 +9,14 @@
   <script src="editor/levelimages.js"></script>
   <script src="editor/leveldataform.js"></script>
   <script src="editor/levelwidthform.js"></script>
+  <script src="editor/modes/modes.js"></script>
+  <script src="editor/modes/obstacleeditingmode.js"></script>
+  <script src="editor/modes/tileeditingmode.js"></script>
+  <script src="editor/obstacledataform.js"></script>
+  <script src="editor/obstaclepicker.js"></script>
   <script src="editor/tilepicker.js"></script>
   <script src="editor/worldpicker.js"></script>
   <script src="game/bricks/bricks.js"></script>
-  <script src="game/bricks/grid_builder.js"></script>
-  <script src="game/bricks/grid.js"></script>
   <script src="game/bricks/tiledrawing.js"></script>
   <script src="game/bricks/tiles.js"></script>
   <script src="game/bricks/tiles_v2.js"></script>
@@ -23,12 +26,18 @@
   <script src="game/editor_camera.js"></script>
   <script src="game/game.js"></script>
   <script src="game/globals.js"></script>
+  <script src="game/modes/editor_mode.js"></script>
+  <script src="game/modes/player_mode.js"></script>
+  <script src="game/obstacles/obstaclegrid.js"></script>
+  <script src="game/obstacles/obstacles.js"></script>
   <script src="game/player_camera.js"></script>
   <script src="game/player.js"></script>
+  <script src="game/tiles/tilegrid.js"></script>
   <script src="graphics/graphics.js"></script>
   <script src="input/keyboard.js"></script>
   <script src="input/keys.js"></script>
   <script src="input/mouse.js"></script>
+  <script src="utils/grid2d.js"></script>
   <script src="utils/hex.js"></script>
   <script src="utils/persistence.js"></script>
   <script src="worlds/cameratest.js"></script>
@@ -78,15 +87,19 @@
 </center>
 
 <script>
+var persistence;
 var game;
 window.onload = function() {
+  persistence = new Persistence();
   globals.setup();
   game = new Game();
   createLevelWidthForm();
   createLevelDataForm();
+  createObstacleDataForm();
   createWorldPicker();
   createTilePicker();
   selectTile();
+  createObstaclePicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadWorld(lastSelectedWorld);
@@ -95,6 +108,7 @@ window.onload = function() {
     game.loadWorld(worlds['1-1']);
   }
   displayLevelData();
+  displayObstacleData();
   setInterval(gameUpdate, 1000 / game.fps);
 };
 function gameUpdate() {
@@ -107,10 +121,12 @@ function gameUpdate() {
     <td>
       <form id="levelWidth"></form>
       <form id="levelData" action="javascript:updateLevelData();"></form>
+      <div id="obstacleData"></div>
       <div id="worldPicker"></div>
     </td>
     <td>
       <div id="tilePicker"></div>
+      <div id="obstaclePicker"></div>
     </td>
   </tr>
 </table>
