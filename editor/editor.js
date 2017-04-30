@@ -1,6 +1,6 @@
 function displayLevelData() {
   var input = document.getElementById('levelData.data');
-  var value = twoDigitHexArray(game.gridData);
+  var value = twoDigitHexArray(game.editorMode.gridData);
   input.value = value;
 
   displayNumCols();
@@ -20,17 +20,17 @@ function updateLevelData() {
 
 function displayNumCols() {
   var numColsElement = document.getElementById('levelWidth.numCols');
-  numColsElement.value = game.numCols.toString();
+  numColsElement.value = game.editorMode.numCols.toString();
 }
 
 function addColumns(colsToAdd) {
-  var convertedGrid = create2dArray(game.gridData, game.numCols);
+  var convertedGrid = create2dArray(game.editorMode.gridData, game.editorMode.numCols);
   addColumnsToGrid(convertedGrid, colsToAdd, 0);
   var convertedBackGrid = create1dArray(convertedGrid);
-  var newNumCols = game.numCols + colsToAdd;
+  var newNumCols = game.editorMode.numCols + colsToAdd;
 
-  game.gridData = convertedBackGrid;
-  game.numCols = newNumCols;
+  game.editorMode.gridData = convertedBackGrid;
+  game.editorMode.numCols = newNumCols;
   game.updateLevel();
 
   // Don't forget to display the changes!
@@ -38,13 +38,13 @@ function addColumns(colsToAdd) {
 }
 
 function deleteLastColumn() {
-  var convertedGrid = create2dArray(game.gridData, game.numCols);
+  var convertedGrid = create2dArray(game.editorMode.gridData, game.editorMode.numCols);
   removeLastColumnFromGrid(convertedGrid);
   var convertedBackGrid = create1dArray(convertedGrid);
-  var newNumCols = game.numCols - 1;
+  var newNumCols = game.editorMode.numCols - 1;
 
-  game.gridData = convertedBackGrid;
-  game.numCols = newNumCols;
+  game.editorMode.gridData = convertedBackGrid;
+  game.editorMode.numCols = newNumCols;
   game.updateLevel();
 
   // Don't forget to display the changes!
@@ -101,79 +101,32 @@ function Editor() {
   this.height = 240;
   this.scaleX = 2;
   this.scaleY = 2;
-  this.isEditing = true;
-  this.levelMockupAlpha = 0.0;
-  this.tileEditingMode = new TileEditingMode();
-  this.obstacleEditingMode = new ObstacleEditingMode();
   this.playerMode = new PlayerMode();
   this.editorMode = new EditorMode();
   this.currentMode = this.editorMode;
-
-  var savedEditingMode = persistence.getValue('editingMode', 'int', EDITING_MODE.TILES);
-  if (savedEditingMode === EDITING_MODE.OBSTACLES) {
-    this.currentEditingMode = this.obstacleEditingMode;
-  }
-  else {
-    this.currentEditingMode = this.tileEditingMode;
-  }
 };
 
 Editor.prototype.loadWorld = function(world) {
-  this.gridData = world.gridData;
-  this.numCols = world.numCols;
-  this.tilesetName = world.tilesetName;
-  this.levelImage = getLevelImage(world.key);
-  this.levelImageKey = world.key;
-  this.levelImageOffset = world.levelImageOffset;
-  this.obstacles = world.obstacles;
-  // Not sure of the best place to put this
-  if (!this.obstacles || this.obstacles.length === 0) {
-    var newObstacles = [];
-    for (var i = 0; i < this.gridData.length; i++) {
-      newObstacles.push(OBSTACLE_EMPTY);
-    }
-    this.obstacles = newObstacles;
-  }
-  this.reset();
   this.playerMode.loadWorld(world);
   this.editorMode.loadWorld(world);
-};
-
-Editor.prototype.reset = function() {
-  var grid = new Grid2D(this.gridData, this.numCols);
-  var tileset = new Tileset(this.tilesetName);
-  this.tiles = new TileGrid(grid, tileset);
-  this.player = new Player(this.width/2, this.height/2);
-  this.playerCamera = new PlayerCamera(0, 0, this.width, this.height);
-  this.editorCamera = new EditorCamera(0, 0, this.width, this.height);
-  this.obstacleGrid = new ObstacleGrid(this.obstacles, this.numCols);
 };
 
 Editor.prototype.updateLevel = function() {
   var grid = new Grid2D(this.gridData, this.numCols);
   var tileset = new Tileset(this.tilesetName);
-  this.tiles = new TileGrid(grid, tileset);
-};
-
-Editor.prototype.switchToEditorMode = function() {
-  this.isEditing = true;
-  this.currentMode = this.editorMode;
-};
-
-Editor.prototype.switchToPlayerMode = function() {
-  this.isEditing = false;
-  this.currentMode = this.playerMode;
+  this.playerMode.tiles = new TileGrid(grid, tileset);
+  this.editorMode.tiles = new TileGrid(grid, tileset);
 };
 
 Editor.prototype.update = function() {
   var keyboard = globals.keyboard;
   var mouse = globals.mouse;
   if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
-    if (this.isEditing) {
-      this.switchToPlayerMode();
+    if (this.currentMode == this.playerMode) {
+      this.currentMode = this.editorMode;
     }
     else {
-      this.switchToEditorMode();
+      this.currentMode = this.playerMode;
     }
   }
 

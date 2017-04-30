@@ -86,6 +86,6 @@ function selectTile() {
   var selectedIndex = select.selectedIndex;
   var selectedOption = select.options[selectedIndex];
   var selectedValue = parseInt(selectedOption.value);
-  game.tileEditingMode.selectedTileValue = selectedValue;
+  game.editorMode.tileEditingMode.selectedTileValue = selectedValue;
   persistence.setValue('lastTileSelected', selectedValue);
 }

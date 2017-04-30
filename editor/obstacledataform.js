@@ -8,6 +8,6 @@ function createObstacleDataForm() {
 
 function displayObstacleData() {
   var input = document.getElementById('obstacleData.data');
-  var value = twoDigitHexArray(game.obstacleGrid.getData());
+  var value = twoDigitHexArray(game.editorMode.obstacleGrid.getData());
   input.value = value;
 }
