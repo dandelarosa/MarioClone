@@ -22,7 +22,7 @@ EditorMode.prototype = (function() {
     draw: draw,
     loadWorld: loadWorld,
     update: update,
-  }
+  };
 
   function loadWorld(world) {
     this.gridData = world.gridData;
