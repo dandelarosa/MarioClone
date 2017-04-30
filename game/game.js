@@ -6,7 +6,13 @@ function Game() {
   this.scaleY = 2;
   this.playerMode = new PlayerMode();
   this.editorMode = new EditorMode();
-  this.currentMode = this.editorMode;
+
+  if (persistence.getValue('isEditing', 'bool', false)) {
+    this.currentMode = this.editorMode;
+  }
+  else {
+    this.currentMode = this.playerMode;
+  }
 };
 
 Game.prototype = (function() {
@@ -34,9 +40,11 @@ Game.prototype = (function() {
     if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
       if (this.currentMode == this.playerMode) {
         this.currentMode = this.editorMode;
+        persistence.setValue('isEditing', true);
       }
       else {
         this.currentMode = this.playerMode;
+        persistence.setValue('isEditing', true);
       }
     }
 
