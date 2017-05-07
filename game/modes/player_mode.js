@@ -6,6 +6,8 @@ function PlayerMode() {
   this.height = 240;
 
   this.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
+
+  this.obstacles = [];
 }
 
 PlayerMode.prototype = (function() {
@@ -17,16 +19,12 @@ PlayerMode.prototype = (function() {
   };
 
   function loadWorld(world) {
-    this.gridData = world.gridData;
-    this.numCols = world.numCols;
-    this.tilesetName = world.tilesetName;
-    this.obstacles = world.obstacles;
-    var grid = new Grid2D(this.gridData, this.numCols);
-    var tileset = new Tileset(this.tilesetName);
+    var grid = new Grid2D(world.gridData, world.numCols);
+    var tileset = new Tileset(world.tilesetName);
     this.tiles = new TileGrid(grid, tileset);
     this.player = new Player(this.width/2, this.height/2);
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
-    this.obstacleGrid = new ObstacleGrid(this.obstacles, this.numCols);
+    this.obstacleGrid = new ObstacleGrid(world.obstacles, world.numCols);
   }
 
   function update() {
@@ -43,8 +41,7 @@ PlayerMode.prototype = (function() {
 
     var newObstacles = this.obstacleGrid.grabObstaclesInRect(camera.x, camera.y, camera.width, camera.height);
     if (newObstacles.length > 0) {
-      // FIXME: DEBUG ONLY!!!
-      console.log(newObstacles);
+      this.obstacles = this.obstacles.concat(newObstacles);
     }
   }
 
@@ -59,6 +56,9 @@ PlayerMode.prototype = (function() {
     graphics.translate(-camera.x, -this.camera.y);
     this.tiles.drawInRect(camera.x, camera.y, camera.width,
       camera.height, graphics);
+    this.obstacles.forEach(function(obstacle) {
+      obstacle.draw(graphics);
+    });
     this.player.draw(graphics);
     if (this.isDebuggingCamera) {
       this.drawCameraDebugger(graphics);

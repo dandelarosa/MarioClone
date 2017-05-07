@@ -3,6 +3,7 @@ const OBSTACLE_HEIGHT = 16;
 
 function ObstacleGrid(data, numCols) {
   this.grid = new Grid2D(data, numCols);
+  this.enemySpawner = new EnemySpawner();
 }
 
 ObstacleGrid.prototype = (function() {
@@ -40,9 +41,8 @@ ObstacleGrid.prototype = (function() {
           var spawnX = col * OBSTACLE_WIDTH;
           var spawnY = row * OBSTACLE_HEIGHT;
           var spawnPoint = new Point2D(spawnX, spawnY);
-          // TODO: define enemy object
-          var obstacle = {};
-          obstaclesInRect.push(obstacle);
+          var spawnedObstacles = this.enemySpawner.spawnWithValueAtPoint(obstacleValue, spawnPoint);
+          obstaclesInRect = obstaclesInRect.concat(spawnedObstacles);
           this.grid.setValueAtColAndRow(OBSTACLE_EMPTY, col, row);
         }
       }
