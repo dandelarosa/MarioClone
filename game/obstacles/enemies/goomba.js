@@ -1,11 +1,18 @@
 function Goomba(spawnPoint) {
   this.rect = new Rect2D(spawnPoint.x, spawnPoint.y, 16, 16);
+  this.speedX = -1;
 }
 
 Goomba.prototype = (function() {
   return {
     draw: draw,
+    update: update,
   };
+
+  function update(tiles) {
+    var rect = this.rect;
+    rect.x = rect.x + this.speedX;
+  }
 
   function draw(graphics) {
     graphics.fillRect(this.rect.x, this.rect.y, this.rect.width,

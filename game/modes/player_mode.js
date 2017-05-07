@@ -43,6 +43,11 @@ PlayerMode.prototype = (function() {
     if (newObstacles.length > 0) {
       this.obstacles = this.obstacles.concat(newObstacles);
     }
+
+    var tiles = this.tiles;
+    this.obstacles.forEach(function(obstacle) {
+      obstacle.update(tiles);
+    });
   }
 
   function draw() {
