@@ -37,6 +37,9 @@ ObstacleGrid.prototype = (function() {
       for (var col = leftMostCol; col < rightMostCol; col++) {
         var obstacleValue = this.grid.valueAtColAndRow(col, row);
         if (typeof obstacleValue === 'number' && obstacleValue > OBSTACLE_EMPTY) {
+          var spawnX = col * OBSTACLE_WIDTH;
+          var spawnY = row * OBSTACLE_HEIGHT;
+          var spawnPoint = new Point2D(spawnX, spawnY);
           // TODO: define enemy object
           var obstacle = {};
           obstaclesInRect.push(obstacle);
