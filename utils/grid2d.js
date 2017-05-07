@@ -6,11 +6,14 @@ function Grid2D(data, numCols) {
 Grid2D.prototype = (function() {
   return {
     getData: getData,
-    indexForColAndRow: indexForColAndRow,
+    getIndexForColAndRow: getIndexForColAndRow,
+    getValueAtColAndRow: getValueAtColAndRow,
+    getValueAtIndex: getValueAtIndex,
+    indexForColAndRow: indexForColAndRow, // Deprecated
     setValueAtColAndRow: setValueAtColAndRow,
     setValueAtIndex: setValueAtIndex,
-    valueAtColAndRow: valueAtColAndRow,
-    valueAtIndex: valueAtIndex,
+    valueAtColAndRow: valueAtColAndRow, // Deprecated
+    valueAtIndex: valueAtIndex, // Deprecated
   }
 
   // Querying Data
@@ -20,17 +23,29 @@ Grid2D.prototype = (function() {
     return defensiveCopy;
   }
 
-  function indexForColAndRow(col, row) {
+  function getIndexForColAndRow(col, row) {
     return col + row * this.numCols;
   }
 
-  function valueAtIndex(index) {
+  function indexForColAndRow(col, row) {
+    return this.getIndexForColAndRow(col, row);
+  }
+
+  function getValueAtIndex(index) {
     return this.data[index];
   }
 
+  function valueAtIndex(index) {
+    return this.getValueAtIndex(index);
+  }
+
+  function getValueAtColAndRow(col, row) {
+    var index = this.getIndexForColAndRow(col, row);
+    return this.getValueAtIndex(index);
+  }
+
   function valueAtColAndRow(col, row) {
-    var index = this.indexForColAndRow(col, row);
-    return this.valueAtIndex(index);
+    return this.getValueAtColAndRow(col, row);
   }
 
   // Modifying Data
