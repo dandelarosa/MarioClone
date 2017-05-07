@@ -9,6 +9,7 @@ ObstacleGrid.prototype = (function() {
   return {
     draw: draw,
     getData: getData,
+    grabObstaclesInRect: grabObstaclesInRect,
     setValueAtColAndRow: setValueAtColAndRow,
   };
 
@@ -22,6 +23,28 @@ ObstacleGrid.prototype = (function() {
 
   function setValueAtColAndRow(value, col, row) {
     this.grid.setValueAtColAndRow(value, col, row);
+  }
+
+  function grabObstaclesInRect(x, y, width, height) {
+    var leftMostCol = parseInt(Math.floor(x / OBSTACLE_WIDTH));
+    var topMostRow = parseInt(Math.floor(y / OBSTACLE_HEIGHT));
+
+    var rightMostCol = parseInt(Math.ceil((x + width) / OBSTACLE_WIDTH)) - 1;
+    var bottomMostRow = parseInt(Math.ceil((y + height) / OBSTACLE_HEIGHT)) - 1;
+
+    var obstaclesInRect = [];
+    for (var row = topMostRow; row < bottomMostRow; row++) {
+      for (var col = leftMostCol; col < rightMostCol; col++) {
+        var obstacleValue = this.grid.valueAtColAndRow(col, row);
+        if (typeof obstacleValue === 'number' && obstacleValue > OBSTACLE_EMPTY) {
+          // TODO: define enemy object
+          var obstacle = {};
+          obstaclesInRect.push(obstacle);
+          this.grid.setValueAtColAndRow(OBSTACLE_EMPTY, col, row);
+        }
+      }
+    }
+    return obstaclesInRect;
   }
 
   // Drawing

@@ -40,6 +40,12 @@ PlayerMode.prototype = (function() {
 
     var camera = this.camera;
     camera.follow(this.player, this.tiles);
+
+    var newObstacles = this.obstacleGrid.grabObstaclesInRect(camera.x, camera.y, camera.width, camera.height);
+    if (newObstacles.length > 0) {
+      // FIXME: DEBUG ONLY!!!
+      console.log(newObstacles);
+    }
   }
 
   function draw() {
