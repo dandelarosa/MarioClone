@@ -44,7 +44,7 @@ Game.prototype = (function() {
       }
       else {
         this.currentMode = this.playerMode;
-        persistence.setValue('isEditing', true);
+        persistence.setValue('isEditing', false);
       }
     }
 
