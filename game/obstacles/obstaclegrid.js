@@ -1,8 +1,14 @@
+const OBSTACLE_WIDTH = 16;
+const OBSTACLE_HEIGHT = 16;
+
 function ObstacleGrid(data, numCols) {
+  this.grid = new Grid2D(data, numCols);
+}
+
+ObstacleGrid.prototype = (function() {
   return {
     draw: draw,
     getData: getData,
-    grid: new Grid2D(data, numCols),
     setValueAtColAndRow: setValueAtColAndRow,
   };
 
@@ -21,8 +27,8 @@ function ObstacleGrid(data, numCols) {
   // Drawing
 
   function draw(x, y, width, height, graphics) {
-    const obstacleWidth = 16;
-    const obstacleHeight = 16;
+    const obstacleWidth = OBSTACLE_WIDTH;
+    const obstacleHeight = OBSTACLE_HEIGHT;
 
     var leftMostCol = Math.floor(x / obstacleWidth);
     var topMostRow = Math.floor(y / obstacleHeight);
@@ -47,4 +53,4 @@ function ObstacleGrid(data, numCols) {
       }
     }
   }
-}
+})();
