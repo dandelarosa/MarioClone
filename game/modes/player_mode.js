@@ -21,15 +21,6 @@ PlayerMode.prototype = (function() {
     this.numCols = world.numCols;
     this.tilesetName = world.tilesetName;
     this.obstacles = world.obstacles;
-    // Not sure of the best place to put this
-    if (!this.obstacles || this.obstacles.length === 0) {
-      var newObstacles = [];
-      for (var i = 0; i < this.gridData.length; i++) {
-        newObstacles.push(OBSTACLE_EMPTY);
-      }
-      this.obstacles = newObstacles;
-    }
-
     var grid = new Grid2D(this.gridData, this.numCols);
     var tileset = new Tileset(this.tilesetName);
     this.tiles = new TileGrid(grid, tileset);
