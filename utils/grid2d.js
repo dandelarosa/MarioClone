@@ -1,9 +1,12 @@
 function Grid2D(data, numCols) {
+  this.data = data;
+  this.numCols = numCols;
+}
+
+Grid2D.prototype = (function() {
   return {
-    data: data,
     getData: getData,
     indexForColAndRow: indexForColAndRow,
-    numCols: numCols,
     setValueAtColAndRow: setValueAtColAndRow,
     setValueAtIndex: setValueAtIndex,
     valueAtColAndRow: valueAtColAndRow,
@@ -40,4 +43,4 @@ function Grid2D(data, numCols) {
     var index = this.indexForColAndRow(col, row);
     this.setValueAtIndex(value, index);
   }
-}
+})();
