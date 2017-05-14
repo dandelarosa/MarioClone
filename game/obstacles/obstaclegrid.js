@@ -27,11 +27,11 @@ ObstacleGrid.prototype = (function() {
   }
 
   function grabObstaclesInRect(x, y, width, height) {
-    var leftMostCol = parseInt(Math.floor(x / OBSTACLE_WIDTH));
-    var topMostRow = parseInt(Math.floor(y / OBSTACLE_HEIGHT));
+    var leftMostCol = parseInt(Math.floor(x / OBSTACLE_WIDTH)) - 1;
+    var topMostRow = parseInt(Math.floor(y / OBSTACLE_HEIGHT)) - 1;
 
-    var rightMostCol = parseInt(Math.ceil((x + width) / OBSTACLE_WIDTH)) - 1;
-    var bottomMostRow = parseInt(Math.ceil((y + height) / OBSTACLE_HEIGHT)) - 1;
+    var rightMostCol = parseInt(Math.floor((x + width) / OBSTACLE_WIDTH)) + 1;
+    var bottomMostRow = parseInt(Math.floor((y + height) / OBSTACLE_HEIGHT)) + 1;
 
     var obstaclesInRect = [];
     for (var row = topMostRow; row < bottomMostRow; row++) {
