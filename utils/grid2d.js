@@ -9,6 +9,7 @@ Grid2D.prototype = (function() {
     getIndexForColAndRow: getIndexForColAndRow,
     getValueAtColAndRow: getValueAtColAndRow,
     getValueAtIndex: getValueAtIndex,
+    isColRowInBounds: isColRowInBounds,
     indexForColAndRow: indexForColAndRow, // Deprecated
     setValueAtColAndRow: setValueAtColAndRow,
     setValueAtIndex: setValueAtIndex,
@@ -21,6 +22,24 @@ Grid2D.prototype = (function() {
   function getData() {
     var defensiveCopy = this.data.slice();
     return defensiveCopy;
+  }
+
+  function isColRowInBounds(col, row) {
+    if (col < 0) {
+      return false;
+    }
+    else if (col > this.numCols) {
+      return false;
+    }
+    else if (row < 0) {
+      return false;
+    }
+    else if (row > this.data.length / this.numCols) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   function getIndexForColAndRow(col, row) {
