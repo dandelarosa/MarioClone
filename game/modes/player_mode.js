@@ -8,6 +8,7 @@ function PlayerMode() {
   this.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
 
   this.obstacles = [];
+  this.collisionDetector = new CollisionDetector();
 }
 
 PlayerMode.prototype = (function() {
@@ -48,6 +49,12 @@ PlayerMode.prototype = (function() {
     this.obstacles.forEach(function(obstacle) {
       obstacle.update(tiles);
     });
+
+    var playerCollidesWithEnemy = this.collisionDetector.objectCollidesWithGroup(this.player, this.obstacles);
+    if (playerCollidesWithEnemy) {
+      // TODO: update player state
+      console.log('player hit!');
+    }
   }
 
   function draw() {
