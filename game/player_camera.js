@@ -14,13 +14,15 @@ PlayerCamera.prototype.follow = function(player, tiles) {
   var rightSnapThreshold = this.rightSnapThreshold;
   var cameraCenterX = this.x + this.width / 2;
 
+  var rect2 = player.rect;
+
   // Left camera threshold
-  if (player.x < this.x + leftSnapThreshold) {
-    this.x = player.x - leftSnapThreshold;
+  if (rect2.x < this.x + leftSnapThreshold) {
+    this.x = rect2.x - leftSnapThreshold;
   }
   // Right camera threshold
-  else if (player.x + player.width > this.x + rightSnapThreshold) {
-    this.x = player.x + player.width - rightSnapThreshold;
+  else if (rect2.x + rect2.width > this.x + rightSnapThreshold) {
+    this.x = rect2.x + rect2.width - rightSnapThreshold;
   }
 
   // this next code blocks the game from showing out of bounds
