@@ -1,6 +1,7 @@
 function createWorldPicker() {
   var worlds = [
     'cameratest',
+    'enemytest1',
     'tilesettest',
     'tilesettest2',
     '1-1',
