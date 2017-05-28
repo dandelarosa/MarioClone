@@ -17,10 +17,17 @@ Player.prototype = (function() {
   return {
     draw: draw,
     drawBoundingBox: drawBoundingBox,
+    getRect: getRect,
     isJumpButtonPressed: isJumpButtonPressed,
     move: move,
     updateSpeedX: updateSpeedX,
   };
+
+  // Properties
+
+  function getRect() {
+    return this.rect;
+  }
 
   // Input
 
@@ -33,7 +40,7 @@ Player.prototype = (function() {
   // Movement
 
   function move(keyboard, tiles) {
-    var rect = this.rect;
+    var rect = this.getRect();
 
     var jumpPressed = this.isJumpButtonPressed(keyboard);
     if (jumpPressed && this.onGround) {
@@ -153,7 +160,7 @@ Player.prototype = (function() {
   }
 
   function drawBoundingBox(graphics) {
-    var rect = this.rect;
+    var rect = this.getRect();
     graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'white');
   }
 })();

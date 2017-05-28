@@ -7,11 +7,16 @@ function Goomba(spawnPoint) {
 Goomba.prototype = (function() {
   return {
     draw: draw,
+    getRect: getRect,
     update: update,
   };
 
+  function getRect() {
+    return this.rect;
+  }
+
   function update(tiles) {
-    var rect = this.rect;
+    var rect = this.getRect();
 
     if (!this.onGround) {
       this.speedY += GRAVITY;
@@ -87,7 +92,7 @@ Goomba.prototype = (function() {
   }
 
   function draw(graphics) {
-    graphics.fillRect(this.rect.x, this.rect.y, this.rect.width,
-      this.rect.height, 'red');
+    var rect = this.getRect();
+    graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'red');
   }
 })();

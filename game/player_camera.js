@@ -14,7 +14,7 @@ PlayerCamera.prototype.follow = function(player, tiles) {
   var rightSnapThreshold = this.rightSnapThreshold;
   var cameraCenterX = this.x + this.width / 2;
 
-  var rect2 = player.rect;
+  var rect2 = player.getRect();
 
   // Left camera threshold
   if (rect2.x < this.x + leftSnapThreshold) {

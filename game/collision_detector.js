@@ -16,7 +16,7 @@ CollisionDetector.prototype = (function () {
    * @returns true if the object collides with any object in the group, false if not.
    */
   function objectCollidesWithGroup(object, group) {
-    var rect1 = object.rect;
+    var rect1 = object.getRect();
     for (var i = 0; i < group.length; i++) {
       var rect1left = rect1.x;
       var rect1right = rect1.x + rect1.width;
@@ -24,7 +24,7 @@ CollisionDetector.prototype = (function () {
       var rect1bottom = rect1.y + rect1.height;
 
       var object2 = group[i];
-      var rect2 = object2.rect;
+      var rect2 = object2.getRect();
       var rect2left = rect2.x;
       var rect2right = rect2.x + rect2.width;
       var rect2top = rect2.y;
