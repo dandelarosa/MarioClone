@@ -8,9 +8,9 @@ var JUMPER_RADIUS = 10;
 
 function Player(x, y) {
   this.onGround = false;
-  this.rect = new Rect2D(x, y, 16, 16);
-  this.speedX = 0;
-  this.speedY = 0;
+  var rect = new Rect2D(x, y, 16, 16);
+  var speed = new Vector2D(0, 0);
+  this.physicsObject = new PhysicsObject2D(rect, speed);
 };
 
 Player.prototype = (function() {
@@ -18,6 +18,7 @@ Player.prototype = (function() {
     draw: draw,
     drawBoundingBox: drawBoundingBox,
     getRect: getRect,
+    getSpeed: getSpeed,
     isJumpButtonPressed: isJumpButtonPressed,
     move: move,
     updateSpeedX: updateSpeedX,
@@ -26,7 +27,11 @@ Player.prototype = (function() {
   // Properties
 
   function getRect() {
-    return this.rect;
+    return this.physicsObject.rect;
+  }
+
+  function getSpeed() {
+    return this.physicsObject.speed;
   }
 
   // Input
@@ -41,10 +46,11 @@ Player.prototype = (function() {
 
   function move(keyboard, tiles) {
     var rect = this.getRect();
+    var speed = this.getSpeed();
 
     var jumpPressed = this.isJumpButtonPressed(keyboard);
     if (jumpPressed && this.onGround) {
-      this.speedY = -JUMP_POWER;
+      speed.y = -JUMP_POWER;
     }
 
     if (this.onGround) {
@@ -57,10 +63,10 @@ Player.prototype = (function() {
     }
     else {
       this.updateSpeedX(keyboard, 0.3, 3.0, AIR_RESISTANCE);
-      this.speedY += GRAVITY;
+      speed.y += GRAVITY;
       // cheap test to ensure can't fall through floor
-      if (this.speedY > JUMPER_RADIUS) {
-        this.speedY = JUMPER_RADIUS;
+      if (speed.y > JUMPER_RADIUS) {
+        speed.y = JUMPER_RADIUS;
       }
     }
 
@@ -68,88 +74,89 @@ Player.prototype = (function() {
     var bottomY = rect.y + rect.height;
     var leftX = rect.x;
     var rightX = rect.x + rect.width;
-    var futureTopY = rect.y + this.speedY;
-    var futureBottomY = rect.y + rect.height + this.speedY;
-    var futureLeftX = rect.x + this.speedX;
-    var futureRightX = rect.x + rect.width + this.speedX;
+    var futureTopY = rect.y + speed.y;
+    var futureBottomY = rect.y + rect.height + speed.y;
+    var futureLeftX = rect.x + speed.x;
+    var futureRightX = rect.x + rect.width + speed.x;
 
-    if (this.speedX < 0 && leftX <= tiles.minX()) {
+    if (speed.x < 0 && leftX <= tiles.minX()) {
       rect.x = tiles.minX();
-      this.speedX = 0.0;
+      speed.x = 0.0;
     }
-    else if (this.speedX > 0 && rightX >= tiles.maxX()) {
+    else if (speed.x > 0 && rightX >= tiles.maxX()) {
       rect.x = tiles.maxX() - rect.width;
-      this.speedX = 0.0;
+      speed.x = 0.0;
     }
 
     // If future top side is inside a wall, push to row below
-    if (this.speedY < 0 && tiles.isSolidAtPoint(rect.x, futureTopY)) {
+    if (speed.y < 0 && tiles.isSolidAtPoint(rect.x, futureTopY)) {
       rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
-      this.speedY = 0.0;
+      speed.y = 0.0;
     }
-    else if (this.speedY < 0 && tiles.isSolidAtPoint(rightX - 1, futureTopY)) {
+    else if (speed.y < 0 && tiles.isSolidAtPoint(rightX - 1, futureTopY)) {
       rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
-      this.speedY = 0.0;
+      speed.y = 0.0;
     }
     // If future bottom side is inside a wall, push to row above
-    else if (this.speedY > 0 && tiles.isSolidAtPoint(leftX, futureBottomY)) {
+    else if (speed.y > 0 && tiles.isSolidAtPoint(leftX, futureBottomY)) {
       rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
       this.onGround = true;
-      this.speedY = 0;
+      speed.y = 0;
     }
-    else if (this.speedY > 0 && tiles.isSolidAtPoint(rightX - 1, futureBottomY)) {
+    else if (speed.y > 0 && tiles.isSolidAtPoint(rightX - 1, futureBottomY)) {
       rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
       this.onGround = true;
-      this.speedY = 0;
+      speed.y = 0;
     }
     else if (tiles.isSolidAtPoint(rect.x, rect.y + rect.height + 2) == 0) {
       this.onGround = false;
     }
 
     // If left side is already inside a wall, push to the column to the right
-    if (this.speedX < 0 && (tiles.isSolidAtPoint(futureLeftX, topY))) {
+    if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, topY))) {
       rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
-      this.speedX = 0;
+      speed.x = 0;
     }
-    else if (this.speedX < 0 && (tiles.isSolidAtPoint(futureLeftX, bottomY - 1))) {
+    else if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, bottomY - 1))) {
       rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
-      this.speedX = 0;
+      speed.x = 0;
     }
     // If right side is already inside a wall, push to the column to the left
-    else if (this.speedX > 0 && (tiles.isSolidAtPoint(futureRightX, topY))) {
+    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, topY))) {
       rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
-      this.speedX = 0;
+      speed.x = 0;
     }
-    else if (this.speedX > 0 && (tiles.isSolidAtPoint(futureRightX, bottomY - 1))) {
+    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, bottomY - 1))) {
       rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
-      this.speedX = 0;
+      speed.x = 0;
     }
 
-    rect.x += this.speedX; // move the jumper based on its current horizontal speed
-    rect.y += this.speedY; // same as above, but for vertical
+    rect.x += speed.x; // move the jumper based on its current horizontal speed
+    rect.y += speed.y; // same as above, but for vertical
   }
 
   function updateSpeedX(keyboard, acceleration, maxSpeed, friction) {
+    var speed = this.getSpeed();
     if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
-      if (this.speedX < -maxSpeed) {
-        this.speedX *= friction;
+      if (speed.x < -maxSpeed) {
+        speed.x *= friction;
       }
       else {
-        this.speedX -= acceleration;
-        this.speedX = Math.max(this.speedX, -maxSpeed);
+        speed.x -= acceleration;
+        speed.x = Math.max(speed.x, -maxSpeed);
       }
     }
     else if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
-      if (this.speedX > maxSpeed) {
-        this.speedX *= friction;
+      if (speed.x > maxSpeed) {
+        speed.x *= friction;
       }
       else {
-        this.speedX += acceleration;
-        this.speedX = Math.min(this.speedX, maxSpeed);
+        speed.x += acceleration;
+        speed.x = Math.min(speed.x, maxSpeed);
       }
     }
     else {
-      this.speedX *= friction;
+      speed.x *= friction;
     }
   }
 
