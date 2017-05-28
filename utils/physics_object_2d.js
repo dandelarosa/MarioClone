@@ -8,3 +8,18 @@ function PhysicsObject2D(rect, speed) {
   this.rect = rect;
   this.speed = speed;
 }
+
+PhysicsObject2D.prototype = (function() {
+  return {
+    getRect: getRect,
+    getSpeed: getSpeed,
+  };
+
+  function getRect() {
+    return this.rect;
+  }
+
+  function getSpeed() {
+    return this.speed;
+  }
+})();
