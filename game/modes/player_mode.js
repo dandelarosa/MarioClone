@@ -35,10 +35,11 @@ PlayerMode.prototype = (function() {
       persistence.setValue('isDebuggingCamera', this.isDebuggingCamera);
     }
 
-    this.player.move(keyboard, this.tiles);
+    var player = this.player;
+    player.move(keyboard, this.tiles);
 
     var camera = this.camera;
-    camera.follow(this.player, this.tiles);
+    camera.follow(player, this.tiles);
 
     var newObstacles = this.obstacleGrid.grabObstaclesInRect(camera.x, camera.y, camera.width, camera.height);
     if (newObstacles.length > 0) {
@@ -50,10 +51,28 @@ PlayerMode.prototype = (function() {
       obstacle.update(tiles);
     });
 
-    if (this.player.shouldCheckForEnemyCollisions()) {
-      var playerCollidesWithEnemy = this.collisionDetector.objectCollidesWithGroup(this.player, this.obstacles);
-      if (playerCollidesWithEnemy) {
-        this.player.switchToDeathState();
+    if (player.shouldCheckForEnemyCollisions()) {
+      var playerDidDie = false;
+      var playerDidKillEnemy = false;
+      for (var i = 0; i < this.obstacles.length; i++) {
+        var enemy = this.obstacles[i];
+        if (this.collisionDetector.objectsCollide(player, enemy)) {
+          var playerRect = player.getRect();
+          var enemyRect = enemy.getRect();
+          if (playerRect.y + playerRect.height / 2 > enemyRect.y) {
+            if (!playerDidDie) {
+              player.switchToDeathState();
+              playerDidDie = true;
+            }
+          }
+          else {
+            if (!playerDidKillEnemy) {
+              var speed = player.getSpeed();
+              speed.y = -5;
+              playerDidKillEnemy = true;
+            }
+          }
+        }
       }
     }
   }
