@@ -1,4 +1,5 @@
 function Goomba(spawnPoint) {
+  this.isDead = false;
   var rect = new Rect2D(spawnPoint.x, spawnPoint.y, 16, 16);
   var speed = new Vector2D(-1, 0);
   this.physicsObject = new PhysicsObject2D(rect, speed);
@@ -9,6 +10,8 @@ Goomba.prototype = (function() {
     draw: draw,
     getRect: getRect,
     getSpeed: getSpeed,
+    shouldCheckForPlayerCollisions: shouldCheckForPlayerCollisions,
+    switchToDeathState: switchToDeathState,
     update: update,
   };
 
@@ -20,6 +23,18 @@ Goomba.prototype = (function() {
 
   function getSpeed() {
     return this.physicsObject.speed;
+  }
+
+  function shouldCheckForPlayerCollisions() {
+    return !this.isDead;
+  }
+
+  // State Machine
+
+  function switchToDeathState() {
+    this.isDead = true;
+    var speed = this.getSpeed();
+    speed.x = 0;
   }
 
   // Movement
@@ -106,6 +121,11 @@ Goomba.prototype = (function() {
 
   function draw(graphics) {
     var rect = this.getRect();
-    graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'red');
+    if (this.isDead) {
+      graphics.fillRect(rect.x, rect.y + rect.height / 2, rect.width, rect.height / 2, 'red');
+    }
+    else {
+      graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'red');
+    }
   }
 })();

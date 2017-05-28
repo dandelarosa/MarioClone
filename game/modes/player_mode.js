@@ -56,6 +56,9 @@ PlayerMode.prototype = (function() {
       var playerDidKillEnemy = false;
       for (var i = 0; i < this.obstacles.length; i++) {
         var enemy = this.obstacles[i];
+        if (!enemy.shouldCheckForPlayerCollisions()) {
+          continue;
+        }
         if (this.collisionDetector.objectsCollide(player, enemy)) {
           var playerRect = player.getRect();
           var enemyRect = enemy.getRect();
@@ -66,6 +69,7 @@ PlayerMode.prototype = (function() {
             }
           }
           else {
+            enemy.switchToDeathState();
             if (!playerDidKillEnemy) {
               var speed = player.getSpeed();
               speed.y = -5;
