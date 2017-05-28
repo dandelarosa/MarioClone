@@ -54,23 +54,26 @@ Goomba.prototype = (function() {
       speed.x = 0.0;
     }
 
+    var tileWidth = tiles.getTileWidth();
+    var tileHeight = tiles.getTileHeight();
+
     // If future top side is inside a wall, push to row below
     if (speed.y < 0 && tiles.isSolidAtPoint(rect.x, futureTopY)) {
-      rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
+      rect.y = Math.floor(rect.y / tileHeight) * tileHeight;
       speed.y = 0.0;
     }
     else if (speed.y < 0 && tiles.isSolidAtPoint(rightX - 1, futureTopY)) {
-      rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
+      rect.y = Math.floor(rect.y / tileHeight) * tileHeight;
       speed.y = 0.0;
     }
     // If future bottom side is inside a wall, push to row above
     else if (speed.y > 0 && tiles.isSolidAtPoint(leftX, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
+      rect.y = (Math.floor(futureBottomY / tileHeight)) * tileHeight - rect.height;
       this.onGround = true;
       speed.y = 0;
     }
     else if (speed.y > 0 && tiles.isSolidAtPoint(rightX - 1, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
+      rect.y = (Math.floor(futureBottomY / tileHeight)) * tileHeight - rect.height;
       this.onGround = true;
       speed.y = 0;
     }
@@ -80,20 +83,20 @@ Goomba.prototype = (function() {
 
     // If left side is already inside a wall, push to the column to the right
     if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, topY))) {
-      rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
+      rect.x = Math.floor(leftX / tileWidth) * tileWidth;
       speed.x = -speed.x;
     }
     else if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, bottomY - 1))) {
-      rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
+      rect.x = Math.floor(leftX / tileWidth) * tileWidth;
       speed.x = -speed.x;
     }
     // If right side is already inside a wall, push to the column to the left
     else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, topY))) {
-      rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
+      rect.x = Math.ceil(rightX / tileWidth) * tileWidth - rect.width;
       speed.x = -speed.x;
     }
     else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, bottomY - 1))) {
-      rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
+      rect.x = Math.ceil(rightX / tileWidth) * tileWidth - rect.width;
       speed.x = -speed.x;
     }
 
