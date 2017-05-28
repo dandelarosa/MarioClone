@@ -5,9 +5,16 @@ function PlayerRegularState() {
 PlayerRegularState.prototype = (function() {
   return {
     isJumpButtonPressed: isJumpButtonPressed,
+    shouldCheckForEnemyCollisions: shouldCheckForEnemyCollisions,
     update: update,
     updateSpeedX: updateSpeedX,
   };
+
+  // Properties
+
+  function shouldCheckForEnemyCollisions() {
+    return true;
+  }
 
   // Input
 

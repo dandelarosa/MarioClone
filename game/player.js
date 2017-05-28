@@ -20,6 +20,8 @@ Player.prototype = (function() {
     getRect: getRect,
     getSpeed: getSpeed,
     move: move,
+    shouldCheckForEnemyCollisions: shouldCheckForEnemyCollisions,
+    switchToDeathState: switchToDeathState,
   };
 
   // Properties
@@ -30,6 +32,19 @@ Player.prototype = (function() {
 
   function getSpeed() {
     return this.physicsObject.speed;
+  }
+
+  function shouldCheckForEnemyCollisions() {
+    return this.currentState.shouldCheckForEnemyCollisions();
+  }
+
+  // State Machine
+
+  function switchToDeathState() {
+    this.currentState = new PlayerDeathState();
+    var speed = this.getSpeed();
+    speed.x = 0;
+    speed.y = -5;
   }
 
   // Movement

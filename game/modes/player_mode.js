@@ -50,10 +50,11 @@ PlayerMode.prototype = (function() {
       obstacle.update(tiles);
     });
 
-    var playerCollidesWithEnemy = this.collisionDetector.objectCollidesWithGroup(this.player, this.obstacles);
-    if (playerCollidesWithEnemy) {
-      // TODO: update player state
-      console.log('player hit!');
+    if (this.player.shouldCheckForEnemyCollisions()) {
+      var playerCollidesWithEnemy = this.collisionDetector.objectCollidesWithGroup(this.player, this.obstacles);
+      if (playerCollidesWithEnemy) {
+        this.player.switchToDeathState();
+      }
     }
   }
 
