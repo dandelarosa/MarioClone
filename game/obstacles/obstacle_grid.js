@@ -1,8 +1,8 @@
 const OBSTACLE_WIDTH = 16;
 const OBSTACLE_HEIGHT = 16;
 
-function ObstacleGrid(data, numCols) {
-  this.grid = new Grid2D(data, numCols);
+function ObstacleGrid(grid) {
+  this.grid = grid;
   this.enemySpawner = new EnemySpawner();
 }
 

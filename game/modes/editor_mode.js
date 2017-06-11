@@ -41,11 +41,12 @@ EditorMode.prototype = (function() {
       this.obstacles = newObstacles;
     }
 
-    var grid = new Grid2D(this.gridData, this.numCols);
+    var tileData = new Grid2D(this.gridData, this.numCols);
     var tileset = new Tileset(this.tilesetName);
-    this.tiles = new TileGrid(grid, tileset);
+    this.tiles = new TileGrid(tileData, tileset);
     this.camera = new EditorCamera(0, 0, this.width, this.height);
-    this.obstacleGrid = new ObstacleGrid(this.obstacles, this.numCols);
+    var obstacleData = new Grid2D(this.obstacles, this.numCols);
+    this.obstacleGrid = new ObstacleGrid(obstacleData);
   }
 
   function update() {

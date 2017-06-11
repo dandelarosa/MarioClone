@@ -20,12 +20,13 @@ PlayerMode.prototype = (function() {
   };
 
   function loadWorld(world) {
-    var grid = new Grid2D(world.gridData, world.numCols);
+    var tileData = new Grid2D(world.gridData, world.numCols);
     var tileset = new Tileset(world.tilesetName);
-    this.tiles = new TileGrid(grid, tileset);
+    this.tiles = new TileGrid(tileData, tileset);
     this.player = new Player(this.width/2, this.height/2);
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
-    this.obstacleGrid = new ObstacleGrid(world.obstacles, world.numCols);
+    var obstacleData = new Grid2D(world.obstacles, world.numCols);
+    this.obstacleGrid = new ObstacleGrid(obstacleData);
   }
 
   function update() {
