@@ -79,6 +79,11 @@ PlayerMode.prototype = (function() {
         }
       }
     }
+
+    if (player.getY() > this.width) {
+      // TODO: implement for real
+      console.log('should restart level');
+    }
   }
 
   function draw() {

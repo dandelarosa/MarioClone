@@ -19,12 +19,30 @@ Player.prototype = (function() {
     drawBoundingBox: drawBoundingBox,
     getRect: getRect,
     getSpeed: getSpeed,
+    getX: getX,
+    getY: getY,
     move: move,
     shouldCheckForEnemyCollisions: shouldCheckForEnemyCollisions,
     switchToDeathState: switchToDeathState,
   };
 
   // Properties
+
+  /**
+   * Gets the player's x-position.
+   * @returns {Number} The player's x-position.
+   */
+  function getX() {
+    return this.getRect().x;
+  }
+
+  /**
+   * Gets the player's y-position.
+   * @returns {Number} The player's y-position.
+   */
+  function getY() {
+    return this.getRect().y;
+  }
 
   function getRect() {
     return this.physicsObject.rect;
