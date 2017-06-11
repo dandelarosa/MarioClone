@@ -7,7 +7,6 @@ function PlayerMode() {
 
   this.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
 
-  this.obstacles = [];
   this.collisionDetector = new CollisionDetector();
 }
 
@@ -16,10 +15,20 @@ PlayerMode.prototype = (function() {
     draw: draw,
     drawCameraDebugger: drawCameraDebugger,
     loadWorld: loadWorld,
+    reset: reset,
     update: update,
   };
 
   function loadWorld(world) {
+    this.world = world;
+    this.reset();
+  }
+
+  /**
+   * Restarts the level.
+   */
+  function reset() {
+    var world = this.world;
     var tileData = new Grid2D(world.gridData, world.numCols);
     var tileset = new Tileset(world.tilesetName);
     this.tiles = new TileGrid(tileData, tileset);
@@ -27,6 +36,7 @@ PlayerMode.prototype = (function() {
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
     var obstacleData = new Grid2D(world.obstacles, world.numCols);
     this.obstacleGrid = new ObstacleGrid(obstacleData);
+    this.obstacles = [];
   }
 
   function update() {
@@ -82,8 +92,7 @@ PlayerMode.prototype = (function() {
     }
 
     if (player.getY() > this.width) {
-      // TODO: implement for real
-      console.log('should restart level');
+      this.reset();
     }
   }
 
