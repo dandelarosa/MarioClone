@@ -91,7 +91,8 @@ TileGrid.prototype = (function() {
     || tileValue === TILE_V2_PIPE_LEFT_END_TOP
     || tileValue === TILE_V2_PIPE_LEFT_END_BOTTOM
     || tileValue === TILE_V2_PIPE_LEFT_INT_TOP
-    || tileValue === TILE_V2_PIPE_LEFT_INT_BOTTOM;
+    || tileValue === TILE_V2_PIPE_LEFT_INT_BOTTOM
+    || tileValue === TILE_V2_BRIDGE;
   };
 
   function tileValueAtPoint(x, y) {
