@@ -22,6 +22,7 @@ function Level(builder) {
 
   // For editor. Can reorganize this?
   this.key = builder.key;
+  this.levelImage = builder.levelImage;
   this.levelImageOffset = builder.levelImageOffset;
 }
 
