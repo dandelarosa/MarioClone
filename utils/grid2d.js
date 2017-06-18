@@ -11,11 +11,11 @@ Grid2D.prototype = (function() {
     getValueAtColAndRow: getValueAtColAndRow,
     getValueAtIndex: getValueAtIndex,
     isColRowInBounds: isColRowInBounds,
-    indexForColAndRow: indexForColAndRow, // Deprecated
+    indexForColAndRow: indexForColAndRow,
     setValueAtColAndRow: setValueAtColAndRow,
     setValueAtIndex: setValueAtIndex,
-    valueAtColAndRow: valueAtColAndRow, // Deprecated
-    valueAtIndex: valueAtIndex, // Deprecated
+    valueAtColAndRow: valueAtColAndRow,
+    valueAtIndex: valueAtIndex,
   }
 
   // Copying
