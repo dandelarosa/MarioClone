@@ -29,14 +29,12 @@ PlayerMode.prototype = (function() {
    */
   function reset() {
     var level = this.level;
-    var tileData = new Grid2D(level.gridData, level.numCols);
-    var tileset = new Tileset(level.tilesetName);
-    this.tiles = new TileGrid(tileData, tileset);
+    this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
+    this.obstacleGrid = new ObstacleGrid(level.obstacleGrid.copy());
+
     this.player = new Player(this.width/2, this.height/2);
-    this.camera = new PlayerCamera(0, 0, this.width, this.height);
-    var obstacleData = new Grid2D(level.obstacles, level.numCols);
-    this.obstacleGrid = new ObstacleGrid(obstacleData);
     this.obstacles = [];
+    this.camera = new PlayerCamera(0, 0, this.width, this.height);
   }
 
   function update() {

@@ -12,6 +12,7 @@ TileGrid.prototype = (function() {
     colForPixelX: colForPixelX,
     drawInRect: drawInRect,
     getGridData: getGridData,
+    getNumCols: getNumCols,
     getTileHeight: getTileHeight,
     getTileWidth: getTileWidth,
     isSolidAtPoint: isSolidAtPoint,
@@ -39,6 +40,10 @@ TileGrid.prototype = (function() {
   function getGridData() {
     return this.grid.getData();
   };
+
+  function getNumCols() {
+    return this.grid.numCols;
+  }
 
   function maxX() {
     return this.grid.numCols * TILE_WIDTH;

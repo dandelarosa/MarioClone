@@ -25,28 +25,18 @@ EditorMode.prototype = (function() {
   };
 
   function loadLevel(level) {
-    this.gridData = level.gridData;
-    this.numCols = level.numCols;
-    this.tilesetName = level.tilesetName;
+    this.tiles = new TileGrid(level.tileGrid, level.tileset);
+    this.obstacleGrid = new ObstacleGrid(level.obstacleGrid);
+    this.camera = new EditorCamera(0, 0, this.width, this.height);
+
+    // For Editor. Can reorganize?
+    this.numCols = this.tiles.getNumCols();
+    this.gridData = this.tiles.getGridData();
+    this.obstacles = this.obstacleGrid.getData();
+
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
     this.levelImageOffset = level.levelImageOffset;
-    this.obstacles = level.obstacles;
-    // Not sure of the best place to put this
-    if (!this.obstacles || this.obstacles.length === 0) {
-      var newObstacles = [];
-      for (var i = 0; i < this.gridData.length; i++) {
-        newObstacles.push(OBSTACLE_EMPTY);
-      }
-      this.obstacles = newObstacles;
-    }
-
-    var tileData = new Grid2D(this.gridData, this.numCols);
-    var tileset = new Tileset(this.tilesetName);
-    this.tiles = new TileGrid(tileData, tileset);
-    this.camera = new EditorCamera(0, 0, this.width, this.height);
-    var obstacleData = new Grid2D(this.obstacles, this.numCols);
-    this.obstacleGrid = new ObstacleGrid(obstacleData);
   }
 
   function update() {

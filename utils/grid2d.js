@@ -5,6 +5,7 @@ function Grid2D(data, numCols) {
 
 Grid2D.prototype = (function() {
   return {
+    copy: copy,
     getData: getData,
     getIndexForColAndRow: getIndexForColAndRow,
     getValueAtColAndRow: getValueAtColAndRow,
@@ -15,6 +16,16 @@ Grid2D.prototype = (function() {
     setValueAtIndex: setValueAtIndex,
     valueAtColAndRow: valueAtColAndRow, // Deprecated
     valueAtIndex: valueAtIndex, // Deprecated
+  }
+
+  // Copying
+
+  /**
+   * Copies this object.
+   * @returns A shallow copy of the object.
+   */
+  function copy() {
+    return new Grid2D(this.data.slice(), parseInt(this.numCols));
   }
 
   // Querying Data
