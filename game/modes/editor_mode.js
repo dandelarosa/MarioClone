@@ -20,18 +20,18 @@ function EditorMode() {
 EditorMode.prototype = (function() {
   return {
     draw: draw,
-    loadWorld: loadWorld,
+    loadLevel: loadLevel,
     update: update,
   };
 
-  function loadWorld(world) {
-    this.gridData = world.gridData;
-    this.numCols = world.numCols;
-    this.tilesetName = world.tilesetName;
-    this.levelImage = getLevelImage(world.key);
-    this.levelImageKey = world.key;
-    this.levelImageOffset = world.levelImageOffset;
-    this.obstacles = world.obstacles;
+  function loadLevel(level) {
+    this.gridData = level.gridData;
+    this.numCols = level.numCols;
+    this.tilesetName = level.tilesetName;
+    this.levelImage = getLevelImage(level.key);
+    this.levelImageKey = level.key;
+    this.levelImageOffset = level.levelImageOffset;
+    this.obstacles = level.obstacles;
     // Not sure of the best place to put this
     if (!this.obstacles || this.obstacles.length === 0) {
       var newObstacles = [];

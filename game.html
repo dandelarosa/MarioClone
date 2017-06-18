@@ -3,7 +3,7 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
-  <!-- Begin Imports -->
+  <title>Mario Clone</title>
   <script src="editor/2darray.js"></script>
   <script src="editor/editor.js"></script>
   <script src="editor/levelimages.js"></script>
@@ -86,8 +86,6 @@
   <script src="worlds/world_8-3.js"></script>
   <script src="worlds/world_8-4.js"></script>
   <script src="worlds/worlds.js"></script>
-  <!-- End Imports -->
-  <title>Mario Clone</title>
 </head>
 
 <body>
@@ -112,10 +110,10 @@ window.onload = function() {
   createObstaclePicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
-    game.loadWorld(lastSelectedWorld);
+    game.loadLevel(lastSelectedWorld);
   }
   else {
-    game.loadWorld(worlds['1-1']);
+    game.loadLevel(worlds['1-1']);
   }
   displayLevelData();
   displayObstacleData();

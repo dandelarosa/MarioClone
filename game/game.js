@@ -17,14 +17,14 @@ function Game() {
 
 Game.prototype = (function() {
   return {
-    loadWorld: loadWorld,
+    loadLevel: loadLevel,
     runLoop: runLoop,
     updateLevel: updateLevel,
   };
 
-  function loadWorld(world) {
-    this.playerMode.loadWorld(world);
-    this.editorMode.loadWorld(world);
+  function loadLevel(level) {
+    this.playerMode.loadLevel(level);
+    this.editorMode.loadLevel(level);
   }
 
   function updateLevel() {

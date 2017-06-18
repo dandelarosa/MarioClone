@@ -14,13 +14,13 @@ PlayerMode.prototype = (function() {
   return {
     draw: draw,
     drawCameraDebugger: drawCameraDebugger,
-    loadWorld: loadWorld,
+    loadLevel: loadLevel,
     reset: reset,
     update: update,
   };
 
-  function loadWorld(world) {
-    this.world = world;
+  function loadLevel(level) {
+    this.level = level;
     this.reset();
   }
 
@@ -28,13 +28,13 @@ PlayerMode.prototype = (function() {
    * Restarts the level.
    */
   function reset() {
-    var world = this.world;
-    var tileData = new Grid2D(world.gridData, world.numCols);
-    var tileset = new Tileset(world.tilesetName);
+    var level = this.level;
+    var tileData = new Grid2D(level.gridData, level.numCols);
+    var tileset = new Tileset(level.tilesetName);
     this.tiles = new TileGrid(tileData, tileset);
     this.player = new Player(this.width/2, this.height/2);
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
-    var obstacleData = new Grid2D(world.obstacles, world.numCols);
+    var obstacleData = new Grid2D(level.obstacles, level.numCols);
     this.obstacleGrid = new ObstacleGrid(obstacleData);
     this.obstacles = [];
   }
