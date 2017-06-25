@@ -2,32 +2,25 @@ const OBSTACLE_WIDTH = 16;
 const OBSTACLE_HEIGHT = 16;
 
 function ObstacleGrid(grid) {
-  this.grid = grid;
-  this.enemySpawner = new EnemySpawner();
 }
 
 ObstacleGrid.prototype = (function() {
   return {
     draw: draw,
-    getData: getData,
-    setValueAtColAndRow: setValueAtColAndRow,
   };
-
-  // Querying Data
-
-  function getData() {
-    return this.grid.getData();
-  }
-
-  // Modifying Data
-
-  function setValueAtColAndRow(value, col, row) {
-    this.grid.setValueAtColAndRow(value, col, row);
-  }
 
   // Drawing
 
-  function draw(x, y, width, height, graphics) {
+  /**
+   * Draws placeholder graphics for enemies in the level editor.
+   * @param {number} x - The camera's x position.
+   * @param {number} y - The camera's y position.
+   * @param {number} width - The camera's width.
+   * @param {number} height - The camera's height.
+   * @param {Object} graphics - The object responsible for drawing graphics on the screen.
+   * @param {Object} grid - The grid containing enemy placement information.
+   */
+  function draw(x, y, width, height, graphics, grid) {
     const obstacleWidth = OBSTACLE_WIDTH;
     const obstacleHeight = OBSTACLE_HEIGHT;
 
@@ -43,7 +36,7 @@ ObstacleGrid.prototype = (function() {
 
     for (var row = topMostRow; row < bottomMostRow; row++) {
       for (var col = leftMostCol; col < rightMostCol; col++) {
-        var obstacleValue = this.grid.valueAtColAndRow(col, row);
+        var obstacleValue = grid.valueAtColAndRow(col, row);
         if (typeof obstacleValue === 'number' && obstacleValue > ENEMY_NONE) {
           var rectX = col * obstacleWidth;
           var rectY = row * obstacleHeight;

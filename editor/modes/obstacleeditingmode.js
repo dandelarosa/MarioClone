@@ -5,9 +5,8 @@ function ObstacleEditingMode() {
     selectedValue: ENEMY_NONE,
   };
 
-  function handleClickAtColRow(col, row, game) {
-    game.obstacleGrid.setValueAtColAndRow(this.selectedValue, col, row);
-    game.obstacles = game.obstacleGrid.data;
+  function handleClickAtColRow(col, row, editor) {
+    editor.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
     displayObstacleData();
   }
 }

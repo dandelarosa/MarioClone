@@ -27,14 +27,13 @@ EditorMode.prototype = (function() {
   function loadLevel(level) {
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
     this.enemyGrid = level.enemyGrid.copy();
-    // TODO: replace with this.enemyGrid
-    this.obstacleGrid = new ObstacleGrid(this.enemyGrid);
+    // TODO: rename to something more appropriate
+    this.obstacleGrid = new ObstacleGrid();
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?
     this.numCols = this.tiles.getNumCols();
     this.gridData = this.tiles.getGridData();
-    this.obstacles = this.obstacleGrid.getData();
 
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
@@ -91,7 +90,7 @@ EditorMode.prototype = (function() {
     this.tiles.drawInRect(camera.x, camera.y, camera.width,
       camera.height, graphics);
     this.obstacleGrid.draw(camera.x, camera.y, camera.width,
-      camera.height, graphics);
+      camera.height, graphics, this.enemyGrid);
     if (levelImageLoaded[this.levelImageKey]) {
       graphics.drawImageWithAlpha(this.levelImage, -this.levelImageOffset, 0,
         this.levelMockupAlpha);
