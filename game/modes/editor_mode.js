@@ -26,6 +26,9 @@ EditorMode.prototype = (function() {
 
   function loadLevel(level) {
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
+    // TODO: should get level.enemyGrid property instead
+    this.enemyGrid = level.obstacleGrid.copy();
+    // TODO: replace with this.enemyGrid
     this.obstacleGrid = new ObstacleGrid(level.obstacleGrid);
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 

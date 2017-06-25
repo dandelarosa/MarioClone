@@ -30,6 +30,10 @@ PlayerMode.prototype = (function() {
   function reset() {
     var level = this.level;
     this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
+
+    // TODO: should get level.enemyGrid property instead
+    this.enemyGrid = level.obstacleGrid.copy();
+    // TODO: replace with this.enemyGrid
     this.obstacleGrid = new ObstacleGrid(level.obstacleGrid.copy());
 
     this.player = new Player(this.width/2, this.height/2);
