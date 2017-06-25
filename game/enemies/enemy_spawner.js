@@ -33,13 +33,13 @@ EnemySpawner.prototype = (function() {
         }
         var value = grid.valueAtColAndRow(col, row);
         // TODO: use enemy constants instead
-        if (value > OBSTACLE_EMPTY) {
+        if (value > ENEMY_NONE) {
           var spawnX = col * CELL_WIDTH;
           var spawnY = row * CELL_HEIGHT;
           var spawnPoint = new Point2D(spawnX, spawnY);
           var enemiesAtPoint = this.spawnWithValueAtPoint(value, spawnPoint);
           spawnedEnemies = spawnedEnemies.concat(enemiesAtPoint);
-          grid.setValueAtColAndRow(OBSTACLE_EMPTY, col, row);
+          grid.setValueAtColAndRow(ENEMY_NONE, col, row);
         }
       }
     }
@@ -54,7 +54,7 @@ EnemySpawner.prototype = (function() {
    */
   function spawnWithValueAtPoint(value, spawnPoint) {
     var spawnedEnemies = [];
-    if (value === OBSTACLE_GOOMBA) {
+    if (value === ENEMY_GOOMBA) {
       spawnedEnemies.push(new Goomba(spawnPoint));
     }
     return spawnedEnemies;

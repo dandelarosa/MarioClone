@@ -13,7 +13,7 @@ function Level(builder) {
   if (!obstacles || obstacles.length === 0) {
     var newObstacles = [];
     for (var i = 0; i < tiles.length; i++) {
-      newObstacles.push(OBSTACLE_EMPTY);
+      newObstacles.push(ENEMY_NONE);
     }
     obstacles = newObstacles;
   }

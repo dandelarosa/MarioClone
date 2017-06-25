@@ -44,7 +44,7 @@ ObstacleGrid.prototype = (function() {
     for (var row = topMostRow; row < bottomMostRow; row++) {
       for (var col = leftMostCol; col < rightMostCol; col++) {
         var obstacleValue = this.grid.valueAtColAndRow(col, row);
-        if (typeof obstacleValue === 'number' && obstacleValue > OBSTACLE_EMPTY) {
+        if (typeof obstacleValue === 'number' && obstacleValue > ENEMY_NONE) {
           var rectX = col * obstacleWidth;
           var rectY = row * obstacleHeight;
           var rectWidth = obstacleWidth;

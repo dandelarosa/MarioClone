@@ -1,2 +1,0 @@
-const OBSTACLE_EMPTY = 0x00;
-const OBSTACLE_GOOMBA = 0x01;

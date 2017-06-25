@@ -1,7 +1,7 @@
 function createObstaclePicker() {
   var options = [
-    {displayText: 'Empty', value: OBSTACLE_EMPTY},
-    {displayText: 'Goomba', value: OBSTACLE_GOOMBA},
+    {displayText: 'Empty', value: ENEMY_NONE},
+    {displayText: 'Goomba', value: ENEMY_GOOMBA},
   ];
   var obstaclePickerDiv = document.getElementById('obstaclePicker');
   var promptText = document.createTextNode('Select an Obstacle:');
@@ -20,7 +20,7 @@ function createObstaclePicker() {
     obstaclePickerOnchange(selectElement);
   };
 
-  var storedValue = persistence.getValue('lastObstacleSelected', 'int', OBSTACLE_EMPTY);
+  var storedValue = persistence.getValue('lastObstacleSelected', 'int', ENEMY_NONE);
   game.editorMode.obstacleEditingMode.selectedValue = storedValue;
   var indexOfStoredValue = 0;
   for (var i = 0; i < options.length; i++) {

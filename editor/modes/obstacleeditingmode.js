@@ -2,7 +2,7 @@ function ObstacleEditingMode() {
   return {
     displayText: 'Editing Obstacles',
     handleClickAtColRow: handleClickAtColRow,
-    selectedValue: OBSTACLE_EMPTY,
+    selectedValue: ENEMY_NONE,
   };
 
   function handleClickAtColRow(col, row, game) {
