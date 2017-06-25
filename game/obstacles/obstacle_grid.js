@@ -10,7 +10,6 @@ ObstacleGrid.prototype = (function() {
   return {
     draw: draw,
     getData: getData,
-    grabObstaclesInRect: grabObstaclesInRect,
     setValueAtColAndRow: setValueAtColAndRow,
   };
 
@@ -24,33 +23,6 @@ ObstacleGrid.prototype = (function() {
 
   function setValueAtColAndRow(value, col, row) {
     this.grid.setValueAtColAndRow(value, col, row);
-  }
-
-  function grabObstaclesInRect(x, y, width, height) {
-    var leftMostCol = parseInt(Math.floor(x / OBSTACLE_WIDTH)) - 1;
-    var topMostRow = parseInt(Math.floor(y / OBSTACLE_HEIGHT)) - 1;
-
-    var rightMostCol = parseInt(Math.floor((x + width) / OBSTACLE_WIDTH)) + 1;
-    var bottomMostRow = parseInt(Math.floor((y + height) / OBSTACLE_HEIGHT)) + 1;
-
-    var obstaclesInRect = [];
-    for (var row = topMostRow; row < bottomMostRow; row++) {
-      for (var col = leftMostCol; col < rightMostCol; col++) {
-        if (!this.grid.isColRowInBounds(col, row)) {
-          continue;
-        }
-        var obstacleValue = this.grid.valueAtColAndRow(col, row);
-        if (obstacleValue > OBSTACLE_EMPTY) {
-          var spawnX = col * OBSTACLE_WIDTH;
-          var spawnY = row * OBSTACLE_HEIGHT;
-          var spawnPoint = new Point2D(spawnX, spawnY);
-          var spawnedObstacles = this.enemySpawner.spawnWithValueAtPoint(obstacleValue, spawnPoint);
-          obstaclesInRect = obstaclesInRect.concat(spawnedObstacles);
-          this.grid.setValueAtColAndRow(OBSTACLE_EMPTY, col, row);
-        }
-      }
-    }
-    return obstaclesInRect;
   }
 
   // Drawing

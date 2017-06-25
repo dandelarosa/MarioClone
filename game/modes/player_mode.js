@@ -7,6 +7,7 @@ function PlayerMode() {
 
   this.isDebuggingCamera = persistence.getValue('isDebuggingCamera', 'bool', false);
 
+  this.enemySpawner = new EnemySpawner();
   this.collisionDetector = new CollisionDetector();
 }
 
@@ -33,11 +34,9 @@ PlayerMode.prototype = (function() {
 
     // TODO: should get level.enemyGrid property instead
     this.enemyGrid = level.obstacleGrid.copy();
-    // TODO: replace with this.enemyGrid
-    this.obstacleGrid = new ObstacleGrid(level.obstacleGrid.copy());
 
     this.player = new Player(this.width/2, this.height/2);
-    this.obstacles = [];
+    this.enemies = [];
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
   }
 
@@ -54,21 +53,22 @@ PlayerMode.prototype = (function() {
     var camera = this.camera;
     camera.follow(player, this.tiles);
 
-    var newObstacles = this.obstacleGrid.grabObstaclesInRect(camera.x, camera.y, camera.width, camera.height);
-    if (newObstacles.length > 0) {
-      this.obstacles = this.obstacles.concat(newObstacles);
+    var cameraRect = camera.getRect();
+    var newEnemies = this.enemySpawner.spawnInRect(this.enemyGrid, cameraRect);
+    if (newEnemies.length > 0) {
+      this.enemies = this.enemies.concat(newEnemies);
     }
 
     var tiles = this.tiles;
-    this.obstacles.forEach(function(obstacle) {
-      obstacle.update(tiles);
+    this.enemies.forEach(function(enemy) {
+      enemy.update(tiles);
     });
 
     if (player.shouldCheckForEnemyCollisions()) {
       var playerDidDie = false;
       var playerDidKillEnemy = false;
-      for (var i = 0; i < this.obstacles.length; i++) {
-        var enemy = this.obstacles[i];
+      for (var i = 0; i < this.enemies.length; i++) {
+        var enemy = this.enemies[i];
         if (!enemy.shouldCheckForPlayerCollisions()) {
           continue;
         }
@@ -109,8 +109,8 @@ PlayerMode.prototype = (function() {
     graphics.translate(-camera.x, -this.camera.y);
     this.tiles.drawInRect(camera.x, camera.y, camera.width,
       camera.height, graphics);
-    this.obstacles.forEach(function(obstacle) {
-      obstacle.draw(graphics);
+    this.enemies.forEach(function(enemy) {
+      enemy.draw(graphics);
     });
     this.player.draw(graphics);
     if (this.isDebuggingCamera) {
