@@ -8,17 +8,16 @@ function Level(builder) {
 
   this.tileset = new Tileset(builder.tilesetName);
 
-  // Should split into enemies and obstacles
-  var obstacles = builder.obstacles;
-  if (!obstacles || obstacles.length === 0) {
-    var newObstacles = [];
+  var enemies = builder.enemies;
+  if (!enemies || enemies.length === 0) {
+    var fixedEnemies = [];
     for (var i = 0; i < tiles.length; i++) {
-      newObstacles.push(ENEMY_NONE);
+      fixedEnemies.push(ENEMY_NONE);
     }
-    obstacles = newObstacles;
+    enemies = fixedEnemies;
   }
-  var obstacleGrid = new Grid2D(obstacles, numCols);
-  this.obstacleGrid = obstacleGrid;
+  var enemyGrid = new Grid2D(enemies, numCols);
+  this.enemyGrid = enemyGrid;
 
   // For editor. Can reorganize this?
   this.key = builder.key;

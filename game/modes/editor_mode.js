@@ -26,10 +26,9 @@ EditorMode.prototype = (function() {
 
   function loadLevel(level) {
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
-    // TODO: should get level.enemyGrid property instead
-    this.enemyGrid = level.obstacleGrid.copy();
+    this.enemyGrid = level.enemyGrid.copy();
     // TODO: replace with this.enemyGrid
-    this.obstacleGrid = new ObstacleGrid(level.obstacleGrid);
+    this.obstacleGrid = new ObstacleGrid(this.enemyGrid);
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?
