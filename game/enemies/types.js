@@ -1,2 +1,3 @@
 const ENEMY_NONE = 0x00;
 const ENEMY_GOOMBA = 0x01;
+const ENEMY_DOUBLE_GOOMBA = 0x02;

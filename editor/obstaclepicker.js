@@ -2,6 +2,7 @@ function createObstaclePicker() {
   var options = [
     {displayText: 'Empty', value: ENEMY_NONE},
     {displayText: 'Goomba', value: ENEMY_GOOMBA},
+    {displayText: 'Two Goombas (half a space apart)', value: ENEMY_DOUBLE_GOOMBA},
   ];
   var obstaclePickerDiv = document.getElementById('obstaclePicker');
   var promptText = document.createTextNode('Select an Obstacle:');

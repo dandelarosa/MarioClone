@@ -57,6 +57,11 @@ EnemySpawner.prototype = (function() {
     if (value === ENEMY_GOOMBA) {
       spawnedEnemies.push(new Goomba(spawnPoint));
     }
+    else if (value === ENEMY_DOUBLE_GOOMBA) {
+      spawnedEnemies.push(new Goomba(spawnPoint));
+      var secondSpawnPoint = new Point2D(spawnPoint.x + CELL_WIDTH * 1.5, spawnPoint.y);
+      spawnedEnemies.push(new Goomba(secondSpawnPoint));
+    }
     return spawnedEnemies;
   }
 })();
