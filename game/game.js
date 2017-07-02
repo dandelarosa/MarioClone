@@ -30,7 +30,6 @@ Game.prototype = (function() {
   function updateLevel() {
     var grid = new Grid2D(this.gridData, this.numCols);
     var tileset = new Tileset(this.tilesetName);
-    this.playerMode.tiles = new TileGrid(grid, tileset);
     this.editorMode.tiles = new TileGrid(grid, tileset);
   }
 

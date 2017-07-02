@@ -49,15 +49,7 @@ function displayNumCols() {
  * @param {number} colsToAdd - The number of columns to add.
  */
 function addColumns(colsToAdd) {
-  var convertedGrid = create2dArray(game.editorMode.gridData, game.editorMode.numCols);
-  addColumnsToGrid(convertedGrid, colsToAdd, 0);
-  var convertedBackGrid = create1dArray(convertedGrid);
-  var newNumCols = game.editorMode.numCols + colsToAdd;
-
-  game.editorMode.gridData = convertedBackGrid;
-  game.editorMode.numCols = newNumCols;
-  game.updateLevel();
-
+  game.editorMode.addColumns(colsToAdd);
   displayNumCols();
   displayLevelData();
   displayObstacleData();
@@ -67,15 +59,7 @@ function addColumns(colsToAdd) {
  * Deletes the last column.
  */
 function deleteLastColumn() {
-  var convertedGrid = create2dArray(game.editorMode.gridData, game.editorMode.numCols);
-  removeLastColumnFromGrid(convertedGrid);
-  var convertedBackGrid = create1dArray(convertedGrid);
-  var newNumCols = game.editorMode.numCols - 1;
-
-  game.editorMode.gridData = convertedBackGrid;
-  game.editorMode.numCols = newNumCols;
-  game.updateLevel();
-
+  game.editorMode.deleteLastColumn();
   displayNumCols();
   displayLevelData();
   displayObstacleData();

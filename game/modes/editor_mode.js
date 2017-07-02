@@ -19,12 +19,19 @@ function EditorMode() {
 
 EditorMode.prototype = (function() {
   return {
+    addColumns: addColumns,
+    deleteLastColumn: deleteLastColumn,
     draw: draw,
     loadLevel: loadLevel,
     update: update,
   };
 
+  /**
+   * Loads a level.
+   * @param {Object} level - The level to load.
+   */
   function loadLevel(level) {
+    this.level = level;
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
     this.enemyGrid = level.enemyGrid.copy();
     // TODO: rename to something more appropriate
@@ -39,6 +46,61 @@ EditorMode.prototype = (function() {
     this.levelImageKey = level.key;
     this.levelImageOffset = level.levelImageOffset;
   }
+
+  // Editing
+
+  /**
+   * Adds columns to the right side of the grid.
+   * @param {number} colsToAdd - The number of columns to add.
+   */
+  function addColumns(colsToAdd) {
+    var oldNumCols = this.numCols;
+    var newNumCols = oldNumCols + colsToAdd;
+
+    var oldTileData = this.tiles.getGridData();
+    tiles2D = create2dArray(oldTileData, oldNumCols);
+    addColumnsToGrid(tiles2D, colsToAdd, 0);
+    var newTiles = create1dArray(tiles2D);
+    var newTileGrid = new Grid2D(newTiles, newNumCols);
+    this.tiles = new TileGrid(newTileGrid, this.level.tileset);
+
+    var oldEnemyData = this.enemyGrid.getData();
+    enemies2D = create2dArray(oldEnemyData, oldNumCols);
+    addColumnsToGrid(enemies2D, colsToAdd, 0);
+    var newEnemies = create1dArray(enemies2D);
+    this.enemyGrid = new Grid2D(newEnemies, newNumCols);
+
+    // For Editor. Can reorganize?
+    this.numCols = newNumCols;
+    this.gridData = this.tiles.getGridData();
+  }
+
+  /**
+   * Deletes the last column.
+   */
+  function deleteLastColumn() {
+    var oldNumCols = this.numCols;
+    var newNumCols = oldNumCols - 1;
+
+    var oldTileData = this.tiles.getGridData();
+    tiles2D = create2dArray(oldTileData, oldNumCols);
+    removeLastColumnFromGrid(tiles2D);
+    var newTiles = create1dArray(tiles2D);
+    var newTileGrid = new Grid2D(newTiles, newNumCols);
+    this.tiles = new TileGrid(newTileGrid, this.level.tileset);
+
+    var oldEnemyData = this.enemyGrid.getData();
+    enemies2D = create2dArray(oldEnemyData, oldNumCols);
+    removeLastColumnFromGrid(enemies2D);
+    var newEnemies = create1dArray(enemies2D);
+    this.enemyGrid = new Grid2D(newEnemies, newNumCols);
+
+    // For Editor. Can reorganize?
+    this.numCols = newNumCols;
+    this.gridData = this.tiles.getGridData();
+  }
+
+  // Run Loop
 
   function update() {
     var keyboard = globals.keyboard;
