@@ -1,8 +1,34 @@
 function createLevelWidthForm() {
-  var elements = [
-    '<input id="levelWidth.numCols" type="text" value="" readonly/>',
-    '<input type="button" onclick="addColumns(16);" value="Add 16 columns"/>',
-    '<input type="button" onclick="deleteLastColumn();" value="Remove last column"/>',
-  ]
-  document.getElementById('levelWidth').innerHTML = elements.join('');
+  var levelWidthDiv = document.getElementById('levelWidth');
+
+  var numColsHeader = document.createTextNode('Number of Columns: ');
+  levelWidthDiv.appendChild(numColsHeader);
+
+  var numColsTextField = document.createElement('input');
+  numColsTextField.id = 'levelWidth.numCols';
+  numColsTextField.type = 'text';
+  numColsTextField.value = '';
+  numColsTextField.readOnly = true;
+  numColsTextField.style.width = '25px';
+  levelWidthDiv.appendChild(numColsTextField);
+
+  levelWidthDiv.appendChild(document.createElement('br'));
+
+  var addColumnsButton = document.createElement('input');
+  addColumnsButton.type = 'button';
+  addColumnsButton.value = 'Add 16 columns';
+  addColumnsButton.onclick = function() {
+    addColumns(16);
+  };
+  levelWidthDiv.appendChild(addColumnsButton);
+
+  levelWidthDiv.appendChild(document.createElement('br'));
+
+  var deleteColumnsButton = document.createElement('input');
+  deleteColumnsButton.type = 'button';
+  deleteColumnsButton.value = 'Remove last column';
+  deleteColumnsButton.onclick = function() {
+    deleteLastColumn();
+  };
+  levelWidthDiv.appendChild(deleteColumnsButton);
 }

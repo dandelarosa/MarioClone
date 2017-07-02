@@ -38,15 +38,22 @@ function createWorldPicker() {
     '8-4',
   ];
 
-  var elements = [];
-  elements.push('Select a World:');
-  elements.push('<select id="worldSelect" onchange="selectWorld();">');
-  worlds.forEach(function(element) {
-    option = '<option id="select' + element + '" value="' + element
-      + '">World ' + element + '</option>';
-    elements.push(option);
-  });
+  var levelPickerElement = document.getElementById('worldPicker');
 
-  var innerHTML = elements.join('');
-  document.getElementById('worldPicker').innerHTML = innerHTML;
+  var levelPickerHeader = document.createTextNode('Select a Level: ');
+  levelPickerElement.appendChild(levelPickerHeader);
+
+  var levelPickerSelect = document.createElement('select');
+  levelPickerSelect.id = 'worldSelect';
+  levelPickerSelect.onchange = function() {
+    selectWorld();
+  };
+  worlds.forEach(function(levelId) {
+    var option = document.createElement('option');
+    option.id = 'select' + levelId;
+    option.value = levelId;
+    option.appendChild(document.createTextNode('World ' + levelId));
+    levelPickerSelect.appendChild(option);
+  });
+  levelPickerElement.appendChild(levelPickerSelect);
 }

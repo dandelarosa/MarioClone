@@ -1,3 +1,12 @@
+function createEditorElements() {
+  createLevelWidthForm();
+  createLevelDataForm();
+  createObstacleDataForm();
+  createWorldPicker();
+  createTilePicker();
+  createObstaclePicker();
+}
+
 function displayLevelData() {
   var input = document.getElementById('levelData.data');
   var value = twoDigitHexArray(game.editorMode.gridData);

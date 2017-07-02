@@ -101,16 +101,11 @@
 var persistence;
 var game;
 window.onload = function() {
-  persistence = new Persistence();
   globals.setup();
+  persistence = new Persistence();
   game = new Game();
-  createLevelWidthForm();
-  createLevelDataForm();
-  createObstacleDataForm();
-  createWorldPicker();
-  createTilePicker();
+  createEditorElements();
   selectTile();
-  createObstaclePicker();
   var lastSelectedWorld = getLastSelectedWorld();
   if (lastSelectedWorld) {
     game.loadLevel(lastSelectedWorld);
@@ -130,16 +125,23 @@ function runLoop() {
 <table>
   <tr>
     <td>
-      <form id="levelWidth"></form>
-      <form id="levelData" action="javascript:updateLevelData();"></form>
-      <div id="obstacleData"></div>
       <div id="worldPicker"></div>
     </td>
     <td>
-      <div id="tilePicker"></div>
-      <div id="obstaclePicker"></div>
     </td>
   </tr>
+  <tr>
+    <td>
+      <div id="levelWidth"></div>
+    </td>
+    <td>
+      <div id="genericEditor">
+        <form id="levelData" action="javascript:updateLevelData();"></form>
+        <div id="obstacleData"></div>
+        <div id="tilePicker"></div>
+        <div id="obstaclePicker"></div>
+      </div>
+    </td>
 </table>
 
 </body>
