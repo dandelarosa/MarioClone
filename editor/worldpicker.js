@@ -46,7 +46,7 @@ function createWorldPicker() {
   var levelPickerSelect = document.createElement('select');
   levelPickerSelect.id = 'worldSelect';
   levelPickerSelect.onchange = function() {
-    selectWorld();
+    levelSelected();
   };
   worlds.forEach(function(levelId) {
     var option = document.createElement('option');
@@ -56,4 +56,32 @@ function createWorldPicker() {
     levelPickerSelect.appendChild(option);
   });
   levelPickerElement.appendChild(levelPickerSelect);
+}
+
+/**
+ * Updates dropdown to show the row with the selected ID.
+ * @param {string} levelId - The level's ID.
+ */
+function showLevelId(levelId) {
+  var select = document.getElementById('worldSelect');
+  var options = select.options;
+  for (var optionIndex = 0; optionIndex < options.length; optionIndex++) {
+    var optionToCheck = options[optionIndex];
+    if (optionToCheck.value === levelId) {
+      select.selectedIndex = optionIndex;
+      break;
+    }
+  }
+}
+
+/**
+ * Handles the level selection event.
+ */
+function levelSelected() {
+  var select = document.getElementById('worldSelect');
+  var selectedIndex = select.selectedIndex;
+  var selectedOption = select.options[selectedIndex];
+  var levelId = selectedOption.value;
+  selectLevelWithId(levelId);
+  persistence.setValue('selectedWorld', levelId);
 }

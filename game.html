@@ -105,16 +105,7 @@ window.onload = function() {
   persistence = new Persistence();
   game = new Game();
   createEditorElements();
-  selectTile();
-  var lastSelectedWorld = getLastSelectedWorld();
-  if (lastSelectedWorld) {
-    game.loadLevel(lastSelectedWorld);
-  }
-  else {
-    game.loadLevel(worlds['1-1']);
-  }
-  displayLevelData();
-  displayObstacleData();
+  loadFirstLevel();
   setInterval(runLoop, 1000 / game.fps);
 };
 function runLoop() {
@@ -136,7 +127,7 @@ function runLoop() {
     </td>
     <td>
       <div id="genericEditor">
-        <form id="levelData" action="javascript:updateLevelData();"></form>
+        <div id="levelData"></div>
         <div id="obstacleData"></div>
         <div id="tilePicker"></div>
         <div id="obstaclePicker"></div>
