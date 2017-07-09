@@ -90,7 +90,7 @@ PlayerMode.prototype = (function() {
       }
     }
 
-    if (player.getY() > this.width) {
+    if (player.getY() > this.height) {
       this.reset();
     }
   }
