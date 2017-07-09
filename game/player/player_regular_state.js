@@ -26,7 +26,7 @@ PlayerRegularState.prototype = (function() {
 
   // Movement
 
-  function update(physicsObject, keyboard, tiles) {
+  function update(physicsObject, keyboard, tiles, camera) {
     var rect = physicsObject.getRect();
     var speed = physicsObject.getSpeed();
 
@@ -61,12 +61,26 @@ PlayerRegularState.prototype = (function() {
     var futureLeftX = rect.x + speed.x;
     var futureRightX = rect.x + rect.width + speed.x;
 
+    // Bound by level dimensions
     if (speed.x < 0 && leftX <= tiles.minX()) {
       rect.x = tiles.minX();
       speed.x = 0.0;
     }
     else if (speed.x > 0 && rightX >= tiles.maxX()) {
       rect.x = tiles.maxX() - rect.width;
+      speed.x = 0.0;
+    }
+
+    // Bound by camera
+    var cameraRect = camera.getRect();
+    var cameraLeft = cameraRect.x;
+    var cameraRight = cameraRect.x + cameraRect.width;
+    if (speed.x < 0.0 && leftX <= cameraLeft) {
+      rect.x = cameraLeft;
+      speed.x = 0.0;
+    }
+    else if (speed.x > 0.0 && rightX >= cameraRight) {
+      rect.x = cameraRight - rect.width;
       speed.x = 0.0;
     }
 

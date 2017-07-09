@@ -32,7 +32,7 @@ PlayerMode.prototype = (function() {
     var level = this.level;
     this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
     this.enemyGrid = level.enemyGrid.copy();
-    
+
     this.player = new Player(this.width/2, this.height/2);
     this.enemies = [];
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
@@ -46,9 +46,8 @@ PlayerMode.prototype = (function() {
     }
 
     var player = this.player;
-    player.move(keyboard, this.tiles);
-
     var camera = this.camera;
+    player.move(keyboard, this.tiles, camera);
     camera.follow(player, this.tiles);
 
     var cameraRect = camera.getRect();

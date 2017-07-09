@@ -36,12 +36,17 @@ PlayerCamera.prototype = (function() {
     var rect2 = player.getRect();
 
     // Left camera threshold
-    if (rect2.x < this.x + leftSnapThreshold) {
-      this.x = rect2.x - leftSnapThreshold;
+    var canMoveCameraLeft = false;
+    var playerLeft = rect2.x;
+    if (canMoveCameraLeft && playerLeft < this.x + leftSnapThreshold) {
+      this.x = playerLeft - leftSnapThreshold;
     }
+
     // Right camera threshold
-    else if (rect2.x + rect2.width > this.x + rightSnapThreshold) {
-      this.x = rect2.x + rect2.width - rightSnapThreshold;
+    var canMoveCameraRight = true;
+    var playerRight = rect2.x + rect2.width;
+    if (canMoveCameraRight && playerRight > this.x + rightSnapThreshold) {
+      this.x = playerRight - rightSnapThreshold;
     }
 
     // this next code blocks the game from showing out of bounds
