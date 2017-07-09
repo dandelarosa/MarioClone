@@ -22,7 +22,8 @@ function createObstaclePicker() {
   };
 
   var storedValue = persistence.getValue('lastObstacleSelected', 'int', ENEMY_NONE);
-  game.editorMode.obstacleEditingMode.selectedValue = storedValue;
+  // TODO: find a way to do this without traversing the entire object hierarchy
+  game.editorMode.editingModeManager.obstacleEditingMode.selectedValue = storedValue;
   var indexOfStoredValue = 0;
   for (var i = 0; i < options.length; i++) {
     if (options[i].value === storedValue) {
@@ -37,6 +38,7 @@ function obstaclePickerOnchange(selectElement) {
   var selectedIndex = selectElement.selectedIndex;
   var selectedOption = selectElement.options[selectedIndex];
   var selectedValue = parseInt(selectedOption.value);
-  game.editorMode.obstacleEditingMode.selectedValue = selectedValue;
+  // TODO: find a way to do this without traversing the entire object hierarchy
+  game.editorMode.editingModeManager.obstacleEditingMode.selectedValue = selectedValue;
   persistence.setValue('lastObstacleSelected', selectedValue);
 }

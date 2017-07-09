@@ -79,6 +79,8 @@ function createTilePicker() {
     }
   }
   document.getElementById('tileSelect').selectedIndex = indexOfStoredValue;
+  // TODO: find a way to do this without traversing the entire object hierarchy
+  game.editorMode.editingModeManager.tileEditingMode.selectedTileValue = storedValue;
 }
 
 function selectTile() {
@@ -86,6 +88,7 @@ function selectTile() {
   var selectedIndex = select.selectedIndex;
   var selectedOption = select.options[selectedIndex];
   var selectedValue = parseInt(selectedOption.value);
-  game.editorMode.tileEditingMode.selectedTileValue = selectedValue;
+  // TODO: find a way to do this without traversing the entire object hierarchy
+  game.editorMode.editingModeManager.tileEditingMode.selectedTileValue = selectedValue;
   persistence.setValue('lastTileSelected', selectedValue);
 }

@@ -6,15 +6,9 @@ function EditorMode() {
   this.height = 240;
   this.levelMockupAlpha = 0.0;
 
-  this.tileEditingMode = new TileEditingMode();
-  this.obstacleEditingMode = new ObstacleEditingMode();
-  var savedEditingMode = persistence.getValue('editingMode', 'int', EDITING_MODE.TILES);
-  if (savedEditingMode === EDITING_MODE.OBSTACLES) {
-    this.currentEditingMode = this.obstacleEditingMode;
-  }
-  else {
-    this.currentEditingMode = this.tileEditingMode;
-  }
+  this.editingModeIndex = persistence.getValue('editingMode', 'int', EDITING_MODE.FIRST);
+  this.editingModeManager = new EditingModeManager();
+  this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
 }
 
 EditorMode.prototype = (function() {
@@ -115,14 +109,12 @@ EditorMode.prototype = (function() {
     }
 
     if (keyboard.isKeyPressedThisFrame(KEY_1)) {
-      if (this.currentEditingMode == this.tileEditingMode) {
-        this.currentEditingMode = this.obstacleEditingMode;
-        persistence.setValue('editingMode', EDITING_MODE.OBSTACLES);
+      this.editingModeIndex++;
+      if (this.editingModeIndex >= EDITING_MODE.COUNT) {
+        this.editingModeIndex = EDITING_MODE.FIRST;
       }
-      else {
-        this.currentEditingMode = this.tileEditingMode;
-        persistence.setValue('editingMode', EDITING_MODE.TILES);
-      }
+      this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
+      persistence.setValue('editingMode', this.editingModeIndex);
     }
 
     var camera = this.camera;
