@@ -90,6 +90,22 @@ PlayerMode.prototype = (function() {
       }
     }
 
+    var enemies = this.enemies;
+    for (var i = 0; i < enemies.length; i++) {
+      var enemy = enemies[i];
+      var shouldDelete = false;
+      if (enemy.deathTimer <= 0) {
+        shouldDelete = true;
+      }
+      if (enemy.getRect().y > this.height) {
+        shouldDelete = true;
+      }
+      if (shouldDelete) {
+        enemies.splice(i, 1);
+        i--;
+      }
+    }
+
     if (player.getY() > this.height) {
       this.reset();
     }

@@ -1,5 +1,6 @@
 function Goomba(spawnPoint) {
   this.isDead = false;
+  this.deathTimer = 20;
   var rect = new Rect2D(spawnPoint.x, spawnPoint.y, 16, 16);
   var speed = new Vector2D(-1, 0);
   this.physicsObject = new PhysicsObject2D(rect, speed);
@@ -117,6 +118,10 @@ Goomba.prototype = (function() {
 
     rect.x += speed.x; // move the jumper based on its current horizontal speed
     rect.y += speed.y; // same as above, but for vertical
+
+    if (this.isDead) {
+      this.deathTimer--;
+    }
   }
 
   function draw(graphics) {
