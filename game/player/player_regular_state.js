@@ -44,7 +44,7 @@ PlayerRegularState.prototype = (function() {
       }
     }
     else {
-      this.updateSpeedX(speed, keyboard, 0.3, 3.0, AIR_RESISTANCE);
+      this.updateSpeedX(speed, keyboard, 0.3, 3.0, 1.0);
       speed.y += GRAVITY;
       // cheap test to ensure can't fall through floor
       if (speed.y > JUMPER_RADIUS) {

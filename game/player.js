@@ -1,5 +1,4 @@
 const GROUND_FRICTION = 0.8;
-const AIR_RESISTANCE = 0.95;
 const RUN_SPEED = 4.0;
 const JUMP_POWER = 9.0;
 const GRAVITY = 0.6;
