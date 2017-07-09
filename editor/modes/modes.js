@@ -2,5 +2,9 @@ const EDITING_MODE = {
   FIRST: 0,
   TILES: 0,
   OBSTACLES: 1,
-  COUNT: 2,
+  BACKGROUND: 2,
+  FOREGROUND: 3,
+  ENEMIES: 4,
+  LAST: 4,
+  COUNT: 5,
 };

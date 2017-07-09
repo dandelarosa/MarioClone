@@ -5,6 +5,9 @@
 function EditingModeManager() {
   this.tileEditingMode = new TileEditingMode();
   this.obstacleEditingMode = new ObstacleEditingMode();
+  this.backgroundEditingMode = new BackgroundEditingMode();
+  this.foregroundEditingMode = new ForegroundEditingMode();
+  this.enemyEditingMode = new EnemyEditingMode();
 }
 
 EditingModeManager.prototype = (function() {
@@ -24,6 +27,15 @@ EditingModeManager.prototype = (function() {
         break;
       case EDITING_MODE.OBSTACLES:
         return this.obstacleEditingMode;
+        break;
+      case EDITING_MODE.BACKGROUND:
+        return this.backgroundEditingMode;
+        break;
+      case EDITING_MODE.FOREGROUND:
+        return this.foregroundEditingMode;
+        break;
+      case EDITING_MODE.ENEMIES:
+        return this.enemyEditingMode;
         break;
       default:
         return null;

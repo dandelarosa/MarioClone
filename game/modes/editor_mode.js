@@ -6,7 +6,11 @@ function EditorMode() {
   this.height = 240;
   this.levelMockupAlpha = 0.0;
 
-  this.editingModeIndex = persistence.getValue('editingMode', 'int', EDITING_MODE.FIRST);
+  var savedEditingModeIndex = persistence.getValue('editingMode', 'int', EDITING_MODE.FIRST);
+  if (savedEditingModeIndex > EDITING_MODE.LAST) {
+    savedEditingModeIndex = EDITING_MODE.FIRST;
+  }
+  this.editingModeIndex = savedEditingModeIndex;
   this.editingModeManager = new EditingModeManager();
   this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
 }
