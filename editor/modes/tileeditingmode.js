@@ -2,7 +2,7 @@ function TileEditingMode() {
   return {
     displayText: 'Editing Tiles',
     handleClickAtColRow: handleClickAtColRow,
-    selectedTileValue: TILE_BLUE_SKY,
+    selectedTileValue: TILE_V2_EMPTY,
   };
 
   function handleClickAtColRow(col, row, game) {

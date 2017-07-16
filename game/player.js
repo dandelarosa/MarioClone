@@ -78,6 +78,6 @@ Player.prototype = (function() {
 
   function drawBoundingBox(graphics) {
     var rect = this.getRect();
-    graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'white');
+    graphics.fillRect(rect, 'white');
   }
 })();

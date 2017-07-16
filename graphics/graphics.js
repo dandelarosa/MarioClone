@@ -23,14 +23,15 @@ Graphics.prototype = (function() {
   // Shortcuts
 
   function fillCanvas(color) {
-    this.fillRect(0, 0, this.canvas.width, this.canvas.height, color);
+    var fullRect = new Rect2D(0, 0, this.canvas.width, this.canvas.height);
+    this.fillRect(fullRect, color);
   }
 
   // Basic Drawing
 
-  function fillRect(x, y, width, height, color) {
+  function fillRect(rect, color) {
     this.context2d.fillStyle = color;
-    this.context2d.fillRect(x, y, width, height);
+    this.context2d.fillRect(rect.x, rect.y, rect.width, rect.height);
   }
 
   function drawLine(point1x, point1y, point2x, point2y, color) {

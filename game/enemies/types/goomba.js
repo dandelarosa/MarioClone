@@ -34,6 +34,9 @@ Goomba.prototype = (function() {
 
   function switchToDeathState() {
     this.isDead = true;
+    var rect = this.getRect();
+    rect.y = rect.y + rect.height / 2;
+    rect.height = rect.height / 2;
     var speed = this.getSpeed();
     speed.x = 0;
   }
@@ -126,11 +129,6 @@ Goomba.prototype = (function() {
 
   function draw(graphics) {
     var rect = this.getRect();
-    if (this.isDead) {
-      graphics.fillRect(rect.x, rect.y + rect.height / 2, rect.width, rect.height / 2, 'red');
-    }
-    else {
-      graphics.fillRect(rect.x, rect.y, rect.width, rect.height, 'red');
-    }
+    graphics.fillRect(rect, 'red');
   }
 })();

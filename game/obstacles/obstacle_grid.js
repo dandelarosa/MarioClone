@@ -1,6 +1,3 @@
-const OBSTACLE_WIDTH = 16;
-const OBSTACLE_HEIGHT = 16;
-
 function ObstacleGrid(grid) {
 }
 
@@ -8,8 +5,6 @@ ObstacleGrid.prototype = (function() {
   return {
     draw: draw,
   };
-
-  // Drawing
 
   /**
    * Draws placeholder graphics for enemies in the level editor.
@@ -21,28 +16,24 @@ ObstacleGrid.prototype = (function() {
    * @param {Object} grid - The grid containing enemy placement information.
    */
   function draw(x, y, width, height, graphics, grid) {
-    const obstacleWidth = OBSTACLE_WIDTH;
-    const obstacleHeight = OBSTACLE_HEIGHT;
+    var leftMostCol = Math.floor(x / CELL_WIDTH);
+    var topMostRow = Math.floor(y / CELL_HEIGHT);
 
-    var leftMostCol = Math.floor(x / obstacleWidth);
-    var topMostRow = Math.floor(y / obstacleHeight);
-
-    var colsThatFitInRect = Math.floor(width / obstacleWidth);
-    var rowsThatFitInRect = Math.floor(height / obstacleHeight);
+    var colsThatFitInRect = Math.floor(width / CELL_WIDTH);
+    var rowsThatFitInRect = Math.floor(height / CELL_HEIGHT);
 
     // Draw a one-cell buffer on each side
     var rightMostCol = leftMostCol + colsThatFitInRect + 2;
     var bottomMostRow = topMostRow + rowsThatFitInRect + 2;
 
+    var drawingRect = new Rect2D(0, 0, CELL_WIDTH, CELL_HEIGHT);
     for (var row = topMostRow; row < bottomMostRow; row++) {
       for (var col = leftMostCol; col < rightMostCol; col++) {
         var obstacleValue = grid.valueAtColAndRow(col, row);
         if (typeof obstacleValue === 'number' && obstacleValue > ENEMY_NONE) {
-          var rectX = col * obstacleWidth;
-          var rectY = row * obstacleHeight;
-          var rectWidth = obstacleWidth;
-          var rectHeight = obstacleHeight;
-          graphics.fillRect(rectX, rectY, rectWidth, rectHeight, 'blue');
+          drawingRect.x = col * CELL_WIDTH;
+          drawingRect.y = row * CELL_HEIGHT;
+          graphics.fillRect(drawingRect, 'blue');
         }
       }
     }
