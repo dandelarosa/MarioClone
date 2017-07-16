@@ -109,27 +109,3 @@ Bricks.prototype.toggleValueAtColRow = function(col, row, value) {
     this.grid2d.setValueAtIndex(value, index);
   }
 }
-
-// Drawing bricks
-
-Bricks.prototype.drawBricksInRect = function(x, y, width, height, graphics) {
-  var leftMostCol = Math.floor(x / BRICK_WIDTH);
-  var topMostRow = Math.floor(y / BRICK_HEIGHT);
-
-  var colsThatFitInRect = Math.floor(width / BRICK_WIDTH);
-  var rowsThatFitInRect = Math.floor(height / BRICK_HEIGHT);
-
-  // Draw a one-cell buffer on each side
-  var rightMostCol = leftMostCol + colsThatFitInRect + 2;
-  var bottomMostRow = topMostRow + rowsThatFitInRect + 2;
-
-  for (var row = topMostRow; row < bottomMostRow; row++) {
-    for (var col = leftMostCol; col < rightMostCol; col++) {
-      var tileIndex = this.grid2d.indexForColAndRow(col, row);
-      var leftX = col * BRICK_WIDTH;
-      var topY = row * BRICK_HEIGHT;
-      var tileValue = this.grid2d.valueAtIndex(tileIndex);
-      this.tileset.drawTile(graphics, tileValue, leftX, topY);
-    }
-  }
-};

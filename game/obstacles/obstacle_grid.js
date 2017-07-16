@@ -3,24 +3,21 @@ function ObstacleGrid(grid) {
 
 ObstacleGrid.prototype = (function() {
   return {
-    draw: draw,
+    drawInRect: drawInRect,
   };
 
   /**
    * Draws placeholder graphics for enemies in the level editor.
-   * @param {number} x - The camera's x position.
-   * @param {number} y - The camera's y position.
-   * @param {number} width - The camera's width.
-   * @param {number} height - The camera's height.
+   * @param {Object} rect - The camera's frame.
    * @param {Object} graphics - The object responsible for drawing graphics on the screen.
    * @param {Object} grid - The grid containing enemy placement information.
    */
-  function draw(x, y, width, height, graphics, grid) {
-    var leftMostCol = Math.floor(x / CELL_WIDTH);
-    var topMostRow = Math.floor(y / CELL_HEIGHT);
+  function drawInRect(rect, graphics, grid) {
+    var leftMostCol = Math.floor(rect.x / CELL_WIDTH);
+    var topMostRow = Math.floor(rect.y / CELL_HEIGHT);
 
-    var colsThatFitInRect = Math.floor(width / CELL_WIDTH);
-    var rowsThatFitInRect = Math.floor(height / CELL_HEIGHT);
+    var colsThatFitInRect = Math.floor(rect.width / CELL_WIDTH);
+    var rowsThatFitInRect = Math.floor(rect.height / CELL_HEIGHT);
 
     // Draw a one-cell buffer on each side
     var rightMostCol = leftMostCol + colsThatFitInRect + 2;

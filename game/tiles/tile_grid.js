@@ -137,12 +137,12 @@ TileGrid.prototype = (function() {
 
   // Drawing bricks
 
-  function drawInRect(x, y, width, height, graphics) {
-    var leftMostCol = Math.floor(x / TILE_WIDTH);
-    var topMostRow = Math.floor(y / TILE_HEIGHT);
+  function drawInRect(rect, graphics) {
+    var leftMostCol = Math.floor(rect.x / TILE_WIDTH);
+    var topMostRow = Math.floor(rect.y / TILE_HEIGHT);
 
-    var colsThatFitInRect = Math.floor(width / TILE_WIDTH);
-    var rowsThatFitInRect = Math.floor(height / TILE_HEIGHT);
+    var colsThatFitInRect = Math.floor(rect.width / TILE_WIDTH);
+    var rowsThatFitInRect = Math.floor(rect.height / TILE_HEIGHT);
 
     // Draw a one-cell buffer on each side
     var rightMostCol = leftMostCol + colsThatFitInRect + 2;

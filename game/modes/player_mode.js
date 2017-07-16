@@ -119,9 +119,9 @@ PlayerMode.prototype = (function() {
 
     graphics.pushState();
     var camera = this.camera;
+    var cameraRect = camera.getRect();
     graphics.translate(-camera.x, -this.camera.y);
-    this.tiles.drawInRect(camera.x, camera.y, camera.width,
-      camera.height, graphics);
+    this.tiles.drawInRect(cameraRect, graphics);
     this.enemies.forEach(function(enemy) {
       enemy.draw(graphics);
     });
