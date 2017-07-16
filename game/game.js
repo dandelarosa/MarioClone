@@ -34,6 +34,7 @@ Game.prototype = (function() {
   }
 
   function runLoop() {
+    // Update
     var keyboard = globals.keyboard;
     var mouse = globals.mouse;
     if (keyboard.isKeyPressedThisFrame(KEY_ESC)) {
@@ -48,9 +49,14 @@ Game.prototype = (function() {
     }
 
     this.currentMode.update();
-    this.currentMode.draw();
 
     keyboard.resetKeyStateChanges();
     mouse.resetStateChange();
+
+    // Draw
+    this.currentMode.draw();
+    var graphics = globals.graphics;
+    graphics.fillText(fpsString, 470, 15, 'yellow');
   }
+
 })();

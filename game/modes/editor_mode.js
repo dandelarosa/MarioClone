@@ -159,7 +159,7 @@ EditorMode.prototype = (function() {
     graphics.fillText('Editor Mode', 5, 15, 'yellow');
     graphics.fillText(this.currentEditingMode.displayText, 5, 25, 'yellow');
 
-    graphics.fillText('Press 0 to toggle level mockup', 370, 15, 'yellow');
+    graphics.fillText('Press 0 to toggle level mockup', 370, 25, 'yellow');
 
     var mouse = globals.mouse;
     var mouseX = mouse.x;

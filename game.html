@@ -49,6 +49,7 @@
   <script src="input/keyboard.js"></script>
   <script src="input/keys.js"></script>
   <script src="input/mouse.js"></script>
+  <script src="utils/fps.js"></script>
   <script src="utils/grid2d.js"></script>
   <script src="utils/hex.js"></script>
   <script src="utils/persistence.js"></script>
@@ -110,9 +111,11 @@ window.onload = function() {
   game = new Game();
   createEditorElements();
   loadFirstLevel();
-  setInterval(runLoop, 1000 / game.fps);
+  var delayPerFrame = 1000 / game.fps;
+  setInterval(runLoop, delayPerFrame);
 };
 function runLoop() {
+  measureFPS();
   game.runLoop();
 }
 </script>
