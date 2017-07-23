@@ -9,7 +9,7 @@ function Tileset(name) {
   function drawTile(graphics, value, x, y) {
     if (value === undefined) return;
     if (value < TILE_V2_EMPTY) {
-      globals.drawTile(graphics, value, x, y);
+      drawTile(graphics, value, x, y);
       return;
     }
     if (tilesetImageLoaded[tileset.name]) {

@@ -2,7 +2,6 @@ var globals = new Globals();
 
 function Globals() {
   var globals = {
-    drawTile: drawTile, // defined in tiledrawing.js
     keyboard: null,
     mouse: null,
     setup: setup,
