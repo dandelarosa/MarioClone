@@ -1,3 +1,5 @@
+const TILE_OUT_OF_BOUNDS = -1;
+
 const TILE_V2_EMPTY = 0x40;
 
 const TILE_V2_CLOUD_UPPER_LEFT = 0x41;

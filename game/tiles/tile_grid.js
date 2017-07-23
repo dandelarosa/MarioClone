@@ -128,7 +128,7 @@ TileGrid.prototype = (function() {
   function toggleValueAtColRow(col, row, value) {
     var index = this.grid.indexForColAndRow(col, row);
     if (this.grid.valueAtIndex(index) === value) {
-      this.grid.setValueAtIndex(TILE_EMPTY, index);
+      this.grid.setValueAtIndex(TILE_V2_EMPTY, index);
     }
     else {
       this.grid.setValueAtIndex(value, index);
