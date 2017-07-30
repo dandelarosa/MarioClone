@@ -12,14 +12,12 @@ TileGrid.prototype = (function() {
     getNumCols: getNumCols,
     getTileHeight: getTileHeight,
     getTileWidth: getTileWidth,
-    isSolidAtPoint: isSolidAtPoint,
     maxX: maxX,
     maxY: maxY,
     minX: minX,
     minY: minY,
     rowForPixelY: rowForPixelY,
     tileValueAtColRow: tileValueAtColRow,
-    tileValueAtPoint: tileValueAtPoint,
     toggleValueAtColRow: toggleValueAtColRow,
   };
 
@@ -73,47 +71,6 @@ TileGrid.prototype = (function() {
   }
 
   // Looking at brick values
-
-  function isSolidAtPoint(x, y) {
-    var tileValue = this.tileValueAtPoint(x, y);
-    return tileValue === TILE_V2_GROUND_BLOCK
-    || tileValue === TILE_V2_SOLID_BLOCK
-    || tileValue === TILE_V2_BRICK_BLOCK
-    || tileValue === TILE_V2_ITEM_BLOCK
-    || tileValue === TILE_V2_EMPTY_BLOCK
-    || tileValue === TILE_V2_TREE_TOP_LEFT
-    || tileValue === TILE_V2_TREE_TOP_CENTER
-    || tileValue === TILE_V2_TREE_TOP_RIGHT
-    || tileValue === TILE_V2_PIPE_TOP_END_LEFT
-    || tileValue === TILE_V2_PIPE_TOP_END_RIGHT
-    || tileValue === TILE_V2_PIPE_V_LEFT
-    || tileValue === TILE_V2_PIPE_V_RIGHT
-    || tileValue === TILE_V2_PIPE_H_TOP
-    || tileValue === TILE_V2_PIPE_H_BOTTOM
-    || tileValue === TILE_V2_PIPE_LEFT_END_TOP
-    || tileValue === TILE_V2_PIPE_LEFT_END_BOTTOM
-    || tileValue === TILE_V2_PIPE_LEFT_INT_TOP
-    || tileValue === TILE_V2_PIPE_LEFT_INT_BOTTOM
-    || tileValue === TILE_V2_BRIDGE;
-  };
-
-  function tileValueAtPoint(x, y) {
-    var tileCol = x / TILE_WIDTH;
-    var tileRow = y / TILE_HEIGHT;
-
-    // using Math.floor to round down to the nearest whole number
-    tileCol = Math.floor(tileCol);
-    tileRow = Math.floor(tileRow);
-
-    // first check whether the jumper is within any part of the brick wall
-    var numRows = this.getGridData().length / this.grid.numCols;
-    if(tileCol < 0 || tileCol >= this.grid.numCols ||
-       tileRow < 0 || tileRow >= numRows) {
-       return TILE_OUT_OF_BOUNDS;
-    }
-
-    return this.tileValueAtColRow(tileCol, tileRow);
-  };
 
   function tileValueAtColRow(col, row) {
     var brickIndex = this.brickTileToIndex(col, row);
