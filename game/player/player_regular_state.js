@@ -1,5 +1,4 @@
 function PlayerRegularState() {
-  this.onGround = false;
 }
 
 PlayerRegularState.prototype = (function() {
@@ -26,16 +25,16 @@ PlayerRegularState.prototype = (function() {
 
   // Movement
 
-  function update(physicsObject, keyboard, tiles, camera) {
+  function update(physicsObject, keyboard, tiles, camera, collisionDetectors) {
     var rect = physicsObject.getRect();
     var speed = physicsObject.getSpeed();
 
     var jumpPressed = this.isJumpButtonPressed(keyboard);
-    if (jumpPressed && this.onGround) {
+    if (jumpPressed && physicsObject.onGround) {
       speed.y = -JUMP_POWER;
     }
 
-    if (this.onGround) {
+    if (physicsObject.onGround) {
       if (keyboard.isKeyPressed(KEY_Z)) {
         this.updateSpeedX(speed, keyboard, 0.5, 6.0, GROUND_FRICTION);
       }
@@ -52,14 +51,8 @@ PlayerRegularState.prototype = (function() {
       }
     }
 
-    var topY = rect.y;
-    var bottomY = rect.y + rect.height;
     var leftX = rect.x;
     var rightX = rect.x + rect.width;
-    var futureTopY = rect.y + speed.y;
-    var futureBottomY = rect.y + rect.height + speed.y;
-    var futureLeftX = rect.x + speed.x;
-    var futureRightX = rect.x + rect.width + speed.x;
 
     // Bound by level dimensions
     if (speed.x < 0 && leftX <= tiles.minX()) {
@@ -84,48 +77,7 @@ PlayerRegularState.prototype = (function() {
       speed.x = 0.0;
     }
 
-    // If future top side is inside a wall, push to row below
-    if (speed.y < 0 && tiles.isSolidAtPoint(rect.x, futureTopY)) {
-      rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
-      speed.y = 0.0;
-    }
-    else if (speed.y < 0 && tiles.isSolidAtPoint(rightX - 1, futureTopY)) {
-      rect.y = Math.floor(rect.y / tiles.getTileHeight()) * tiles.getTileHeight();
-      speed.y = 0.0;
-    }
-    // If future bottom side is inside a wall, push to row above
-    else if (speed.y > 0 && tiles.isSolidAtPoint(leftX, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
-      this.onGround = true;
-      speed.y = 0;
-    }
-    else if (speed.y > 0 && tiles.isSolidAtPoint(rightX - 1, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tiles.getTileHeight())) * tiles.getTileHeight() - rect.height;
-      this.onGround = true;
-      speed.y = 0;
-    }
-    else if (tiles.isSolidAtPoint(rect.x, rect.y + rect.height + 2) == 0) {
-      this.onGround = false;
-    }
-
-    // If left side is already inside a wall, push to the column to the right
-    if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, topY))) {
-      rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
-      speed.x = 0;
-    }
-    else if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, bottomY - 1))) {
-      rect.x = Math.floor(leftX / tiles.getTileWidth()) * tiles.getTileWidth();
-      speed.x = 0;
-    }
-    // If right side is already inside a wall, push to the column to the left
-    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, topY))) {
-      rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
-      speed.x = 0;
-    }
-    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, bottomY - 1))) {
-      rect.x = Math.ceil(rightX / tiles.getTileWidth()) * tiles.getTileWidth() - rect.width;
-      speed.x = 0;
-    }
+    collisionDetectors.foreground.handleCollisionsWith(physicsObject);
 
     rect.x += speed.x; // move the jumper based on its current horizontal speed
     rect.y += speed.y; // same as above, but for vertical

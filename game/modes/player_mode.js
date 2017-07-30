@@ -30,12 +30,18 @@ PlayerMode.prototype = (function() {
    */
   function reset() {
     var level = this.level;
+    var foregroundTiles = level.tileGrid.copy();
+    // TODO: deprecate TileGrid class
     this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
     this.enemyGrid = level.enemyGrid.copy();
 
     this.player = new Player(this.width/2, this.height/2);
     this.enemies = [];
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
+
+    this.collisionDetectors = {
+      foreground: new ForegroundCollisionDetector(foregroundTiles),
+    };
   }
 
   function update() {
@@ -47,7 +53,7 @@ PlayerMode.prototype = (function() {
 
     var player = this.player;
     var camera = this.camera;
-    player.move(keyboard, this.tiles, camera);
+    player.move(keyboard, this.tiles, camera, this.collisionDetectors);
     camera.follow(player, this.tiles);
 
     var cameraRect = camera.getRect();
@@ -57,8 +63,9 @@ PlayerMode.prototype = (function() {
     }
 
     var tiles = this.tiles;
+    var collisionDetectors = this.collisionDetectors
     this.enemies.forEach(function(enemy) {
-      enemy.update(tiles);
+      enemy.update(tiles, collisionDetectors);
     });
 
     if (player.shouldCheckForEnemyCollisions()) {

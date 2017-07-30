@@ -1,6 +1,3 @@
-const TILE_WIDTH = 16;
-const TILE_HEIGHT = 16;
-
 function TileGrid(grid, tileset) {
   this.grid = grid;
   this.tileset = tileset;

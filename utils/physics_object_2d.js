@@ -7,6 +7,7 @@
 function PhysicsObject2D(rect, speed) {
   this.rect = rect;
   this.speed = speed;
+  this.onGround = false;
 }
 
 PhysicsObject2D.prototype = (function() {

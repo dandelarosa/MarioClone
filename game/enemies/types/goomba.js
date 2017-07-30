@@ -4,6 +4,7 @@ function Goomba(spawnPoint) {
   var rect = new Rect2D(spawnPoint.x, spawnPoint.y, 16, 16);
   var speed = new Vector2D(-1, 0);
   this.physicsObject = new PhysicsObject2D(rect, speed);
+  this.physicsObject.bouncesHorizontal = true;
 }
 
 Goomba.prototype = (function() {
@@ -43,11 +44,11 @@ Goomba.prototype = (function() {
 
   // Movement
 
-  function update(tiles) {
+  function update(tiles, collisionDetectors) {
     var rect = this.getRect();
     var speed = this.getSpeed();
 
-    if (!this.onGround) {
+    if (!this.physicsObject.onGround) {
       speed.y += GRAVITY;
       // cheap test to ensure can't fall through floor
       if (speed.y > JUMPER_RADIUS) {
@@ -55,14 +56,8 @@ Goomba.prototype = (function() {
       }
     }
 
-    var topY = rect.y;
-    var bottomY = rect.y + rect.height;
     var leftX = rect.x;
     var rightX = rect.x + rect.width;
-    var futureTopY = rect.y + speed.y;
-    var futureBottomY = rect.y + rect.height + speed.y;
-    var futureLeftX = rect.x + speed.x;
-    var futureRightX = rect.x + rect.width + speed.x;
 
     if (speed.x < 0 && leftX <= tiles.minX()) {
       rect.x = tiles.minX();
@@ -73,51 +68,7 @@ Goomba.prototype = (function() {
       speed.x = 0.0;
     }
 
-    var tileWidth = tiles.getTileWidth();
-    var tileHeight = tiles.getTileHeight();
-
-    // If future top side is inside a wall, push to row below
-    if (speed.y < 0 && tiles.isSolidAtPoint(rect.x, futureTopY)) {
-      rect.y = Math.floor(rect.y / tileHeight) * tileHeight;
-      speed.y = 0.0;
-    }
-    else if (speed.y < 0 && tiles.isSolidAtPoint(rightX - 1, futureTopY)) {
-      rect.y = Math.floor(rect.y / tileHeight) * tileHeight;
-      speed.y = 0.0;
-    }
-    // If future bottom side is inside a wall, push to row above
-    else if (speed.y > 0 && tiles.isSolidAtPoint(leftX, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tileHeight)) * tileHeight - rect.height;
-      this.onGround = true;
-      speed.y = 0;
-    }
-    else if (speed.y > 0 && tiles.isSolidAtPoint(rightX - 1, futureBottomY)) {
-      rect.y = (Math.floor(futureBottomY / tileHeight)) * tileHeight - rect.height;
-      this.onGround = true;
-      speed.y = 0;
-    }
-    else if (tiles.isSolidAtPoint(rect.x, rect.y + rect.height + 2) == 0) {
-      this.onGround = false;
-    }
-
-    // If left side is already inside a wall, push to the column to the right
-    if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, topY))) {
-      rect.x = Math.floor(leftX / tileWidth) * tileWidth;
-      speed.x = -speed.x;
-    }
-    else if (speed.x < 0 && (tiles.isSolidAtPoint(futureLeftX, bottomY - 1))) {
-      rect.x = Math.floor(leftX / tileWidth) * tileWidth;
-      speed.x = -speed.x;
-    }
-    // If right side is already inside a wall, push to the column to the left
-    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, topY))) {
-      rect.x = Math.ceil(rightX / tileWidth) * tileWidth - rect.width;
-      speed.x = -speed.x;
-    }
-    else if (speed.x > 0 && (tiles.isSolidAtPoint(futureRightX, bottomY - 1))) {
-      rect.x = Math.ceil(rightX / tileWidth) * tileWidth - rect.width;
-      speed.x = -speed.x;
-    }
+    collisionDetectors.foreground.handleCollisionsWith(this.physicsObject);
 
     rect.x += speed.x; // move the jumper based on its current horizontal speed
     rect.y += speed.y; // same as above, but for vertical

@@ -1,6 +1,7 @@
 function Grid2D(data, numCols) {
   this.data = data.slice();
   this.numCols = parseInt(numCols);
+  this.numRows = this.data.length / this.numCols;
 }
 
 Grid2D.prototype = (function() {
