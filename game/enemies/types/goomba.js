@@ -56,18 +56,7 @@ Goomba.prototype = (function() {
       }
     }
 
-    var leftX = rect.x;
-    var rightX = rect.x + rect.width;
-
-    if (speed.x < 0 && leftX <= tiles.minX()) {
-      rect.x = tiles.minX();
-      speed.x = 0.0;
-    }
-    else if (speed.x > 0 && rightX >= tiles.maxX()) {
-      rect.x = tiles.maxX() - rect.width;
-      speed.x = 0.0;
-    }
-
+    collisionDetectors.level.handleCollisionsWith(this.physicsObject);
     collisionDetectors.foreground.handleCollisionsWith(this.physicsObject);
 
     rect.x += speed.x; // move the jumper based on its current horizontal speed

@@ -40,6 +40,7 @@ PlayerMode.prototype = (function() {
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
 
     this.collisionDetectors = {
+      level: new LevelCollisionDetector(foregroundTiles),
       foreground: new ForegroundCollisionDetector(foregroundTiles),
     };
   }

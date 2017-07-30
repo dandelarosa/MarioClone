@@ -53,16 +53,7 @@ PlayerRegularState.prototype = (function() {
 
     var leftX = rect.x;
     var rightX = rect.x + rect.width;
-
-    // Bound by level dimensions
-    if (speed.x < 0 && leftX <= tiles.minX()) {
-      rect.x = tiles.minX();
-      speed.x = 0.0;
-    }
-    else if (speed.x > 0 && rightX >= tiles.maxX()) {
-      rect.x = tiles.maxX() - rect.width;
-      speed.x = 0.0;
-    }
+    collisionDetectors.level.handleCollisionsWith(physicsObject);
 
     // Bound by camera
     var cameraRect = camera.getRect();
