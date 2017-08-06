@@ -30,6 +30,8 @@ EditorMode.prototype = (function() {
    */
   function loadLevel(level) {
     this.level = level;
+    var foregroundTiles = level.tileGrid.copy();
+    // TODO: deprecate TileGrid class
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
     this.enemyGrid = level.enemyGrid.copy();
     // TODO: rename to something more appropriate
@@ -43,6 +45,10 @@ EditorMode.prototype = (function() {
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
     this.levelImageOffset = level.levelImageOffset;
+
+    this.collisionDetectors = {
+      level: new LevelCollisionDetector(foregroundTiles),
+    };
   }
 
   // Editing
@@ -122,13 +128,13 @@ EditorMode.prototype = (function() {
     }
 
     var camera = this.camera;
-    this.camera.update(keyboard, this.tiles);
+    this.camera.update(keyboard, this.collisionDetectors);
 
     var mouse = globals.mouse;
     var mouseX = mouse.x;
     var mouseY = mouse.y;
-    var mousePlusCameraX = mouse.x / 2 + camera.x;
-    var mousePlusCameraY = mouse.y / 2 + camera.y;
+    var mousePlusCameraX = mouse.x / 2 + camera.getRect().x;
+    var mousePlusCameraY = mouse.y / 2 + camera.getRect().y;
     var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
     var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
     if (mouse.isPressedThisFrame()) {
@@ -145,7 +151,7 @@ EditorMode.prototype = (function() {
     graphics.pushState();
     var camera = this.camera;
     var cameraRect = camera.getRect();
-    graphics.translate(-this.camera.x, -this.camera.y);
+    graphics.translate(-cameraRect.x, -cameraRect.y);
     this.tiles.drawInRect(cameraRect, graphics);
     this.obstacleGrid.drawInRect(cameraRect, graphics, this.enemyGrid);
     if (levelImageLoaded[this.levelImageKey]) {
@@ -163,8 +169,8 @@ EditorMode.prototype = (function() {
     var mouse = globals.mouse;
     var mouseX = mouse.x;
     var mouseY = mouse.y;
-    var mousePlusCameraX = mouse.x / 2 + camera.x;
-    var mousePlusCameraY = mouse.y / 2 + camera.y;
+    var mousePlusCameraX = mouse.x / 2 + cameraRect.x;
+    var mousePlusCameraY = mouse.y / 2 + cameraRect.y;
     var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
     var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
     var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';

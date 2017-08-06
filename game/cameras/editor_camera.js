@@ -1,10 +1,9 @@
 const EDITOR_CAMERA_SPEED = 16;
 
 function EditorCamera(x, y, width, height) {
-  this.x = x;
-  this.y = y;
-  this.width = width;
-  this.height = height;
+  var rect = new Rect2D(x, y, width, height);
+  var speed = new Vector2D(0, 0);
+  this.physicsObject = new PhysicsObject2D(rect, speed);
 }
 
 EditorCamera.prototype = (function() {
@@ -18,45 +17,38 @@ EditorCamera.prototype = (function() {
    * @returns {Object} The object's rect.
    */
   function getRect() {
-    return new Rect2D(this.x, this.y, this.width, this.height);
+    return this.physicsObject.getRect();
   }
 
   /**
    * Updates the camera's position
    * @param {Object} keyboard - The keyboard controlling the camera.
-   * @param {Object} tiles - The object with the bounds data.
+   * @param {Object} collisionDetectors - The objects that handle collisions.
    */
-  function update(keyboard, tiles) {
-    var nextX = this.x;
-    var nextY = this.y;
+  function update(keyboard, collisionDetectors) {
+    var physicsObject = this.physicsObject;
+    var rect = physicsObject.rect;
+    var speed = physicsObject.speed;
 
     if (keyboard.isKeyPressed(KEY_LEFT_ARROW)) {
-      nextX -= EDITOR_CAMERA_SPEED;
+      speed.x = -EDITOR_CAMERA_SPEED;
     }
     if (keyboard.isKeyPressed(KEY_RIGHT_ARROW)) {
-      nextX += EDITOR_CAMERA_SPEED;
+      speed.x = EDITOR_CAMERA_SPEED;
     }
     if (keyboard.isKeyPressed(KEY_UP_ARROW)) {
-      nextY -= EDITOR_CAMERA_SPEED;
+      speed.y = -EDITOR_CAMERA_SPEED;
     }
     if (keyboard.isKeyPressed(KEY_DOWN_ARROW)) {
-      nextY += EDITOR_CAMERA_SPEED;
+      speed.y = EDITOR_CAMERA_SPEED;
     }
 
-    if (nextX < tiles.minX()) {
-      nextX = tiles.minX();
-    }
-    if (nextY < tiles.minY()) {
-      nextY = tiles.minY();
-    }
-    if (nextX + this.width > tiles.maxX()) {
-      nextX = tiles.maxX() - this.width;
-    }
-    if (nextY + this.height > tiles.maxY()) {
-      nextY = tiles.maxY() - this.height;
-    }
+    collisionDetectors.level.handleCollisionsWith(physicsObject);
 
-    this.x = nextX;
-    this.y = nextY;
+    rect.x += speed.x;
+    rect.y += speed.y;
+
+    speed.x = 0;
+    speed.y = 0;
   }
 })();
