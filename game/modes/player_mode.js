@@ -55,7 +55,7 @@ PlayerMode.prototype = (function() {
     var player = this.player;
     var camera = this.camera;
     player.move(keyboard, camera, this.collisionDetectors);
-    camera.follow(player, this.tiles);
+    camera.follow(player, this.collisionDetectors);
 
     var cameraRect = camera.getRect();
     var newEnemies = this.enemySpawner.spawnInRect(this.enemyGrid, cameraRect);
@@ -127,7 +127,7 @@ PlayerMode.prototype = (function() {
     graphics.pushState();
     var camera = this.camera;
     var cameraRect = camera.getRect();
-    graphics.translate(-camera.x, -this.camera.y);
+    graphics.translate(-cameraRect.x, -cameraRect.y);
     this.tiles.drawInRect(cameraRect, graphics);
     this.enemies.forEach(function(enemy) {
       enemy.draw(graphics);
@@ -144,9 +144,10 @@ PlayerMode.prototype = (function() {
 
   function drawCameraDebugger(graphics) {
     var camera = this.camera;
-    var leftThreshold = camera.x + camera.leftSnapThreshold;
+    var cameraRect = camera.getRect();
+    var leftThreshold = cameraRect.x + camera.leftSnapThreshold;
     graphics.drawLine(leftThreshold, 0, leftThreshold, this.height, 'black');
-    var rightThreshold = camera.x + camera.rightSnapThreshold;
+    var rightThreshold = cameraRect.x + camera.rightSnapThreshold;
     graphics.drawLine(rightThreshold, 0, rightThreshold, this.height, 'black');
   }
 })();
