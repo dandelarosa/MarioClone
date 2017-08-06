@@ -19,18 +19,11 @@ Game.prototype = (function() {
   return {
     loadLevel: loadLevel,
     runLoop: runLoop,
-    updateLevel: updateLevel,
   };
 
   function loadLevel(level) {
     this.playerMode.loadLevel(level);
     this.editorMode.loadLevel(level);
-  }
-
-  function updateLevel() {
-    var grid = new Grid2D(this.gridData, this.numCols);
-    var tileset = new Tileset(this.tilesetName);
-    this.editorMode.tiles = new TileGrid(grid, tileset);
   }
 
   function runLoop() {
