@@ -44,7 +44,7 @@ Goomba.prototype = (function() {
 
   // Movement
 
-  function update(tiles, collisionDetectors) {
+  function update(collisionDetectors) {
     var rect = this.getRect();
     var speed = this.getSpeed();
 

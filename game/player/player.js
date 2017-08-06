@@ -66,8 +66,8 @@ Player.prototype = (function() {
 
   // Movement
 
-  function move(keyboard, tiles, camera, collisionDetectors) {
-    this.currentState.update(this.physicsObject, keyboard, tiles, camera, collisionDetectors);
+  function move(keyboard, camera, collisionDetectors) {
+    this.currentState.update(this.physicsObject, keyboard, camera, collisionDetectors);
   }
 
   // Drawing

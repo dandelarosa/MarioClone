@@ -54,7 +54,7 @@ PlayerMode.prototype = (function() {
 
     var player = this.player;
     var camera = this.camera;
-    player.move(keyboard, this.tiles, camera, this.collisionDetectors);
+    player.move(keyboard, camera, this.collisionDetectors);
     camera.follow(player, this.tiles);
 
     var cameraRect = camera.getRect();
@@ -63,10 +63,9 @@ PlayerMode.prototype = (function() {
       this.enemies = this.enemies.concat(newEnemies);
     }
 
-    var tiles = this.tiles;
     var collisionDetectors = this.collisionDetectors
     this.enemies.forEach(function(enemy) {
-      enemy.update(tiles, collisionDetectors);
+      enemy.update(collisionDetectors);
     });
 
     if (player.shouldCheckForEnemyCollisions()) {

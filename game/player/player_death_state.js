@@ -11,7 +11,7 @@ PlayerDeathState.prototype = (function() {
     return false;
   }
 
-  function update(physicsObject, keyboard, tiles, collisionDetectors) {
+  function update(physicsObject, keyboard, collisionDetectors) {
     var rect = physicsObject.getRect();
     var speed = physicsObject.getSpeed();
 

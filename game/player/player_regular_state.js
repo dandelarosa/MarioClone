@@ -25,7 +25,7 @@ PlayerRegularState.prototype = (function() {
 
   // Movement
 
-  function update(physicsObject, keyboard, tiles, camera, collisionDetectors) {
+  function update(physicsObject, keyboard, camera, collisionDetectors) {
     var rect = physicsObject.getRect();
     var speed = physicsObject.getSpeed();
 
