@@ -30,12 +30,11 @@ EditorMode.prototype = (function() {
    */
   function loadLevel(level) {
     this.level = level;
-    // TODO: have different tile systems for foreground tiles and background tiles
-    var backgroundTiles = level.tileGrid;
-    var foregroundTiles = level.tileGrid;
+    var backgroundTiles = level.backgroundTiles;
+    var foregroundTiles = level.foregroundTiles;
     var enemyGrid = level.enemyGrid;
     // TODO: deprecate TileGrid class
-    this.tiles = new TileGrid(level.tileGrid, level.tileset);
+    this.tiles = new TileGrid(foregroundTiles, level.tileset);
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?

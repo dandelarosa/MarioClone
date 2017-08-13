@@ -30,9 +30,8 @@ PlayerMode.prototype = (function() {
    */
   function reset() {
     var level = this.level;
-    // TODO: have different tile systems for foreground tiles and background tiles
-    var backgroundTiles = level.tileGrid.copy();
-    var foregroundTiles = level.tileGrid.copy();
+    var backgroundTiles = level.backgroundTiles.copy();
+    var foregroundTiles = level.foregroundTiles.copy();
     var enemyGrid = level.enemyGrid.copy();
 
     this.player = new Player(this.width/2, this.height/2);

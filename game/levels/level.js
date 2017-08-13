@@ -1,17 +1,18 @@
 function Level(builder) {
   var numCols = builder.numCols;
 
-  // Should split into foreground tiles and background tiles
-  var tiles = builder.gridData;
-  var tileGrid = new Grid2D(tiles, numCols);
-  this.tileGrid = tileGrid;
+  var backgroundTilesData = builder.backgroundTilesData;
+  this.backgroundTiles = new Grid2D(backgroundTilesData, numCols);
+
+  var foregroundTilesData = builder.foregroundTilesData;
+  this.foregroundTiles = new Grid2D(foregroundTilesData, numCols);
 
   this.tileset = new Tileset(builder.tilesetName);
 
   var enemies = builder.enemies;
   if (!enemies || enemies.length === 0) {
     var fixedEnemies = [];
-    for (var i = 0; i < tiles.length; i++) {
+    for (var i = 0; i < backgroundTilesData.length; i++) {
       fixedEnemies.push(ENEMY_NONE);
     }
     enemies = fixedEnemies;
