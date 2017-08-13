@@ -30,12 +30,12 @@ EditorMode.prototype = (function() {
    */
   function loadLevel(level) {
     this.level = level;
-    var foregroundTiles = level.tileGrid.copy();
+    // TODO: have different tile systems for foreground tiles and background tiles
+    var backgroundTiles = level.tileGrid;
+    var foregroundTiles = level.tileGrid;
+    var enemyGrid = level.enemyGrid;
     // TODO: deprecate TileGrid class
     this.tiles = new TileGrid(level.tileGrid, level.tileset);
-    this.enemyGrid = level.enemyGrid.copy();
-    // TODO: rename to something more appropriate
-    this.obstacleGrid = new ObstacleGrid();
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?
@@ -45,6 +45,14 @@ EditorMode.prototype = (function() {
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
     this.levelImageOffset = level.levelImageOffset;
+
+    this.allGrids = new AllGrids({
+      backgroundTiles: backgroundTiles,
+      foregroundTiles: foregroundTiles,
+      enemyGrid: enemyGrid,
+      tileset: level.tileset,
+      shoudDrawEnemyTiles: true,
+    });
 
     this.collisionDetectors = {
       level: new LevelCollisionDetector(foregroundTiles),
@@ -68,11 +76,11 @@ EditorMode.prototype = (function() {
     var newTileGrid = new Grid2D(newTiles, newNumCols);
     this.tiles = new TileGrid(newTileGrid, this.level.tileset);
 
-    var oldEnemyData = this.enemyGrid.getData();
+    var oldEnemyData = this.allGrids.enemyGrid.getData();
     enemies2D = create2dArray(oldEnemyData, oldNumCols);
     addColumnsToGrid(enemies2D, colsToAdd, 0);
     var newEnemies = create1dArray(enemies2D);
-    this.enemyGrid = new Grid2D(newEnemies, newNumCols);
+    this.allGrids.enemyGrid = new Grid2D(newEnemies, newNumCols);
 
     // For Editor. Can reorganize?
     this.numCols = newNumCols;
@@ -93,11 +101,11 @@ EditorMode.prototype = (function() {
     var newTileGrid = new Grid2D(newTiles, newNumCols);
     this.tiles = new TileGrid(newTileGrid, this.level.tileset);
 
-    var oldEnemyData = this.enemyGrid.getData();
+    var oldEnemyData = this.allGrids.enemyGrid.getData();
     enemies2D = create2dArray(oldEnemyData, oldNumCols);
     removeLastColumnFromGrid(enemies2D);
     var newEnemies = create1dArray(enemies2D);
-    this.enemyGrid = new Grid2D(newEnemies, newNumCols);
+    this.allGrids.enemyGrid = new Grid2D(newEnemies, newNumCols);
 
     // For Editor. Can reorganize?
     this.numCols = newNumCols;
@@ -138,6 +146,8 @@ EditorMode.prototype = (function() {
     var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
     var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
     if (mouse.isPressedThisFrame()) {
+      console.log('gets here');
+      console.log(this.currentEditingMode);
       this.currentEditingMode.handleClickAtColRow(mouseCol, mouseRow, this);
     }
   }
@@ -152,8 +162,7 @@ EditorMode.prototype = (function() {
     var camera = this.camera;
     var cameraRect = camera.getRect();
     graphics.translate(-cameraRect.x, -cameraRect.y);
-    this.tiles.drawInRect(cameraRect, graphics);
-    this.obstacleGrid.drawInRect(cameraRect, graphics, this.enemyGrid);
+    this.allGrids.drawWithGraphicsInRect(graphics, cameraRect);
     if (levelImageLoaded[this.levelImageKey]) {
       graphics.drawImageWithAlpha(this.levelImage, -this.levelImageOffset, 0,
         this.levelMockupAlpha);
@@ -176,7 +185,7 @@ EditorMode.prototype = (function() {
     var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
     graphics.fillText(mouseColRowText, mouseX + 5, mouseY, 'yellow');
 
-    var value = this.tiles.tileValueAtColRow(mouseCol, mouseRow);
+    var value = this.allGrids.foregroundTiles.valueAtColAndRow(mouseCol, mouseRow);
     if (typeof value === 'number') {
       var displayValue = twoDigitHexString(value);
       graphics.fillText(displayValue, mouseX + 15, mouseY + 15, 'yellow');

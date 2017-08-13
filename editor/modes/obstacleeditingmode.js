@@ -6,7 +6,7 @@ function ObstacleEditingMode() {
   };
 
   function handleClickAtColRow(col, row, editor) {
-    editor.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
+    editor.allGrids.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
     displayObstacleData();
   }
 }

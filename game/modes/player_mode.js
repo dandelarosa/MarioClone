@@ -33,10 +33,7 @@ PlayerMode.prototype = (function() {
     // TODO: have different tile systems for foreground tiles and background tiles
     var backgroundTiles = level.tileGrid.copy();
     var foregroundTiles = level.tileGrid.copy();
-    // TODO: deprecate TileGrid class
-    this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
     var enemyGrid = level.enemyGrid.copy();
-    this.enemyGrid = enemyGrid;
 
     this.player = new Player(this.width/2, this.height/2);
     this.enemies = [];
@@ -68,7 +65,8 @@ PlayerMode.prototype = (function() {
     camera.follow(player, this.collisionDetectors);
 
     var cameraRect = camera.getRect();
-    var newEnemies = this.enemySpawner.spawnInRect(this.enemyGrid, cameraRect);
+    var enemyGrid = this.allGrids.enemyGrid;
+    var newEnemies = this.enemySpawner.spawnInRect(enemyGrid, cameraRect);
     if (newEnemies.length > 0) {
       this.enemies = this.enemies.concat(newEnemies);
     }

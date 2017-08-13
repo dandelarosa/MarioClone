@@ -6,8 +6,10 @@ function TileEditingMode() {
   };
 
   function handleClickAtColRow(col, row, game) {
-    game.tiles.toggleValueAtColRow(col, row, this.selectedTileValue);
-    game.gridData = game.tiles.getGridData();
+    console.log('gets here');
+    console.log(this.selectedTileValue);
+    game.allGrids.foregroundTiles.setValueAtColAndRow(col, row, this.selectedTileValue);
+    game.gridData = game.allGrids.foregroundTiles.getGridData();
     displayLevelData();
   }
 }
