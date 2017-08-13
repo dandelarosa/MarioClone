@@ -30,14 +30,24 @@ PlayerMode.prototype = (function() {
    */
   function reset() {
     var level = this.level;
+    // TODO: have different tile systems for foreground tiles and background tiles
+    var backgroundTiles = level.tileGrid.copy();
     var foregroundTiles = level.tileGrid.copy();
     // TODO: deprecate TileGrid class
     this.tiles = new TileGrid(level.tileGrid.copy(), level.tileset);
-    this.enemyGrid = level.enemyGrid.copy();
+    var enemyGrid = level.enemyGrid.copy();
+    this.enemyGrid = enemyGrid;
 
     this.player = new Player(this.width/2, this.height/2);
     this.enemies = [];
     this.camera = new PlayerCamera(0, 0, this.width, this.height);
+
+    this.allGrids = new AllGrids({
+      backgroundTiles: backgroundTiles,
+      foregroundTiles: foregroundTiles,
+      enemyGrid: enemyGrid,
+      tileset: level.tileset,
+    });
 
     this.collisionDetectors = {
       level: new LevelCollisionDetector(foregroundTiles),
@@ -128,7 +138,7 @@ PlayerMode.prototype = (function() {
     var camera = this.camera;
     var cameraRect = camera.getRect();
     graphics.translate(-cameraRect.x, -cameraRect.y);
-    this.tiles.drawInRect(cameraRect, graphics);
+    this.allGrids.drawWithGraphicsInRect(graphics, cameraRect);
     this.enemies.forEach(function(enemy) {
       enemy.draw(graphics);
     });
