@@ -4,6 +4,7 @@
  */
 function EnemyEditingMode() {
   this.displayText = 'Editing Enemies';
+  this.selectedValue = ENEMY_NONE;
 }
 
 EnemyEditingMode.prototype = (function() {
@@ -30,6 +31,7 @@ EnemyEditingMode.prototype = (function() {
    * @param {Object} editor - The object managing the level editing.
    */
   function handleClickAtColRow(col, row, editor) {
-    // TODO: implement for real
+    editor.allGrids.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
+    displayObstacleData();
   }
 })();

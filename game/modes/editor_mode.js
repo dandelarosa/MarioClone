@@ -129,7 +129,7 @@ EditorMode.prototype = (function() {
 
     if (keyboard.isKeyPressedThisFrame(KEY_1)) {
       this.editingModeIndex++;
-      if (this.editingModeIndex >= EDITING_MODE.COUNT) {
+      if (this.editingModeIndex > EDITING_MODE.LAST) {
         this.editingModeIndex = EDITING_MODE.FIRST;
       }
       this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
