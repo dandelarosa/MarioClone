@@ -1,10 +1,8 @@
 const EDITING_MODE = {
   FIRST: 0,
-  TILES: 0,
-  OBSTACLES: 1,
-  BACKGROUND: 2,
-  FOREGROUND: 3,
-  ENEMIES: 4,
-  LAST: 4,
-  COUNT: 5,
+  BACKGROUND: 0,
+  FOREGROUND: 1,
+  ENEMIES: 2,
+  LAST: 2,
+  COUNT: 3,
 };

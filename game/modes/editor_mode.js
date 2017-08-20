@@ -13,6 +13,8 @@ function EditorMode() {
   this.editingModeIndex = savedEditingModeIndex;
   this.editingModeManager = new EditingModeManager();
   this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
+
+  this.editorMouse = new EditorMouse();
 }
 
 EditorMode.prototype = (function() {
@@ -138,16 +140,31 @@ EditorMode.prototype = (function() {
     this.camera.update(keyboard, this.collisionDetectors);
 
     var mouse = globals.mouse;
-    var mouseX = mouse.x;
-    var mouseY = mouse.y;
-    var mousePlusCameraX = mouse.x / 2 + camera.getRect().x;
-    var mousePlusCameraY = mouse.y / 2 + camera.getRect().y;
-    var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
-    var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
-    if (mouse.isPressedThisFrame()) {
-      console.log('gets here');
-      console.log(this.currentEditingMode);
-      this.currentEditingMode.handleClickAtColRow(mouseCol, mouseRow, this);
+    if (mouse.x !== undefined && mouse.y !== undefined) {
+      // Use the canvas' coordinate system
+      var graphicalMouseX = mouse.x;
+      var graphicalMouseY = mouse.y;
+      // Logical coordinates (relative to canvas)
+      var logicalMouseX = graphicalMouseX / 2;
+      var logicalMouseY = graphicalMouseY / 2;
+      // Logical coordinates (relative to level)
+      var levelMouseX = logicalMouseX + camera.getRect().x;
+      var levelMouseY = logicalMouseY + camera.getRect().y;
+
+      this.editorMouse.x = levelMouseX;
+      this.editorMouse.y = levelMouseY;
+
+      var mouseCol = Math.floor(levelMouseX / TILE_WIDTH);
+      var mouseRow = Math.floor(levelMouseY / TILE_HEIGHT);
+
+      var editingMode = this.currentEditingMode;
+      if (mouse.isPressedThisFrame()) {
+        editingMode.handleClickAtColRow(mouseCol, mouseRow, this);
+      }
+      this.editorMouse.col = mouseCol;
+      this.editorMouse.row = mouseRow;
+      var mouseValue = editingMode.valueAtColRow(mouseCol, mouseRow, this);
+      this.editorMouse.value = mouseValue;
     }
   }
 
@@ -166,6 +183,7 @@ EditorMode.prototype = (function() {
       graphics.drawImageWithAlpha(this.levelImage, -this.levelImageOffset, 0,
         this.levelMockupAlpha);
     }
+    this.editorMouse.draw(graphics);
     graphics.popState();
     graphics.popState();
 
@@ -173,21 +191,5 @@ EditorMode.prototype = (function() {
     graphics.fillText(this.currentEditingMode.displayText, 5, 25, 'yellow');
 
     graphics.fillText('Press 0 to toggle level mockup', 370, 25, 'yellow');
-
-    var mouse = globals.mouse;
-    var mouseX = mouse.x;
-    var mouseY = mouse.y;
-    var mousePlusCameraX = mouse.x / 2 + cameraRect.x;
-    var mousePlusCameraY = mouse.y / 2 + cameraRect.y;
-    var mouseCol = this.tiles.colForPixelX(mousePlusCameraX);
-    var mouseRow = this.tiles.rowForPixelY(mousePlusCameraY);
-    var mouseColRowText = '(' + mouseCol + ', ' + mouseRow + ')';
-    graphics.fillText(mouseColRowText, mouseX + 5, mouseY, 'yellow');
-
-    var value = this.allGrids.foregroundTiles.valueAtColAndRow(mouseCol, mouseRow);
-    if (typeof value === 'number') {
-      var displayValue = twoDigitHexString(value);
-      graphics.fillText(displayValue, mouseX + 15, mouseY + 15, 'yellow');
-    }
   }
 })();

@@ -3,8 +3,10 @@ function Mouse(canvas, documentRoot) {
   this.documentRoot = documentRoot;
   this.isDown = false;
   this.stateChanged = false;
-  this.x = 0;
-  this.y = 0;
+
+  // Keep undefined until the mouse moves inside the canvas
+  this.x = undefined;
+  this.y = undefined;
 }
 
 Mouse.prototype.isPressedThisFrame = function() {

@@ -3,8 +3,6 @@
  * @constructor
  */
 function EditingModeManager() {
-  this.tileEditingMode = new TileEditingMode();
-  this.obstacleEditingMode = new ObstacleEditingMode();
   this.backgroundEditingMode = new BackgroundEditingMode();
   this.foregroundEditingMode = new ForegroundEditingMode();
   this.enemyEditingMode = new EnemyEditingMode();
@@ -22,12 +20,6 @@ EditingModeManager.prototype = (function() {
    */
   function modeForIndex(index) {
     switch(index) {
-      case EDITING_MODE.TILES:
-        return this.tileEditingMode;
-        break;
-      case EDITING_MODE.OBSTACLES:
-        return this.obstacleEditingMode;
-        break;
       case EDITING_MODE.BACKGROUND:
         return this.backgroundEditingMode;
         break;

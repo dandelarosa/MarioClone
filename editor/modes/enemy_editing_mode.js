@@ -9,6 +9,18 @@ function EnemyEditingMode() {
 EnemyEditingMode.prototype = (function() {
   return {
     handleClickAtColRow: handleClickAtColRow,
+    valueAtColRow: valueAtColRow,
+  }
+
+  /**
+   * Gets the current value at the mouse's location.
+   * @param {number} col - The index of the column clicked on.
+   * @param {number} row - The index of the row clicked on.
+   * @param {Object} editor - The object managing the level editing.
+   */
+  function valueAtColRow(col, row, editor) {
+    var grid = editor.allGrids.enemyGrid;
+    return grid.valueAtColAndRow(col, row);
   }
 
   /**
