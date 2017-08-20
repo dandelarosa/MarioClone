@@ -10,6 +10,7 @@ function LevelCollisionDetector(foregroundTiles) {
 LevelCollisionDetector.prototype = (function() {
   return {
     handleCollisionsWith: handleCollisionsWith,
+    updateWithGrid: updateWithGrid,
   };
 
   /**
@@ -31,5 +32,14 @@ LevelCollisionDetector.prototype = (function() {
       rect.x = this.levelWidth - rect.width;
       speed.x = 0.0;
     }
+  }
+
+  /**
+   * Updates the level's dimensions with new tile grid.
+   * @param {Object} grid - The grid used to calculate the level's dimensions.
+   */
+  function updateWithGrid(grid) {
+    this.levelWidth = TILE_WIDTH * grid.numCols;
+    this.levelHeight = TILE_HEIGHT * grid.numRows;
   }
 })();
