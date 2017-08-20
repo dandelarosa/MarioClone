@@ -40,8 +40,8 @@ EditorMode.prototype = (function() {
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?
-    this.numCols = this.tiles.getNumCols();
-    this.gridData = this.tiles.getGridData();
+    this.numCols = backgroundTiles.numCols;
+    this.gridData = backgroundTiles.data;
 
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
@@ -85,7 +85,7 @@ EditorMode.prototype = (function() {
 
     // For Editor. Can reorganize?
     this.numCols = newNumCols;
-    this.gridData = this.tiles.getGridData();
+    this.gridData = this.allGrids.backgroundTiles.getData();
   }
 
   /**
@@ -110,7 +110,7 @@ EditorMode.prototype = (function() {
 
     // For Editor. Can reorganize?
     this.numCols = newNumCols;
-    this.gridData = this.tiles.getGridData();
+    this.gridData = this.allGrids.backgroundTiles.getData();
   }
 
   // Run Loop
