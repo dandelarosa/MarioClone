@@ -35,8 +35,6 @@ EditorMode.prototype = (function() {
     var backgroundTiles = level.backgroundTiles;
     var foregroundTiles = level.foregroundTiles;
     var enemyGrid = level.enemyGrid;
-    // TODO: deprecate TileGrid class
-    this.tiles = new TileGrid(foregroundTiles, level.tileset);
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
     // For Editor. Can reorganize?
