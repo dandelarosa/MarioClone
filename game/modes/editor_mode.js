@@ -20,6 +20,7 @@ function EditorMode() {
 EditorMode.prototype = (function() {
   return {
     addColumns: addColumns,
+    changeEditingModeIndex: changeEditingModeIndex,
     deleteLastColumn: deleteLastColumn,
     draw: draw,
     loadLevel: loadLevel,
@@ -138,12 +139,12 @@ EditorMode.prototype = (function() {
     }
 
     if (keyboard.isKeyPressedThisFrame(KEY_1)) {
-      this.editingModeIndex++;
-      if (this.editingModeIndex > EDITING_MODE.LAST) {
-        this.editingModeIndex = EDITING_MODE.FIRST;
+      if (this.editingModeIndex >= EDITING_MODE.LAST) {
+        this.changeEditingModeIndex(EDITING_MODE.FIRST);
       }
-      this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
-      persistence.setValue('editingMode', this.editingModeIndex);
+      else {
+        this.changeEditingModeIndex(this.editingModeIndex + 1);
+      }
     }
 
     var camera = this.camera;
@@ -176,6 +177,16 @@ EditorMode.prototype = (function() {
       var mouseValue = editingMode.valueAtColRow(mouseCol, mouseRow, this);
       this.editorMouse.value = mouseValue;
     }
+  }
+
+  /**
+   * Changes the editing mode index. Use this method for switching editing modes.
+   * @param {number} index - The new editing mode index.
+   */
+  function changeEditingModeIndex(index) {
+    this.editingModeIndex = index;
+    this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
+    persistence.setValue('editingMode', this.editingModeIndex);
   }
 
   function draw() {
