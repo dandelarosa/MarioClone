@@ -8,6 +8,14 @@
   <script src="editor/2darray.js"></script>
   <script src="editor/editor_mouse.js"></script>
   <script src="editor/editor.js"></script>
+  <script src="editor/html/backgroundtilesdetail.js"></script>
+  <script src="editor/html/enemiesdetail.js"></script>
+  <script src="editor/html/foregroundtilesdetail.js"></script>
+  <script src="editor/html/griddetail.js"></script>
+  <script src="editor/html/gridpicker.js"></script>
+  <script src="editor/html/leveleditor.js"></script>
+  <script src="editor/html/levelpicker.js"></script>
+  <script src="editor/html/sizeeditor.js"></script>
   <script src="editor/levelimages.js"></script>
   <script src="editor/leveldataform.js"></script>
   <script src="editor/levelwidthform.js"></script>
@@ -93,6 +101,9 @@
 </head>
 
 <body>
+
+<div id="editor"></div>
+
 <center>
 <!-- NES screen size @2x -->
 <canvas id="gameCanvas" width="512" height="480"></canvas>
@@ -105,8 +116,9 @@ window.onload = function() {
   globals.setup();
   persistence = new Persistence();
   game = new Game();
-  createEditorElements();
+  createEditorElements(); // TODO: deprecate
   loadFirstLevel();
+  createLevelEditorUI();
   var delayPerFrame = 1000 / game.fps;
   setInterval(runLoop, delayPerFrame);
 };
