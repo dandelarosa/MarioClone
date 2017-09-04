@@ -3,8 +3,6 @@
  */
 function createEditorElements() {
   createLevelWidthForm();
-  createLevelDataForm();
-  createObstacleDataForm();
   createWorldPicker();
   createTilePicker();
   createObstaclePicker();
