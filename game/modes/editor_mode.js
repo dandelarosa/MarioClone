@@ -187,6 +187,7 @@ EditorMode.prototype = (function() {
     this.editingModeIndex = index;
     this.currentEditingMode = this.editingModeManager.modeForIndex(this.editingModeIndex);
     persistence.setValue('editingMode', this.editingModeIndex);
+    showGridDetailUIForIndex(this.editingModeIndex);
   }
 
   function draw() {
