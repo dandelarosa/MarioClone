@@ -28,15 +28,7 @@ function selectLevelWithId(levelId) {
   game.loadLevel(level);
 
   displayNumCols();
-  displayLevelData();
+  updateBackgroundTilesDetailUI();
+  updateForegroundTilesDetailUI();
   displayObstacleData();
-}
-
-/**
- * Displays the grid data for foreground and background tiles.
- */
-function displayLevelData() {
-  var input = document.getElementById('levelData.data');
-  var value = twoDigitHexArray(game.editorMode.gridData);
-  input.value = value;
 }

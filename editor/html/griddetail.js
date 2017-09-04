@@ -4,7 +4,7 @@
  */
 function createGridDetailUI(element) {
   var backgroundTilesDetail = document.createElement('div');
-  createBackgroundTilesDetailUI(backgroundTilesDetail)
+  createBackgroundTilesDetailUI(backgroundTilesDetail);
   element.appendChild(backgroundTilesDetail);
 
   var foregroundTilesDetail = document.createElement('div');

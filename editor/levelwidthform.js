@@ -51,7 +51,8 @@ function displayNumCols() {
 function addColumns(colsToAdd) {
   game.editorMode.addColumns(colsToAdd);
   displayNumCols();
-  displayLevelData();
+  updateBackgroundTilesDetailUI();
+  updateForegroundTilesDetailUI();
   displayObstacleData();
 }
 
@@ -61,6 +62,7 @@ function addColumns(colsToAdd) {
 function deleteLastColumn() {
   game.editorMode.deleteLastColumn();
   displayNumCols();
-  displayLevelData();
+  updateBackgroundTilesDetailUI();
+  updateForegroundTilesDetailUI();
   displayObstacleData();
 }

@@ -30,8 +30,7 @@ BackgroundEditingMode.prototype = (function() {
    * @param {Object} editor - The object managing the level editing.
    */
   function handleClickAtColRow(col, row, editor) {
-    editor.allGrids.backgroundTiles.setValueAtColAndRow(col, row, this.selectedTileValue);
-    editor.gridData = game.allGrids.backgroundTiles.getGridData();
-    displayLevelData();
+    editor.allGrids.backgroundTiles.setValueAtColAndRow(this.selectedTileValue, col, row);
+    updateBackgroundTilesDetailUI();
   }
 })();

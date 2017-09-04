@@ -30,8 +30,7 @@ ForegroundEditingMode.prototype = (function() {
    * @param {Object} editor - The object managing the level editing.
    */
   function handleClickAtColRow(col, row, editor) {
-    editor.allGrids.foregroundTiles.setValueAtColAndRow(col, row, this.selectedTileValue);
-    editor.gridData = game.allGrids.foregroundTiles.getGridData();
-    displayLevelData();
+    editor.allGrids.foregroundTiles.setValueAtColAndRow(this.selectedTileValue, col, row);
+    updateForegroundTilesDetailUI();
   }
 })();
