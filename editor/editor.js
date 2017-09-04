@@ -30,5 +30,5 @@ function selectLevelWithId(levelId) {
   displayNumCols();
   updateBackgroundTilesDetailUI();
   updateForegroundTilesDetailUI();
-  displayObstacleData();
+  updateEnemiesDetailUI();
 }

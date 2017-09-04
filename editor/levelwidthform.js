@@ -53,7 +53,7 @@ function addColumns(colsToAdd) {
   displayNumCols();
   updateBackgroundTilesDetailUI();
   updateForegroundTilesDetailUI();
-  displayObstacleData();
+  updateEnemiesDetailUI();
 }
 
 /**
@@ -64,5 +64,5 @@ function deleteLastColumn() {
   displayNumCols();
   updateBackgroundTilesDetailUI();
   updateForegroundTilesDetailUI();
-  displayObstacleData();
+  updateEnemiesDetailUI();
 }

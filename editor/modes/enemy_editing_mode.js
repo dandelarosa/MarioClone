@@ -32,6 +32,6 @@ EnemyEditingMode.prototype = (function() {
    */
   function handleClickAtColRow(col, row, editor) {
     editor.allGrids.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
-    displayObstacleData();
+    updateEnemiesDetailUI();
   }
 })();
