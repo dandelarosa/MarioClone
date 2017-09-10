@@ -4,11 +4,13 @@
  */
 function ForegroundEditingMode() {
   this.displayText = 'Editing Foreground Tiles';
+  this.selectedTileValue = persistence.getValue('lastForegroundTileSelected', 'int', TILE_V2_EMPTY);
 }
 
 ForegroundEditingMode.prototype = (function() {
   return {
     handleClickAtColRow: handleClickAtColRow,
+    handleSelectedValue: handleSelectedValue,
     valueAtColRow: valueAtColRow,
   }
 
@@ -19,7 +21,7 @@ ForegroundEditingMode.prototype = (function() {
    * @param {Object} editor - The object managing the level editing.
    */
   function valueAtColRow(col, row, editor) {
-    var grid = editor.allGrids.backgroundTiles;
+    var grid = editor.allGrids.foregroundTiles;
     return grid.valueAtColAndRow(col, row);
   }
 
@@ -32,5 +34,14 @@ ForegroundEditingMode.prototype = (function() {
   function handleClickAtColRow(col, row, editor) {
     editor.allGrids.foregroundTiles.setValueAtColAndRow(this.selectedTileValue, col, row);
     updateForegroundTilesDetailUI();
+  }
+
+  /**
+   * Handles the selection of a tile value.
+   * @param {number} newValue - The selected tile value.
+   */
+  function handleSelectedValue(newValue) {
+    this.selectedTileValue = newValue;
+    persistence.setValue('lastForegroundTileSelected', newValue);
   }
 })();
