@@ -4,11 +4,13 @@
  */
 function BackgroundEditingMode() {
   this.displayText = 'Editing Background Tiles';
+  this.selectedTileValue = persistence.getValue('lastBackgroundTileSelected', 'int', TILE_V2_EMPTY);
 }
 
 BackgroundEditingMode.prototype = (function() {
   return {
     handleClickAtColRow: handleClickAtColRow,
+    handleSelectedValue: handleSelectedValue,
     valueAtColRow: valueAtColRow,
   }
 
@@ -32,5 +34,14 @@ BackgroundEditingMode.prototype = (function() {
   function handleClickAtColRow(col, row, editor) {
     editor.allGrids.backgroundTiles.setValueAtColAndRow(this.selectedTileValue, col, row);
     updateBackgroundTilesDetailUI();
+  }
+
+  /**
+   * Handles the selection of a tile value.
+   * @param {number} newValue - The selected tile value.
+   */
+  function handleSelectedValue(newValue) {
+    this.selectedTileValue = newValue;
+    persistence.setValue('lastBackgroundTileSelected', newValue);
   }
 })();
