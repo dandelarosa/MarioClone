@@ -84,8 +84,8 @@ AllGrids.prototype = (function() {
       return;
     }
     var drawingRect = new Rect2D(0, 0, CELL_WIDTH, CELL_HEIGHT);
-    var obstacleValue = this.enemyGrid.valueAtColAndRow(col, row);
-    if (typeof obstacleValue === 'number' && obstacleValue > ENEMY_NONE) {
+    var enemy = this.enemyGrid.valueAtColAndRow(col, row);
+    if (typeof enemy === 'number' && enemy > ENEMY_NONE) {
       var x = col * TILE_WIDTH;
       var y = row * TILE_HEIGHT;
       var drawingRect = new Rect2D(x, y, TILE_WIDTH, TILE_HEIGHT);
