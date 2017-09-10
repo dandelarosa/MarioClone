@@ -38,10 +38,6 @@ EditorMode.prototype = (function() {
     var enemyGrid = level.enemyGrid;
     this.camera = new EditorCamera(0, 0, this.width, this.height);
 
-    // For Editor. Can reorganize?
-    this.numCols = backgroundTiles.numCols;
-    this.gridData = backgroundTiles.data;
-
     this.levelImage = getLevelImage(level.key);
     this.levelImageKey = level.key;
     this.levelImageOffset = level.levelImageOffset;
@@ -66,7 +62,7 @@ EditorMode.prototype = (function() {
    * @param {number} colsToAdd - The number of columns to add.
    */
   function addColumns(colsToAdd) {
-    var oldNumCols = this.numCols;
+    var oldNumCols = this.allGrids.backgroundTiles.numCols;
     var newNumCols = oldNumCols + colsToAdd;
 
     var oldBackgroundTilesData = this.allGrids.backgroundTiles.getData();
@@ -87,9 +83,6 @@ EditorMode.prototype = (function() {
     var newEnemies = create1dArray(enemies2D);
     this.allGrids.enemyGrid = new Grid2D(newEnemies, newNumCols);
 
-    // For Editor. Can reorganize?
-    this.numCols = newNumCols;
-    this.gridData = this.allGrids.backgroundTiles.getData();
     this.collisionDetectors.level.updateWithGrid(this.allGrids.backgroundTiles);
   }
 
@@ -97,7 +90,7 @@ EditorMode.prototype = (function() {
    * Deletes the last column.
    */
   function deleteLastColumn() {
-    var oldNumCols = this.numCols;
+    var oldNumCols = this.allGrids.backgroundTiles.numCols;
     var newNumCols = oldNumCols - 1;
 
     var oldBackgroundTilesData = this.allGrids.backgroundTiles.getData();
@@ -118,9 +111,6 @@ EditorMode.prototype = (function() {
     var newEnemies = create1dArray(enemies2D);
     this.allGrids.enemyGrid = new Grid2D(newEnemies, newNumCols);
 
-    // For Editor. Can reorganize?
-    this.numCols = newNumCols;
-    this.gridData = this.allGrids.backgroundTiles.getData();
     this.collisionDetectors.level.updateWithGrid(this.allGrids.backgroundTiles);
   }
 

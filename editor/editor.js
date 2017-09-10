@@ -2,7 +2,6 @@
  * Generates HTML elements for debugging and editing.
  */
 function createEditorElements() {
-  createLevelWidthForm();
   createWorldPicker();
 }
 
