@@ -23,7 +23,6 @@
   <script src="editor/modes/enemy_editing_mode.js"></script>
   <script src="editor/modes/foreground_editing_mode.js"></script>
   <script src="editor/modes/modes.js"></script>
-  <script src="editor/worldpicker.js"></script>
   <script src="game/cameras/editor_camera.js"></script>
   <script src="game/cameras/player_camera.js"></script>
   <script src="game/enemies/enemy_spawner.js"></script>
@@ -111,7 +110,6 @@ window.onload = function() {
   globals.setup();
   persistence = new Persistence();
   game = new Game();
-  createEditorElements(); // TODO: deprecate
   loadFirstLevel();
   createLevelEditorUI();
   var delayPerFrame = 1000 / game.fps;
@@ -122,16 +120,6 @@ function runLoop() {
   game.runLoop();
 }
 </script>
-
-<table>
-  <tr>
-    <td>
-      <div id="worldPicker"></div>
-    </td>
-    <td>
-    </td>
-  </tr>
-</table>
 
 </body>
 </html>

@@ -1,11 +1,4 @@
 /**
- * Generates HTML elements for debugging and editing.
- */
-function createEditorElements() {
-  createWorldPicker();
-}
-
-/**
  * Loads the last level visited, or the first level if no levels were visited.
  */
 function loadFirstLevel() {
