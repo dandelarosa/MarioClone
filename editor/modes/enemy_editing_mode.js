@@ -4,12 +4,13 @@
  */
 function EnemyEditingMode() {
   this.displayText = 'Editing Enemies';
-  this.selectedValue = ENEMY_NONE;
+  this.selectedValue = persistence.getValue('lastEnemySelected', 'int', ENEMY_NONE);
 }
 
 EnemyEditingMode.prototype = (function() {
   return {
     handleClickAtColRow: handleClickAtColRow,
+    handleSelectedValue: handleSelectedValue,
     valueAtColRow: valueAtColRow,
   }
 
@@ -33,5 +34,14 @@ EnemyEditingMode.prototype = (function() {
   function handleClickAtColRow(col, row, editor) {
     editor.allGrids.enemyGrid.setValueAtColAndRow(this.selectedValue, col, row);
     updateEnemiesDetailUI();
+  }
+
+  /**
+   * Handles the selection of a enemy value.
+   * @param {number} newValue - The selected enemy value.
+   */
+  function handleSelectedValue(newValue) {
+    this.selectedValue = newValue;
+    persistence.setValue('lastEnemySelected', newValue);
   }
 })();
